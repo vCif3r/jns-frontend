@@ -1,0 +1,60 @@
+<mat-toolbar>
+    <div class="d-flex container-fluid align-items-center justify-content-between">
+        <button mat-icon-button (click)="onToggleSidenav()" *ngIf="isHandset$ | async">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <div class="d-flex align-items-center gap-3" style="margin-left: auto;">
+            <!-- <button class="p-1.5 flex items-center justify-center rounded-lg shadow dark:text-white transition duration-150 ease-in-out" (click)="_theme.toggleDarkMode()">
+                <mat-icon fontSet="material-icons-outlined">
+                    {{ _theme.isDarkModeEnabled ? 'light_mode' : 'dark_mode' }}
+                </mat-icon>
+            </button> -->
+
+            <button mat-icon-button>
+                <mat-icon class="material-icons-outlined" matBadge="0" matBadgeColor="warn">dark_mode</mat-icon>
+            </button>
+
+            <button mat-icon-button>
+                <mat-icon class="material-icons-outlined" matBadge="0" matBadgeColor="warn">notifications</mat-icon>
+            </button>
+
+            <mat-menu #notifications="matMenu">
+                <div>
+                    <div class="p-3">
+                        <span>Notificaciones</span>
+                    </div>
+                    <!-- <div>
+                        @for (n of listNotifications; track $index) {
+                            <div class="flex items-center gap-2 p-1">
+                                <img src="{{n.avatar}}" class="rounded-full" width="40" height="40" alt="">
+                                <div>
+                                    <small>{{n.message}}</small>
+                                    <p><small>{{n.date}}</small></p>
+                                </div>
+                            </div><hr>
+                        }
+                    </div> -->
+                </div>
+            </mat-menu>
+
+
+            <button [matMenuTriggerFor]="menu" class="btn">
+                <div class="d-flex ">
+                    <img src="https://www.w3schools.com/howto/img_avatar.png" alt="" height="27" width="27"
+                        style="border-radius: 100%;">
+                </div>
+            </button>
+            <mat-menu #menu="matMenu" class="profile-dropdown w-44">
+                <div>
+                    <!-- <a mat-menu-item [routerLink]="['/virtual/profile', getIdUser()]">Mi perfil</a> -->
+                    <button mat-menu-item>Editar perfil</button>
+                    <button mat-menu-item>Configuración</button>
+                </div>
+                <hr>
+                <div>
+                    <button mat-button color="accent" class="w-full text-white">Logout</button>
+                </div>
+            </mat-menu>
+        </div>
+    </div>
+</mat-toolbar>

@@ -1,0 +1,78 @@
+<header>
+    <h1 class="fs-5">Proceso de Demanda</h1>
+</header>
+
+<div class="row">
+    <div class="col-5">
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>Formulario de Demanda</mat-card-title>
+                <mat-card-subtitle>Por favor, complete la siguiente información para iniciar su demanda legal.</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <form (ngSubmit)="onSubmit()" [formGroup]="demandForm" class="pt-2">
+                    <div class="mb-2">Demandante: {{demandante}}</div>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tipo de Demanda:</mat-label>
+                        <mat-select formControlName="tipo">
+                            @for (tipo of tipo_demandas; track tipo) {
+                            <mat-option [value]="tipo.value">{{tipo.viewValue}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Título</mat-label>
+                        <input matInput formControlName="titulo">
+                        
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Detalles de la Demanda:</mat-label>
+                        <textarea matInput formControlName="descripcion"></textarea>
+                    </mat-form-field>
+                    <button type="submit" mat-button>Presentar Demanda</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="col-7">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="codigo">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="titulo">
+              <th mat-header-cell *matHeaderCellDef> Título </th>
+              <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef> Acciones </th>
+              <td mat-cell *matCellDef="let element"> 
+                <button mat-button (click)="openDialog(element.id)">ver detalles</button>
+              </td>
+            </ng-container>
+          
+        
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          
+          
+    </div>
+</div>
+
+
+

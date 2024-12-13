@@ -1,0 +1,21 @@
+<main class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100">
+    <a routerLink="/" class="d-flex align-items-center text-white text-decoration-none gap-1">
+        <img src="logo1.png" alt="img" height="20">
+        <span class="fs-6">AsesoresLegales</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        @for (item of sidebarItems; track $index) {
+            <li class="nav-item">
+                <a routerLink="{{item.url}}" class="nav-link d-flex align-items-center gap-2 " routerLinkActive="active">
+                    <mat-icon matListItemIcon class="material-icons-outlined">{{ item.icon }}</mat-icon>
+                    <span>{{ item.title }}</span>
+                </a>
+            </li>
+        }
+    </ul>
+    <button class="navlink" (click)="logout()">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span>Cerrar Sesión</span>
+    </button>
+</main>

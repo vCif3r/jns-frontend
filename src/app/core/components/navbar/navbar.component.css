@@ -1,0 +1,135 @@
+
+/**********************************/
+/*********** MENU **********/
+/**********************************/
+/* Estilos generales para la barra de navegación */
+.navbar {
+    position: relative;
+    transition: .5s;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px; /* Ajusta el padding según sea necesario */
+    background-color: #333; /* Asegúrate de que haya un fondo para que el contenido sea visible */
+}
+
+/* Estilo para cuando la barra de navegación se fija en la parte superior */
+.navbar.nav-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+    transition: .5s;
+}
+
+/* Estilo para el logotipo */
+.navbar .navbar-brand {
+    margin: 0;
+    color: #ffffff;
+    font-size: 45px;
+    line-height: 0;
+    font-weight: 200;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para la imagen del logotipo */
+.navbar .navbar-brand img {
+    max-width: 80px; /* Ajusta el tamaño máximo del logotipo */
+    height: auto; /* Mantiene la proporción del logotipo */
+}
+
+/* Responsividad para dispositivos móviles */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 10px; /* Ajusta el padding en pantallas más pequeñas */
+    }
+    
+    .navbar .navbar-brand {
+        font-size: 30px; /* Ajusta el tamaño de la fuente en pantallas más pequeñas */
+    }
+    
+    .navbar .navbar-brand img {
+        max-width: 100px; /* Ajusta el tamaño máximo del logotipo en pantallas más pequeñas */
+    }
+}
+
+
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    padding: 10px 10px 8px 10px;
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #0796fe;
+    transition: none;
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0;
+    border: 0;
+    border-radius: 0;
+    background: #f8f9fa;
+}
+
+
+@media (min-width: 992px) {
+    .navbar {
+        position: absolute;
+        width: 100%;
+        top: 35px;
+        padding: 15px 60px;
+        background: rgba(9, 42, 73, .4)!important;
+        z-index: 9;
+    }
+    
+    .navbar.nav-sticky {
+        padding: 10px 60px;
+        background: #092a49 !important;
+    }
+    
+    .page .navbar {
+        background: #092a49 !important;
+    }
+    
+    .navbar a.nav-link {
+        padding: 8px 15px;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+}
+
+@media (max-width: 991.98px) {   
+    .navbar {
+        /* padding: 15px; */
+        background: #092a49 !important;
+    }
+    
+    .navbar a.nav-link {
+        padding: 5px;
+    }
+    
+    .navbar .dropdown-menu {
+        box-shadow: none;
+    }
+}
+
+
+.btn-login{
+    color: #fff;
+    background-color: #084678;
+    border-radius: 1.5rem;
+    text-align: center;
+    text-transform: none !important;
+    cursor: pointer;
+    padding: 7px 15px;
+    text-decoration: none;
+}
+
