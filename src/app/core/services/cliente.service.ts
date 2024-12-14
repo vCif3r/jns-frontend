@@ -13,4 +13,8 @@ export class ClienteService {
   findAll(): Observable<Cliente[]>{
     return this.http_.get<Cliente[]>(`http://localhost:3000/clientes`);
   }
+
+  getTipoClientes(){
+    return this.http_.get<any[]>('http://localhost:3000/clientes/tipos/count')
+  }
 }

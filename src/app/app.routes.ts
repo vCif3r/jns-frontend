@@ -14,6 +14,7 @@ import { RoleGuard } from './core/guards/role.guard';
 import { ExperienceComponent } from './public/experience/experience.component';
 import { DemandaComponent } from './cliente/demanda/demanda.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { FormDemandaComponent } from './public/procesos/form-demanda/form-demanda.component';
 
 export const routes: Routes = [
     {
@@ -27,9 +28,12 @@ export const routes: Routes = [
             { path: 'blog', component: BlogComponent },
             { path: 'contact', component: ContactComponent },
             { path: 'experience', component: ExperienceComponent },
-            { path: 'login',component: LoginComponent, title:'login' }
+            { path: 'login',component: LoginComponent, title:'login' },
+            // formularios de  procesos
+            
         ]
     },
+    { path: 'demanda', component: FormDemandaComponent, title: 'Nueva demanda' },
     {
         path: 'admin',
         component: AdminComponent,

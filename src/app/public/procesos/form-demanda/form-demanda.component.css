@@ -1,0 +1,12 @@
+mat-card-header{
+    color: #000;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+section{
+    background-color: #EEEEEE;
+    padding: 2rem 15rem;
+}

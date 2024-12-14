@@ -1,0 +1,101 @@
+<div>
+  <div class="w-100 bg-dark p-4">
+    <h1 class="text-white fs-4 text-center">Proceso de Demanda</h1>
+  </div>
+
+  <section>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Formulario de Demanda</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form (ngSubmit)="onSubmit()" [formGroup]="demandForm" class="pt-2">
+          <!-- fechas -->
+          <div class="row mb-2">
+            <span class="fs-6 mb-2">Fecha y hora de la cita</span>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha</mat-label>
+                <input matInput [matDatepicker]="picker"  formControlName="fecha"/>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Hora</mat-label>
+                <input
+                  matInput
+                  [matTimepicker]="timepicker"
+                  [(ngModel)]="value"
+                  [ngModelOptions]="{ updateOn: 'blur' }"
+                  
+                />
+                <mat-timepicker #timepicker />
+                <mat-timepicker-toggle [for]="timepicker" matSuffix />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- tipo demanda -->
+
+          <div class="w-100">
+            <!-- <span class="fs-6 mb-2">Tipo de demanda</span> -->
+            <mat-form-field appearance="outline">
+              <mat-label>Tipo de Demanda:</mat-label>
+              <mat-select formControlName="tipo">
+                @for (tipo of tipo_demandas; track tipo) {
+                <mat-option [value]="tipo.value">{{
+                  tipo.viewValue
+                }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- detalles -->
+          <div class="w-100 mb-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Detalles de la Demanda</mat-label>
+              <textarea matInput formControlName="descripcion"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="w-100">
+            <mat-form-field appearance="outline">
+              <mat-label>Demandante</mat-label>
+              <input matInput formControlName="demandante" />
+            </mat-form-field>
+          </div>
+
+          <div class="w-100">
+            <mat-form-field appearance="outline">
+              <mat-label>Correo Electrónico</mat-label>
+              <input matInput formControlName="correo" />
+            </mat-form-field>
+          </div>
+
+          <div class="w-100">
+            <mat-form-field appearance="outline">
+              <mat-label>Lugar de la cita</mat-label>
+              <input matInput formControlName="lugarCita" />
+            </mat-form-field>
+          </div>
+
+          <div class="w-100 mb-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Descripción de los Hechos</mat-label>
+              <textarea matInput formControlName="descripcionHechos"></textarea>
+            </mat-form-field>
+          </div>
+
+          <button mat-button type="submit">Procesar demanda</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>
