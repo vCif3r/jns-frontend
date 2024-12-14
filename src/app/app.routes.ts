@@ -15,6 +15,7 @@ import { ExperienceComponent } from './public/experience/experience.component';
 import { DemandaComponent } from './cliente/demanda/demanda.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { FormDemandaComponent } from './public/procesos/form-demanda/form-demanda.component';
+import { AbogadosComponent } from './admin/abogados/abogados.component';
 
 export const routes: Routes = [
     {
@@ -41,8 +42,9 @@ export const routes: Routes = [
         data: { role: 'Admin' },
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-            { path: 'dashboard', component: DashboardComponent },
-            { path: 'clientes', component: ClientesComponent }
+            { path: 'dashboard', component: DashboardComponent, title: 'dashboard' },
+            { path: 'clientes', component: ClientesComponent, title: 'clientes' },
+            { path: 'abogados', component: AbogadosComponent, title: 'abogados' }
         ]
     },
     {

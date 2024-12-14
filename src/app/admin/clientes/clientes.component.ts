@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../core/services/cliente.service';
 import { Cliente } from '../../core/models/cliente';
+import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-clientes',
-  imports: [],
+  imports: [RouterLink, MatIconModule],
   templateUrl: './clientes.component.html',
   styleUrl: './clientes.component.css'
 })

@@ -2,7 +2,12 @@
     color: #dddd;
 }
 
-.nav-link:hover{
+/* .nav-link:hover{
+    color: #000;
+    background-color: #ddd;
+} */
+
+.active-link{
     color: #000;
     background-color: #ddd;
 }

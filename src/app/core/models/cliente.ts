@@ -1,5 +1,3 @@
-import { Pais } from "./pais";
-
 export interface Cliente {
     nombre: string;
     apellido: string;
@@ -11,6 +9,6 @@ export interface Cliente {
     fecha_nacimiento: string;
     genero: string;
     foto: string
-    pais: Pais;
+    pais: string;
     estado_civil: string;
 }

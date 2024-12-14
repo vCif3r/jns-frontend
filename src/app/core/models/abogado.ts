@@ -1,12 +1,13 @@
-import { Pais } from "./pais";
-
 export interface Abogado {
     id: number;
     nombre: string;
     apellido: string;
-    correo: string;
+    email: string;
     cedula: string;
     especialidad: string;
-    pais: Pais
-    fecha_ingreso: Date;
+    direccion: string;
+    telefono: string;
+    genero: string;
+    pais: string;
+    foto: string
 }

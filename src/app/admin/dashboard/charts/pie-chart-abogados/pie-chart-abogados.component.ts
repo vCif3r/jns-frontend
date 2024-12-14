@@ -13,7 +13,7 @@ Chart.register(...registerables)
 export class PieChartAbogadosComponent {
   labeldata: string[] = [];  // Tipos de cliente
   realdata: number[] = [];   // Cantidades de cada tipo
-  colordata: string[] = ['#3357FF', '#F1C40F'];  // Colores de ejemplo
+  colordata: string[] = ['#3357FF', '#F1C40F','#33FF57', '#FF5733'];  // Colores de ejemplo
 
   constructor(private _abogadosService: AbogadoService) { }
 

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { Abogado } from '../models/abogado';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ export class AuthService {
   login(credentials: { email: string; password: string }): Observable<any> {
     return this._http.post<any>(`${this.url}/login/`, credentials)
   }
+
+  
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');

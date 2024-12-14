@@ -10,3 +10,9 @@ section{
     background-color: #EEEEEE;
     padding: 2rem 15rem;
 }
+
+@media (max-width: 868px){
+    section{
+        padding: 2rem ;
+    }
+}

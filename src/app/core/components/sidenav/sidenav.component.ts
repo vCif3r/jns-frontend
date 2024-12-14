@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 interface Navmenu {
@@ -11,7 +11,7 @@ interface Navmenu {
 
 @Component({
   selector: 'app-sidenav',
-  imports: [MatIconModule, RouterLink],
+  imports: [MatIconModule, RouterLink, RouterLinkActive],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
@@ -22,7 +22,7 @@ export class SidenavComponent implements OnInit{
   constructor(private _auth: AuthService){}
 
   ngOnInit(): void {
-    this.userRole = 'abogado'
+    this.userRole = this._auth.getRole();
     this.updateSidebar()
   }
 
@@ -30,7 +30,7 @@ export class SidenavComponent implements OnInit{
     this._auth.logout()
   }
   updateSidebar() {
-    if (this.userRole === 'abogado') {
+    if (this.userRole === 'Abogado') {
       this.sidebarItems = [
         { title: 'Dashboard', icon: 'dashboard', url: '/abogado/dashboard' },
         { title: 'Clientes', icon: 'people', url: '/abogado/clientes' },
@@ -39,7 +39,7 @@ export class SidenavComponent implements OnInit{
         { title: 'Procesos', icon: 'library_books', url: '/abogado/procesos' },
         { title: 'help', icon: 'assignment', url: '/abogado/help' },
       ];
-    } else if (this.userRole === 'abogado') {
+    } else if (this.userRole === 'Admin') {
       this.sidebarItems = [
         { title: 'Dashboard', icon: 'dashboard', url: '/admin/dashboard' },
         { title: 'Clientes', icon: 'people', url: '/admin/clientes' },
@@ -48,6 +48,13 @@ export class SidenavComponent implements OnInit{
         { title: 'Procesos', icon: 'library_books', url: '/admin/procesos' },
         { title: 'help', icon: 'assignment', url: '/admin/help' },
       ];
+    } else{
+      this.sidebarItems = [
+        { title: 'Demandas', icon: 'dashboard', url: '/cliente/demandas' },
+        { title: 'Clientes', icon: 'people', url: '/admin/clientes' },
+        { title: 'Abogados', icon: 'people', url: '/admin/abogados' },
+        { title: 'help', icon: 'assignment', url: '/admin/help' },
+      ];
     }
-}
-}
+  }
+} 
