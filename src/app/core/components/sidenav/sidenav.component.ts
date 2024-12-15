@@ -34,8 +34,7 @@ export class SidenavComponent implements OnInit{
       this.sidebarItems = [
         { title: 'Dashboard', icon: 'dashboard', url: '/abogado/dashboard' },
         { title: 'Clientes', icon: 'people', url: '/abogado/clientes' },
-        { title: 'Abogados', icon: 'people', url: '/abogado/abogados' },
-        { title: 'Querellas', icon: 'people', url: '/abogado/querellas' },
+        { title: 'Demandas', icon: 'people', url: '/abogado/demandas' },
         { title: 'Procesos', icon: 'library_books', url: '/abogado/procesos' },
         { title: 'help', icon: 'assignment', url: '/abogado/help' },
       ];

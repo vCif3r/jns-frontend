@@ -22,18 +22,22 @@ export class DemandaService {
     return this._http.get<Demanda>(`${this.url}/${id}`);
   }
 
-  save(demanda: Demanda): any {
-    const token = localStorage.getItem('token');
+  saveDemanda(demanda: any, cedula: string){
+    return this._http.post<Demanda>(this.url, {...demanda, cedula});
+  }
 
-    const clienteId = this.auth.getID();
+   save(demanda: Demanda): any {
+     const token = localStorage.getItem('token');
+
+     const clienteId = this.auth.getID();
     
-    if (!token) {
-      throw new Error('No estás autenticado');
-    }
+     if (!token) {
+       throw new Error('No estás autenticado');
+     }
 
     demanda.cliente = clienteId
-    console.log(demanda)
+   console.log(demanda)
     
-    return this._http.post<Demanda>(this.url, demanda);
-  }
+     return this._http.post<Demanda>(this.url, demanda);
+   }
 }

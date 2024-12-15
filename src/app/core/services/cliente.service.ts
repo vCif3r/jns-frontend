@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ClienteService {
+export class ClienteService  {
   private urlRegister = 'http://localhost:3000/auth'; // url solo para registrar
   private url = 'http://localhost:3000/clientes'; // URL para obtener la lista de clientes
 
@@ -27,6 +27,18 @@ export class ClienteService {
     return this.http_
       .post<any>(`${this.urlRegister}/register/cliente/`, cliente)
       .pipe(switchMap(() => this.findAll()));
+  }
+
+ 
+
+
+  obtenerClientesCedula(searchTerm: string): Observable<any[]> {
+    if (!searchTerm.trim()) {
+      return new Observable();  // Si no hay término de búsqueda, retorna un observable vacío
+    }
+
+    // Realiza la petición HTTP GET con el término de búsqueda
+    return this.http_.get<any[]>(`${this.url}?cedula=${searchTerm}`);
   }
 
   getTipoClientes() {

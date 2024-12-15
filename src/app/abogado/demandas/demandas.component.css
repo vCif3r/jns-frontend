@@ -1,0 +1,22 @@
+mat-form-field{
+    width: 100%;
+}
+
+/*******************
+ Breadcrumb and page title
+*******************/
+.page-breadcrumb {
+    padding: 20px 20px 0 20px;
+}
+
+.page-breadcrumb .page-title {
+    margin-bottom: 15px;
+}
+
+.page-breadcrumb .breadcrumb {
+    padding: 0px;
+    margin: 0px;
+    background: transparent;
+    font-size: 12px;
+}
+

@@ -6,7 +6,7 @@
     <section>
         <mat-card appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Formulario de Denuncia</mat-card-title>
+                <mat-card-title>Formulario de Apelación</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <form (ngSubmit)="onSubmit()" [formGroup]="denunciaForm" class="pt-2">
@@ -36,9 +36,9 @@
                     <div class="w-100">
                         <!-- <span class="fs-6 mb-2">Tipo de demanda</span> -->
                         <mat-form-field appearance="outline">
-                            <mat-label>Tipo de Denuncia</mat-label>
+                            <mat-label>Tipo de Apelación</mat-label>
                             <mat-select formControlName="tipo">
-                                @for (tipo of tipo_denuncias; track tipo) {
+                                @for (tipo of tipo_apelaciones; track tipo) {
                                 <mat-option [value]="tipo.value">{{
                                     tipo.viewValue
                                     }}</mat-option>
@@ -50,7 +50,7 @@
                     <!-- detalles -->
                     <div class="w-100">
                         <mat-form-field appearance="outline">
-                            <mat-label>Detalles de la Denuncia</mat-label>
+                            <mat-label>Detalles de la Apelación</mat-label>
                             <textarea matInput formControlName="detalles"></textarea>
                         </mat-form-field>
                     </div>

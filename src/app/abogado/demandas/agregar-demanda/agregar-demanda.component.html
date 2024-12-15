@@ -1,0 +1,36 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>Formulario de Demanda</mat-card-title>
+        <mat-card-subtitle>Por favor, complete la siguiente información para iniciar su demanda
+            legal.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form (ngSubmit)="onSubmit()" [formGroup]="demandForm" class="pt-2">
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Cedula Cliente</mat-label>
+                <input type="text" matInput formControlName="cedula">
+            </mat-form-field>
+              
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Tipo de Demanda:</mat-label>
+                <mat-select formControlName="tipo">
+                    <mat-option value="Civil">Civil</mat-option>
+                    <mat-option value="Laboral">Laboral</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="titulo">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Detalles de la Demanda:</mat-label>
+                <textarea matInput formControlName="descripcion"></textarea>
+            </mat-form-field>
+            <button type="submit" mat-button>Presentar Demanda</button>
+        </form>
+    </mat-card-content>
+</mat-card>

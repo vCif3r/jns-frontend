@@ -1515,4 +1515,14 @@ a:focus {
 
 
 
+mat-sidenav-container{
+    background-color: #EEEEEE !important;
+    height: 100%;
+}
+
+mat-sidenav{
+    width: 250px !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
 /*DENUNCIA*/

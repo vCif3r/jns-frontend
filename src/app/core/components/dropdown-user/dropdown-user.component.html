@@ -5,13 +5,13 @@
     <div class="px-2">{{ email }}</div>
     <hr>
     @if (role == 'Cliente') {
-        <button mat-menu-item>Mis citas</button>
+        <button mat-menu-item routerLink="/procesos">Mis citas</button>
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
     }@else if (role == "Admin") {
-        <button mat-menu-item>Dashboard</button>
+        <button mat-menu-item routerLink="/admin">Dashboard</button>
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
     }@else if (role == "Abogado") {
-        <button mat-menu-item>Dashboard</button>
+        <button mat-menu-item routerLink="/abogado">Dashboard</button>
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
     }
 </mat-menu>

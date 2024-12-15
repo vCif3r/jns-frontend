@@ -17,6 +17,8 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { FormDemandaComponent } from './public/procesos/form-demanda/form-demanda.component';
 import { AbogadosComponent } from './admin/abogados/abogados.component';
 import { RegisterComponent } from './public/register/register.component';
+import { DemandasComponent } from './abogado/demandas/demandas.component';
+import { FormDenunciaComponent } from './public/procesos/form-denuncia/form-denuncia.component';
 
 export const routes: Routes = [
     {
@@ -37,6 +39,7 @@ export const routes: Routes = [
         ]
     },
     { path: 'demanda', component: FormDemandaComponent, title: 'Nueva demanda' },
+    { path: 'denuncia', component: FormDenunciaComponent, title: 'Nueva denuncia' },
     {
         path: 'admin',
         component: AdminComponent,
@@ -56,7 +59,7 @@ export const routes: Routes = [
         data: { role: 'Abogado' },
         children: [
             { path: '', redirectTo: 'clientes', pathMatch: 'full' },
-            
+            { path: 'demandas', component: DemandasComponent, title: 'demandas' }
         ]
     },
     {

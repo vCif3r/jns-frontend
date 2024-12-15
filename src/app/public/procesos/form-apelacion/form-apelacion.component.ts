@@ -1,50 +1,43 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatTimepickerModule } from '@angular/material/timepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
-import { DenunciaService } from '../../../core/services/denuncia.service';
-import { Denuncia } from '../../../core/models/denuncia';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTimepickerModule } from '@angular/material/timepicker';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ApelacionService } from '../../../core/services/apelacion.service';
 
-interface TipoDenuncia {
+interface TipoApelacion {
   value: string;
   viewValue: string;
 }
 
 @Component({
-  selector: 'app-form-denuncia',
+  selector: 'app-form-apelacion',
   providers: [provideNativeDateAdapter()],
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatTimepickerModule,
-    MatSelectModule,
-    CommonModule,
-  ],
-  templateUrl: './form-denuncia.component.html',
-  styleUrl: './form-denuncia.component.css',
+    imports: [
+      MatCardModule,
+      MatButtonModule,
+      MatFormFieldModule,
+      MatInputModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatDatepickerModule,
+      MatTimepickerModule,
+      MatSelectModule,
+      CommonModule,
+    ],
+  templateUrl: './form-apelacion.component.html',
+  styleUrl: './form-apelacion.component.css'
 })
-export class FormDenunciaComponent {
-  tipo_denuncias: TipoDenuncia[] = [
+export class FormApelacionComponent {
+tipo_apelaciones: TipoApelacion[] = [
     { value: 'Civil', viewValue: 'Demanda Civil' },
     { value: 'Laboral', viewValue: 'Demanda Laboral' },
     { value: 'Familiar', viewValue: 'Demanda Familiar' },
@@ -56,7 +49,7 @@ export class FormDenunciaComponent {
   denunciaForm: FormGroup;
 
   constructor(
-    private denunciaService: DenunciaService,
+    private apelacionService: ApelacionService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
@@ -78,15 +71,15 @@ export class FormDenunciaComponent {
       // Transformar la fecha antes de enviar
       formValue.fecha = this.formatDate(formValue.fecha);
 
-      this.denunciaService.save(this.denunciaForm.value).subscribe(
-        (response: Denuncia) => {
+      this.apelacionService.save(this.denunciaForm.value).subscribe(
+        (response: any) => {
 
           this.snackBar.open('Denuncia registrada con éxito', 'Cerrar', {
             duration: 5000,
           });
           this.router.navigate(['/home']);
         },
-        (error) => {
+        (error:any) => {
 
           this.snackBar.open('Error al registrar la denuncia', 'Cerrar', {
             duration: 5000,
