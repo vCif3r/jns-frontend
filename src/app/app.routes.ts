@@ -16,6 +16,7 @@ import { DemandaComponent } from './cliente/demanda/demanda.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { FormDemandaComponent } from './public/procesos/form-demanda/form-demanda.component';
 import { AbogadosComponent } from './admin/abogados/abogados.component';
+import { RegisterComponent } from './public/register/register.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,7 @@ export const routes: Routes = [
             { path: 'contact', component: ContactComponent },
             { path: 'experience', component: ExperienceComponent },
             { path: 'login',component: LoginComponent, title:'login' },
+            { path: 'register', component: RegisterComponent, title:'register' },
             // formularios de  procesos
             
         ]

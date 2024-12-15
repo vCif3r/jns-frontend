@@ -15,7 +15,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { PaisService } from '../../../core/services/pais.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Para mostrar mensajes
-import { AuthService } from '../../../core/services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
 import { AbogadoService } from '../../../core/services/abogado.service';
 

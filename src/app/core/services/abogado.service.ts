@@ -8,7 +8,7 @@ import { Abogado } from '../models/abogado';
 })
 export class AbogadoService {
 
-  private urlRegister = 'http://localhost:3000/auth' // url solo para registrar abogados
+  private urlRegister = 'http://localhost:3000/auth' // url solo para registrar 
   private url = 'http://localhost:3000/abogados'; // URL para obtener la lista de abogados
 
 

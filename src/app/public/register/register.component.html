@@ -1,0 +1,160 @@
+<section class="" style="margin: 60px 0;">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-5 offset-xl-1">
+                <form [formGroup]="registerForm" (ngSubmit)="register()" >
+                    
+                    <div class="divider d-flex align-items-center justify-content-center py-4">
+                        <span class="text-center mb-0 fw-bold fs-5">
+                            Registrate
+                        </span>
+                    </div>
+
+                    <!-- names input -->
+                    <div class="row mb-0">
+                        <div class="col-12 col-xl-6">
+                            <mat-form-field appearance="outline" style="width: 100%;">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput type="email" formControlName="nombre"/>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-12 col-xl-6">
+                            <mat-form-field appearance="outline" style="width: 100%;">
+                                <mat-label>Apellidos</mat-label>
+                                <input matInput type="email" formControlName="apellido"/>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row mb-0">
+                        <div class="col-12 col-xl-6">
+                            <mat-form-field appearance="outline" style="width: 100%;">
+                                <mat-label>Cédula</mat-label>
+                                <input matInput type="email" formControlName="cedula"/>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-xl-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Fecha de nacimiento</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="fecha_nacimiento">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="w-100 text-center mb-2">
+                        <label id="example-radio-group-label" class="w-100">Género</label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="genero">
+                            <mat-radio-button value="Masculino">Masculino</mat-radio-button>
+                            <mat-radio-button value="Femenino">Femenino</mat-radio-button>
+                            <mat-radio-button value="Otro">Otro</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-xl-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tipo de cliente</mat-label>
+                                <mat-select formControlName="tipo_cliente">
+                                    <mat-option value="Individual">Individual</mat-option>
+                                    <mat-option value="Empresa">Empresa</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-xl-6">
+                            <mat-form-field appearance="outline" style="width: 100%;">
+                                <mat-label>Estado civil</mat-label>
+                                <mat-select formControlName="estado_civil">
+                                    <mat-option value="Soltero">Soltero</mat-option>
+                                    <mat-option value="Casado">Casado</mat-option>
+                                    <mat-option value="Divorciado">Divorciado</mat-option>
+                                    <mat-option value="Viudo">Viudo</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+
+                    <div class="w-100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput type="email" formControlName="direccion"/>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12 col-xl-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Teléfono</mat-label>
+                                <input matInput type="email" formControlName="telefono"/>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-12 col-xl-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nacionalidad</mat-label>
+                                <mat-select formControlName="pais">
+                                    @for (country of countries; track country) {
+                                    <mat-option [value]="country.name.common">
+                                        <img [src]="country.flags.png" alt="Bandera" width="24" height="16"
+                                            style="margin-right: 10px;">
+                                        {{country.name.common}}
+                                    </mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                      
+
+                    <div>
+                        <mat-form-field appearance="outline" style="width: 100%;" >
+                            <mat-label>Correo Electrónico</mat-label>
+                            <input matInput type="email" formControlName="email" formControlName="email"/>
+                        </mat-form-field>
+
+                    </div>
+
+                    <!-- Password input -->
+                    <div >
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password"/>
+                            <a
+                              mat-icon-button
+                              matSuffix
+                              (click)="clickEvent($event)"
+                              [attr.aria-label]="'Hide password'"
+                              [attr.aria-pressed]="hide()"
+                            >
+                              <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                        </mat-form-field>
+                    </div>
+
+                    
+
+                    <div class="text-center text-lg-start pt-2">
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Registrar</button>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Tienes una cuenta? 
+                            <a routerLink="/login" class="link-danger">Login</a>
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</section>

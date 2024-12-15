@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { ChartDemandaComponent } from './charts/chart-demanda/chart-demanda.component';
 import { PieChartClientesComponent } from './charts/pie-chart-clientes/pie-chart-clientes.component';
 import { PieChartAbogadosComponent } from './charts/pie-chart-abogados/pie-chart-abogados.component';
+import { StatisticService } from '../../core/services/statistic.service';
 
 export interface Cliente {
   id: string;
@@ -35,9 +36,33 @@ export class DashboardComponent {
   displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correo'];
   dataSource: any[] = [];
 
-  constructor(private _clienteService: ClienteService){}
+  totalAbogados: number = 0;
+  totalClientes: number = 0;
+
+  constructor(private _clienteService: ClienteService, 
+    private statisticService: StatisticService
+  ){}
 
   ngOnInit(): void {
+    this.findAllClientes()
+    this.getStatistic()
+  }
+
+  getStatistic(){
+    this.statisticService.getTotalAbogados().subscribe(
+      (data) => {
+        this.totalAbogados = data;
+      }
+    )
+
+    this.statisticService.getTotalClientes().subscribe(
+      (data) => {
+        this.totalClientes = data;
+      }
+    )
+  }
+
+  findAllClientes(){
     this._clienteService.findAll().subscribe(
       (data) => {
         this.dataSource = data; // Asigna la respuesta a la variable dataSource

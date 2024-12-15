@@ -1,20 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cliente } from '../models/cliente';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClienteService {
+  private urlRegister = 'http://localhost:3000/auth'; // url solo para registrar
+  private url = 'http://localhost:3000/clientes'; // URL para obtener la lista de clientes
 
-  constructor(private http_ : HttpClient) { }
+  private clientesSubject = new BehaviorSubject<Cliente[]>([]);
+  clientes$ = this.clientesSubject.asObservable();
 
-  findAll(): Observable<Cliente[]>{
-    return this.http_.get<Cliente[]>(`http://localhost:3000/clientes`);
+  constructor(private http_: HttpClient) {}
+
+  findAll(): Observable<Cliente[]> {
+    return this.http_.get<Cliente[]>(this.url).pipe(
+      tap((data) => {
+        this.clientesSubject.next(data);
+      })
+    );
   }
 
-  getTipoClientes(){
-    return this.http_.get<any[]>('http://localhost:3000/clientes/tipos/count')
+  registerCliente(cliente: any) {
+    return this.http_
+      .post<any>(`${this.urlRegister}/register/cliente/`, cliente)
+      .pipe(switchMap(() => this.findAll()));
+  }
+
+  getTipoClientes() {
+    return this.http_.get<any[]>(`${this.url}/tipos/count`);
   }
 }
