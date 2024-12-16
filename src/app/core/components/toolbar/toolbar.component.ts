@@ -4,10 +4,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
 import { Observable } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
 import { RouterLink } from '@angular/router';
+import { MenuUserComponent } from '../../../workspace/components/menu-user/menu-user.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -16,8 +15,8 @@ import { RouterLink } from '@angular/router';
     MatIconModule,
     MatMenuModule,
     CommonModule,
-    RouterLink,
     MatButtonModule,
+    MenuUserComponent
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css',
@@ -30,13 +29,4 @@ export class ToolbarComponent {
     this.toggleSidenav.emit();
   }
 
-  email: any;
-
-  constructor(private _authService: AuthService) {
-    this.email = _authService.getEmailUser();
-  }
-
-  logout() {
-    this._authService.logout();
-  }
 }

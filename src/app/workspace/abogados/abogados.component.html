@@ -1,0 +1,131 @@
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <h4 class="page-title">Datos</h4>
+            <div class=" text-right" style="margin-left: auto;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/admin">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Abogados</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Título de la tabla -->
+                    <h5 class="card-title">Abogados</h5>
+                    <!-- Botones de acción -->
+                    <div class="mb-3 d-flex gap-2">
+                        <a class="btn btn-success btn-sm" (click)="openDialog()">
+                            <div class="d-flex align-items-center gap-2">
+                                <mat-icon>add_circle</mat-icon>
+                                Add New
+                            </div>
+                        </a>
+                        <button class="btn btn-secondary btn-sm" (click)="printPreview()">
+                            <div class="d-flex align-items-center gap-2">
+                                <mat-icon>print</mat-icon>
+                                Print Preview
+                            </div>
+                        </button>
+                        <button class="btn btn-info btn-sm" (click)="exportToCSV()">
+                            <div class="d-flex align-items-center gap-2">
+                                <mat-icon>description</mat-icon>
+                                Save CSV
+                            </div>                   
+                        </button>
+
+                        <!-- <button class="btn btn-warning btn-sm">
+                            <div class="d-flex align-items-center gap-2">
+                                <mat-icon>filter_alt</mat-icon>
+                                Filter
+                            </div>
+                        </button>
+
+                        <button class="btn btn-dark btn-sm">
+                            <div class="d-flex align-items-center gap-2">
+                                <mat-icon>visibility</mat-icon>
+                                Show all
+                            </div>
+                        </button> -->
+                    </div>
+
+                    <!-- SPINNER -->
+                    <div *ngIf="loading" class="loading-container">
+                        <mat-spinner></mat-spinner> <!-- Spinner de carga -->
+                    </div>
+                      
+                    <!-- Buscador -->
+                    <div *ngIf="!loading">
+
+                        <div class="w-100 p-2">
+                            <mat-form-field appearance="outline" class="w-100">
+                                
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar por cédula">
+                            </mat-form-field>
+                        </div>
+
+                        <table mat-table [dataSource]="dataSource" matSort  id="printableTable">
+
+                            <!-- Definir las columnas de la tabla -->
+                            <ng-container matColumnDef="foto">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Foto</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <img src="{{ element.foto || 'https://www.w3schools.com/howto/img_avatar.png' }}" alt="" class="img-thumbnail" style="width: 50px" />
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="cedula">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cédula</th>
+                                <td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="especialidad">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Especialidad</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.especialidad}} 
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="nombre">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                                <td mat-cell *matCellDef="let element">                               
+                                    {{element.nombre}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+                                <td mat-cell *matCellDef="let element">                               
+                                    {{element.email}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="acciones">
+                                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                                <td mat-cell *matCellDef="let element">                               
+                                    <a mat-button>delete</a>
+                                </td>
+                            </ng-container>
+
+                            <!-- Definir las filas de la tabla -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+                            showFirstLastButtons></mat-paginator>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

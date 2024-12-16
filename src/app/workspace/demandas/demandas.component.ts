@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -18,6 +18,8 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { AgregarDemandaComponent } from './agregar-demanda/agregar-demanda.component';
+import { AuthService } from '../../core/services/auth.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-demandas',
@@ -29,13 +31,14 @@ import { AgregarDemandaComponent } from './agregar-demanda/agregar-demanda.compo
     MatIconModule,
     MatPaginatorModule,
     CommonModule,
-    RouterLink
+    RouterLink,
+    MatButtonModule
   ],
   templateUrl: './demandas.component.html',
   styleUrl: './demandas.component.css',
 })
 export class DemandasComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'titulo', 'cliente', 'estado']; // Definir las columnas
+  displayedColumns: string[] = ['id', 'titulo', 'cliente', 'estado','acciones']; // Definir las columnas
   dataSource = new MatTableDataSource<any>(); // Definir el origen de datos
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -44,16 +47,25 @@ export class DemandasComponent implements AfterViewInit {
   readonly dialog = inject(MatDialog);
   openDialog(): void {
     const dialogRef = this.dialog.open(AgregarDemandaComponent);
-
     dialogRef.afterClosed().subscribe();
   }
 
-  constructor(private demandaService: DemandaService) {}
+  role:any;
+
+  constructor(
+    private router: Router,
+    private demandaService: DemandaService,
+    private _authService: AuthService 
+  ) {}
+
+  
 
   ngOnInit(): void {
     this.demandaService.findAll().subscribe((data) => {
       this.dataSource.data = data;
     });
+
+    this.role = this._authService.getRole(); 
   }
 
   ngAfterViewInit() {
@@ -69,5 +81,10 @@ export class DemandasComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  verDetalles(demandaId: number): void {
+    // Redirigir a la ruta de detalles con el id de la demanda
+    this.router.navigate([`/workspace/demandas/${demandaId}`]);
   }
 }

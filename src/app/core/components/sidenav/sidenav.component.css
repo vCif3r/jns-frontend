@@ -1,26 +1,27 @@
-.nav-link{
-    color: #dddd;
+.sidenav-link{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #ddd;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
 }
 
-/* .nav-link:hover{
-    color: #000;
-    background-color: #ddd;
-} */
+.sidenav-link mat-icon{
+    height: 20px;
+    width: 20px;
+}
+.material-icons{
+    font-size: 20px;
+}
 
 .active-link{
     color: #000;
     background-color: #ddd;
-}
-
-.navlink{
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 6px;
-    gap: 5px;
-    font-weight: 400;
-    border: none;
-    text-decoration: none;
 }
 
 .navlink:hover, .navlink.active{

@@ -1,0 +1,124 @@
+<div>
+    <h2 mat-dialog-title>Nuevo abogado</h2>
+
+    <mat-dialog-content>Completa los campos del formulario.</mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="abogadoForm">
+
+        <div class="pt-4 px-4 w-100">
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput required formControlName="nombre">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput required formControlName="apellido">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Cédula</mat-label>
+                        <input matInput required formControlName="cedula">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Especialidad</mat-label>
+                        <mat-select formControlName="especialidad">
+                            @for (e of especialidades; track e) {
+                            <mat-option [value]="e.value">{{e.viewValue}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="w-100">
+                <mat-form-field appearance="outline">
+                    <mat-label>Correo</mat-label>
+                    <input matInput required formControlName="email">
+                </mat-form-field>
+            </div>
+
+            <div class="w-100">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+                    <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()">
+                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+            <div class="w-100">
+                <mat-form-field appearance="outline">
+                    <mat-label>Dirección</mat-label>
+                    <input matInput required formControlName="direccion">
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Teléfono</mat-label>
+
+                        <input matInput required formControlName="telefono">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Género</mat-label>
+                        <mat-select formControlName="genero">
+                            <mat-option value="Masculino">Masculino</mat-option>
+                            <mat-option value="Femenino">Femenino</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-12 col-xl-12">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nacionalidad</mat-label>
+                        <mat-select formControlName="pais">
+                            @for (country of countries; track country) {
+                            <mat-option [value]="country.name.common">
+                                <img [src]="country.flags.png" alt="Bandera" width="24" height="16"
+                                    style="margin-right: 10px;">
+                                {{country.name.common}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="col-12 col-xl-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha Ingreso</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fecha_ingreso" />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div> -->
+
+            </div>
+        </div>
+
+        <mat-dialog-actions>
+            <button type="submit" mat-button>Agregar</button>
+            <button mat-button mat-dialog-close>Cancelar</button>
+        </mat-dialog-actions>
+
+    </form>
+</div>

@@ -1,0 +1,15 @@
+<button [matMenuTriggerFor]="beforeMenu" class="btn">
+    <div class="d-flex align-items-center gap-1">
+        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="" height="30" width="30"
+            style="border-radius: 100%;">
+        <div class="d-flex flex-column align-items-start text-white">
+            <small>{{ fullname }}</small>
+            <span style="font-size: 11px;">{{ role }}</span>
+        </div>
+    </div>
+</button>
+<mat-menu #beforeMenu="matMenu" xPosition="before">
+    <div class="px-2">{{ email }}</div>
+    <hr>
+    <button mat-menu-item routerLink="/profile">Mi perfil</button>
+</mat-menu>

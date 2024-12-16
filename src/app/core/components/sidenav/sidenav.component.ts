@@ -40,12 +40,12 @@ export class SidenavComponent implements OnInit{
       ];
     } else if (this.userRole === 'Admin') {
       this.sidebarItems = [
-        { title: 'Dashboard', icon: 'dashboard', url: '/admin/dashboard' },
-        { title: 'Clientes', icon: 'people', url: '/admin/clientes' },
-        { title: 'Abogados', icon: 'people', url: '/admin/abogados' },
-        { title: 'Querellas', icon: 'people', url: '/admin/querellas' },
-        { title: 'Procesos', icon: 'library_books', url: '/admin/procesos' },
-        { title: 'help', icon: 'assignment', url: '/admin/help' },
+        { title: 'Dashboard', icon: 'dashboard', url: '/workspace/dashboard' },
+        { title: 'Casos', icon: 'library_books', url: '/workspace/casos' },
+        { title: 'Clientes', icon: 'people', url: '/workspace/clientes' },
+        { title: 'Abogados', icon: 'people', url: '/workspace/abogados' },
+        { title: 'Reportes', icon: 'people', url: '/workspace/reportes' },
+        { title: 'Documentos', icon: 'assignment', url: '/workspace/documentos' },
       ];
     } else{
       this.sidebarItems = [

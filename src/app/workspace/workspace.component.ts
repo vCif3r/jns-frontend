@@ -1,16 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { Observable, map, shareReplay } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { map, Observable, shareReplay } from 'rxjs';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { SidenavComponent } from '../core/components/sidenav/sidenav.component';
 import { ToolbarComponent } from '../core/components/toolbar/toolbar.component';
 
 @Component({
-  selector: 'app-abogado',
+  selector: 'app-workspace',
   imports: [
     RouterOutlet,
     MatSidenavModule,
@@ -20,10 +20,10 @@ import { ToolbarComponent } from '../core/components/toolbar/toolbar.component';
     CommonModule,
     SidenavComponent
   ],
-  templateUrl: './abogado.component.html',
-  styleUrl: './abogado.component.css'
+  templateUrl: './workspace.component.html',
+  styleUrl: './workspace.component.css'
 })
-export class AbogadoComponent {
+export class WorkspaceComponent {
   @ViewChild('sidenav') sidenav?: MatSidenav;
 
   isHandset$: Observable<boolean>;

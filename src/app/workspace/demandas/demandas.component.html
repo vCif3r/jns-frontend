@@ -5,7 +5,7 @@
             <div class=" text-right" style="margin-left: auto;">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/abogado">Home</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/workspace/dashboard">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Demandas</li>
                     </ol>
                 </nav>
@@ -22,12 +22,14 @@
                     <h5 class="card-title">Demandas</h5>
 
                     <div class="mb-3 d-flex gap-2">
-                        <a class="btn btn-success btn-sm" (click)="openDialog()">
-                            <div class="d-flex align-items-center gap-2">
-                                <mat-icon>add_circle</mat-icon>
-                                Add New
-                            </div>
-                        </a>
+                        @if (role == 'Admin') {
+                            <a class="btn btn-success btn-sm" (click)="openDialog()">
+                                <div class="d-flex align-items-center gap-2">
+                                    <mat-icon>add_circle</mat-icon>
+                                    Add New
+                                </div>
+                            </a>
+                        }
                         <button class="btn btn-secondary btn-sm">
                             <div class="d-flex align-items-center gap-2">
                                 <mat-icon>print</mat-icon>
@@ -39,9 +41,7 @@
                                 <mat-icon>description</mat-icon>
                                 Save CSV
                             </div>
-                        </button>
-
-                        
+                        </button>    
                     </div>
 
                     <!-- TABLE -->
@@ -58,23 +58,39 @@
 
                             <!-- Definir las columnas de la tabla -->
                             <ng-container matColumnDef="id">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
                                 <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="titulo">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> titulo </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
                                 <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="cliente">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> cliente </th>
-                                <td mat-cell *matCellDef="let element"> {{element.cliente.nombre}} </td>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.cliente.nombre}} {{element.cliente.apellido}}
+                                </td>
                             </ng-container>
 
                             <ng-container matColumnDef="estado">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> estado </th>
-                                <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                                <td mat-cell *matCellDef="let element">                               
+                                    <span class="badge bg-primary"> {{element.estado}} </span>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="acciones">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                                <td mat-cell *matCellDef="let element">                               
+                                    @if (role == 'Admin') {
+                                        <a mat-button>editar</a>
+                                        <a mat-button>delete</a>
+                                    }@else if (role == 'Abogado') {
+                                        <a mat-button (click)="verDetalles(element.id)">ver detalles</a>
+                                    }
+                                </td>
                             </ng-container>
 
                             <!-- Definir las filas de la tabla -->

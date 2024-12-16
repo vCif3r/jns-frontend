@@ -4,18 +4,16 @@
         <span class="fs-6">AsesoresLegales</span>
     </a>
     <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
+    <ul class="nav nav-pills flex-column gap-1 mb-auto">
         @for (item of sidebarItems; track $index) {
-            <li class="nav-item">
-                <a routerLink="{{item.url}}" class="nav-link d-flex align-items-center gap-2 " routerLinkActive="active-link">
-                    <mat-icon matListItemIcon class="material-icons-outlined">{{ item.icon }}</mat-icon>
-                    <span>{{ item.title }}</span>
-                </a>
-            </li>
+            <a routerLink="{{item.url}}" class="sidenav-link" routerLinkActive="active-link">
+                <mat-icon matListItemIcon class="material-icons-outlined">{{ item.icon }}</mat-icon>
+                <span>{{ item.title }}</span>
+            </a>
         }
     </ul>
-    <button class="navlink" (click)="logout()">
+    <a class="sidenav-link" (click)="logout()">
         <mat-icon matListItemIcon>logout</mat-icon>
         <span>Cerrar Sesión</span>
-    </button>
+    </a>
 </main>

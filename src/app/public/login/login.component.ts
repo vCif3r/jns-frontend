@@ -48,10 +48,10 @@ export class LoginComponent {
           // Redirigir al usuario basándose en su rol
           if (tokenPayload.rol === 'Admin') {
             console.log("Admin")
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/workspace']);
           } else if (tokenPayload.rol === 'Abogado') {
             console.log("abogado")
-            this.router.navigate(['/abogado']);
+            this.router.navigate(['/workspace']);
           } else {
             // Redirigir a una página de error o de inicio si el rol no es reconocido
             this.router.navigate(['/']);
