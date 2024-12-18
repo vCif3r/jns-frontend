@@ -1,0 +1,22 @@
+
+.whatsapp-icon {
+    position: fixed;
+    bottom: 20px; /* Distancia desde la parte inferior */
+    left: 20px; /* Distancia desde la izquierda */
+    background-color: #25D366; /* Color de fondo de WhatsApp */
+    color: white; /* Color del ícono */
+    border-radius: 50%; /* Esquinas redondeadas */
+    height: 50;
+    width: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px; /* Espaciado interno */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra para destacar el ícono */
+    z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
+    text-align: center; /* Centrar el ícono */
+}
+
+.whatsapp-icon:hover {
+    opacity: 0.8; /* Efecto al pasar el mouse */
+}

@@ -19,6 +19,7 @@ import { DetallesDemandaComponent } from './workspace/demandas/detalles-demanda/
 import { ClientesComponent } from './workspace/clientes/clientes.component';
 import { DashboardComponent } from './workspace/dashboard/dashboard.component';
 import { AbogadosComponent } from './workspace/abogados/abogados.component';
+import { ServiciosComponent } from './workspace/servicios/servicios.component';
 
 export const routes: Routes = [
   {
@@ -84,12 +85,30 @@ export const routes: Routes = [
     component: WorkspaceComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, title: 'dashboard',canActivate: [RoleGuard],
-        data: { roles: ['Admin','Cliente','Abogado'] }, },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        title: 'dashboard',
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin', 'Cliente', 'Abogado'] },
+      },
       {
         path: 'clientes',
         component: ClientesComponent,
         title: 'clientes',
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin'] },
+      },
+      {
+        path: 'servicios',
+        component: ServiciosComponent,
+        title: 'demandas',
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin'] },
+      },
+      {
+        path: 'servicios/:id',
+        component: ServiciosComponent,
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
       },

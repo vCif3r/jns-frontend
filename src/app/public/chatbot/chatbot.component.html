@@ -1,0 +1,72 @@
+<div class="chatbot-container">
+    <!-- Botón flotante para abrir el chat -->
+    <div class="widget-position-right sidebar-position-right bubbleWithLabel">
+        <button class="widgetLabel" type="button">
+            <span>Chatea con nosotros
+                <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/12.1.1/72x72/1f44b.png" alt="👋" class="emoji">
+            </span>
+        </button>
+
+        <!-- Botón de chat flotante -->
+        <div id="button" class="chat-closed mobile-size__large" [class.clicked]="isChatOpen">
+            <div class="buttonWave"></div>
+            <button type="button" id="button-body" (click)="toggleChat()" class="chrome" aria-label="Open chat widget">
+                <i class="material-icons type1 for-closed active">
+                    <svg id="ic_bubble" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path>
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                    </svg>
+                </i>
+                <i class="material-icons type1 for-closed hover-pencil">
+                    <svg id="ic_create" fill="blue" height="24" viewBox="0 0 24 24" width="24"
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path
+                            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z">
+                        </path>
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                    </svg>
+                </i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Contenedor del chat (por defecto oculto) -->
+    <div class="chat-container" [class.hidden]="!isChatOpen">
+        <div class="chat-header">
+            <div class="header-top">
+                <div class="avatar">
+                    <div class="header-ava"></div>
+                </div>
+                <div class="chat-info">
+                    <h2>Chatear con JNS</h2>
+                    <button id="toggleChat" class="toggle-button" (click)="minimizeChat()">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z"></path>
+                        </svg>
+                        <span class="sr-only">Minimizar</span>
+                    </button>
+                </div>
+            </div>
+            <div class="header-bottom">
+                <span class="status-indicator"></span>
+                <p>Contestamos inmediatamente</p>
+            </div>
+        </div>
+
+        <div #chatbox class="chatbox">
+            <div #optionButtons class="option-buttons">
+                <!-- Los botones de opción se cargarán dinámicamente aquí -->
+            </div>
+            <!-- Los mensajes aparecerán aquí -->
+        </div>
+
+        <div class="input-area">
+            <input #userInput type="text" class="form-control" placeholder="Escribe un mensaje..."
+                (keydown)="handleInput($event)">
+            <button (click)="sendMessage()" id="sendButton" >➤</button>
+        </div>
+
+    </div>
+</div>

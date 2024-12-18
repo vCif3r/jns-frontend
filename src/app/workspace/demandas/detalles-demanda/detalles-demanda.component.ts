@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-detalles-demanda',
@@ -14,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
+    MatSelectModule
   ],
   templateUrl: './detalles-demanda.component.html',
   styleUrl: './detalles-demanda.component.css'

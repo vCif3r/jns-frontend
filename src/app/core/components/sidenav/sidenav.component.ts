@@ -41,6 +41,7 @@ export class SidenavComponent implements OnInit{
     } else if (this.userRole === 'Admin') {
       this.sidebarItems = [
         { title: 'Dashboard', icon: 'dashboard', url: '/workspace/dashboard' },
+        { title: 'Servicios', icon: 'library_books', url: '/workspace/servicios' },
         { title: 'Casos', icon: 'library_books', url: '/workspace/casos' },
         { title: 'Clientes', icon: 'people', url: '/workspace/clientes' },
         { title: 'Abogados', icon: 'people', url: '/workspace/abogados' },

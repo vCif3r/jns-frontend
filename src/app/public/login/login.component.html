@@ -10,14 +10,14 @@
                     
                     <div class="divider d-flex align-items-center my-4">
                         <p class="text-center mb-0">
-                            Please login to your account
+                            Iniciar sesión
                         </p>
                     </div>
 
                     <!-- Email input -->
                     <div>
                         <mat-form-field appearance="outline" style="width: 100%;">
-                            <mat-label>Enter your Email address</mat-label>
+                            <mat-label>Correo electrónico</mat-label>
                             <input matInput type="email" formControlName="email"/>
                         </mat-form-field>
 
@@ -26,7 +26,7 @@
                     <!-- Password input -->
                     <div >
                         <mat-form-field appearance="outline" style="width: 100%;">
-                            <mat-label>Enter your password</mat-label>
+                            <mat-label>Contraseña</mat-label>
                             <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password"/>
                             <a
                               mat-icon-button
@@ -45,16 +45,16 @@
                         <div class="form-check mb-0">
                             <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
                             <label class="form-check-label" for="form2Example3">
-                                Remember me
+                                Recordar mi contraseña
                             </label>
                         </div>
-                        <a href="#!" class="text-body">Forgot password?</a>
+                        <a href="#!" class="text-body">Olvisaste tu contraseña?</a>
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
                             style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a routerLink="/register"
+                        <p class="small fw-bold mt-2 pt-1 mb-0">No tienes una cuenta? <a routerLink="/register"
                                 class="link-danger">Register</a></p>
                     </div>
 
