@@ -63,7 +63,7 @@ export class DashboardComponent {
   }
 
   findAllClientes(){
-    this._clienteService.findAll().subscribe(
+    this._clienteService.getClientes().subscribe(
       (data) => {
         this.dataSource = data; // Asigna la respuesta a la variable dataSource
         console.log('Clientes obtenidos exitosamente', data);

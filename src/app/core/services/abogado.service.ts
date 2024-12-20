@@ -9,7 +9,7 @@ import { Abogado } from '../models/abogado';
 export class AbogadoService {
 
   private urlRegister = 'http://localhost:3000/auth' // url solo para registrar 
-  private url = 'http://localhost:3000/abogados'; // URL para obtener la lista de abogados
+  private url = 'http://localhost:3000/users/abogados'; // URL para obtener la lista de abogados
 
 
   private abogadosSubject = new BehaviorSubject<Abogado[]>([]);
@@ -36,8 +36,4 @@ export class AbogadoService {
     )
   }
 
-
-  countAbogadosByEspecialidad() {
-    return this.http.get<any[]>(`${this.url}/especialidad/count`)
-  }
 }

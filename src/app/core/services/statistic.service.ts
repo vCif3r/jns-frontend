@@ -20,4 +20,8 @@ export class StatisticService {
     return this.http.get<number>(`${this.baseUrl}/clientes`);
   }
 
+  countAbogadosByEspecialidad() {
+    return this.http.get<any[]>(`${this.baseUrl}/especialidad/count`)
+  }
+
 }

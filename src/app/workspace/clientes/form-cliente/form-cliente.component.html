@@ -1,0 +1,132 @@
+<div>
+    <h2 mat-dialog-title>{{ isEditMode ? 'Editar cliente' : 'Agregar Nuevo cliente' }}</h2>
+
+    <mat-dialog-content>Completa todos los campos del formulario.</mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="clienteForm">
+        <div class="pt-4 px-4 w-100">
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput required formControlName="nombre">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput required formControlName="apellido">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="w-100 text-center mb-2">
+                <label id="example-radio-group-label" class="w-100">Género</label>
+                <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="genero">
+                    <mat-radio-button value="Masculino">Masculino</mat-radio-button>
+                    <mat-radio-button value="Femenino">Femenino</mat-radio-button>
+                    <mat-radio-button value="Otro">Otro</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Cédula</mat-label>
+                        <input matInput required formControlName="cedula">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Dirección</mat-label>
+                        <input matInput type="email" formControlName="direccion"/>
+                    </mat-form-field>
+                </div>
+                
+            </div>
+
+      
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline"  class="w-100">
+                        <mat-label>Tipo de cliente</mat-label>
+                        <mat-select formControlName="tipo_cliente">
+                            <mat-option value="Individual">Individual</mat-option>
+                            <mat-option value="Empresa">Empresa</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline"  class="w-100">
+                        <mat-label>Estado civil</mat-label>
+                        <mat-select formControlName="estado_civil">
+                            <mat-option value="Soltero">Soltero</mat-option>
+                            <mat-option value="Casado">Casado</mat-option>
+                            <mat-option value="Divorciado">Divorciado</mat-option>
+                            <mat-option value="Viudo">Viudo</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                
+            </div>
+
+            
+
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Teléfono</mat-label>
+                        <input matInput type="email" formControlName="telefono"/>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline"  class="w-100">
+                        <mat-label>Nacionalidad</mat-label>
+                        <mat-select formControlName="pais">
+                            @for (country of countries; track country) {
+                            <mat-option [value]="country.name.common">
+                                <img [src]="country.flags.png" alt="Bandera" width="24" height="16"
+                                    style="margin-right: 10px;">
+                                {{country.name.common}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                
+            </div>
+
+            @if (isEditMode == false) {  
+                <mat-form-field appearance="outline" class="w-100" >
+                    <mat-label>Correo Electrónico</mat-label>
+                    <input matInput type="email" formControlName="email" formControlName="email"/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline"  class="w-100">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password"/>
+                    <a
+                      mat-icon-button
+                      matSuffix
+                      (click)="clickEvent($event)"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide()"
+                    >
+                      <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </a>
+                </mat-form-field>
+            }
+
+       
+        </div>
+        <mat-dialog-actions>
+            <button mat-raised-button color="primary" type="submit" [disabled]="clienteForm.invalid">{{ isEditMode ? 'Actualizar' : 'Agregar' }}</button>
+            <button mat-button mat-dialog-close>Cancelar</button>
+        </mat-dialog-actions>
+    </form>
+</div>
