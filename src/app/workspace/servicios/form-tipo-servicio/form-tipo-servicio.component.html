@@ -1,0 +1,54 @@
+<div>
+    <h2 mat-dialog-title>{{ isEditMode ? 'Editar tipo de servicio' : 'Agregar Nuevo tipo de Servicio' }}</h2>
+
+    <mat-dialog-content>Completa todos los campos del formulario.</mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="tpsvForm">
+        <div class="pt-4 px-4 w-100">
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput required formControlName="nombre">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Servicio</mat-label>
+                        <mat-select formControlName="servicio">
+                            @for (servicio of servicios; track servicio.id) {
+                                <mat-option [value]="servicio.id">{{ servicio.nombre }}</mat-option> 
+                            }                     
+                                             
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+      
+            <div class="w-100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Descripción</mat-label>
+                    <textarea matInput required formControlName="descripcion"></textarea>
+                </mat-form-field>
+            </div>
+
+            @if (isEditMode == true) {
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="estado">                     
+                        <mat-option [value]="true">Disponible</mat-option>   
+                        <mat-option [value]="false">No disponible</mat-option>                    
+                    </mat-select>
+                </mat-form-field>
+            }
+
+       
+        </div>
+        <mat-dialog-actions>
+            <button mat-raised-button color="primary" type="submit" [disabled]="tpsvForm.invalid">{{ isEditMode ? 'Actualizar' : 'Agregar' }}</button>
+            <button mat-button mat-dialog-close>Cancelar</button>
+        </mat-dialog-actions>
+    </form>
+</div>

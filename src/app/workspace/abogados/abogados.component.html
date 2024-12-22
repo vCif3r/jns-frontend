@@ -5,7 +5,7 @@
             <div class=" text-right" style="margin-left: auto;">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/admin">Home</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/workspace">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Abogados</li>
                     </ol>
                 </nav>
@@ -40,20 +40,6 @@
                                 Save CSV
                             </div>                   
                         </button>
-
-                        <!-- <button class="btn btn-warning btn-sm">
-                            <div class="d-flex align-items-center gap-2">
-                                <mat-icon>filter_alt</mat-icon>
-                                Filter
-                            </div>
-                        </button>
-
-                        <button class="btn btn-dark btn-sm">
-                            <div class="d-flex align-items-center gap-2">
-                                <mat-icon>visibility</mat-icon>
-                                Show all
-                            </div>
-                        </button> -->
                     </div>
 
                     <!-- SPINNER -->
@@ -63,11 +49,9 @@
                       
                     <!-- Buscador -->
                     <div *ngIf="!loading">
-
                         <div class="w-100 p-2">
-                            <mat-form-field appearance="outline" class="w-100">
-                                
-                                <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar por cédula">
+                            <mat-form-field appearance="outline" class="w-100">                       
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Buscar...">
                             </mat-form-field>
                         </div>
 
@@ -110,8 +94,12 @@
                             <ng-container matColumnDef="acciones">
                                 <th mat-header-cell *matHeaderCellDef>Acciones</th>
                                 <td mat-cell *matCellDef="let element">  
-                                    <a mat-button>editar</a>                             
-                                    <a mat-button>delete</a>
+                                    <a mat-icon-button (click)="openDialog(element)">
+                                        <mat-icon>edit</mat-icon>
+                                    </a>                             
+                                    <a mat-icon-button (click)="openDialogDelete(element.id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </a>
                                 </td>
                             </ng-container>
 
@@ -121,10 +109,7 @@
                         </table>
                         <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
                             showFirstLastButtons></mat-paginator>
-
                     </div>
-
-
                 </div>
             </div>
         </div>

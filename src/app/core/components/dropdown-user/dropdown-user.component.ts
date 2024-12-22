@@ -15,13 +15,16 @@ export class DropdownUserComponent {
   email:any;
   role:any;
 
-  constructor(private _authService: AuthService) {
-    this.fullname = _authService.getFullnameUser();
-    this.email = _authService.getEmailUser();
-    this.role = _authService.getRole();
+  constructor(private authService: AuthService) {
+    this.email = authService.getEmailUser();
+    this.role = authService.getRole();
   }
 
-  logout() {
-    this._authService.logout();
+  ngOnInit(): void {
+    this.fullname = this.authService.getnameUser()
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

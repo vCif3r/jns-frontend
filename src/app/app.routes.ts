@@ -10,9 +10,7 @@ import { RoleGuard } from './core/guards/role.guard';
 import { ExperienceComponent } from './public/experience/experience.component';
 import { DemandaComponent } from './cliente/demanda/demanda.component';
 import { ClienteComponent } from './cliente/cliente.component';
-import { FormDemandaComponent } from './public/procesos/form-demanda/form-demanda.component';
 import { RegisterComponent } from './public/register/register.component';
-import { FormDenunciaComponent } from './public/procesos/form-denuncia/form-denuncia.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { DemandasComponent } from './workspace/demandas/demandas.component';
 import { DetallesDemandaComponent } from './workspace/demandas/detalles-demanda/detalles-demanda.component';
@@ -20,6 +18,10 @@ import { ClientesComponent } from './workspace/clientes/clientes.component';
 import { DashboardComponent } from './workspace/dashboard/dashboard.component';
 import { AbogadosComponent } from './workspace/abogados/abogados.component';
 import { ServiciosComponent } from './workspace/servicios/servicios.component';
+import { RedirectGuard } from './core/guards/RedirectGuard.guard';
+import { AuthGuard } from './core/guards/auth.guard';
+import { CasosComponent } from './workspace/casos/casos.component';
+import { FormConsultaComponent } from './public/form-consulta/form-consulta.component';
 
 export const routes: Routes = [
   {
@@ -33,39 +35,17 @@ export const routes: Routes = [
       { path: 'blog', component: BlogComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'experience', component: ExperienceComponent },
-      { path: 'login', component: LoginComponent, title: 'login' },
-      { path: 'register', component: RegisterComponent, title: 'register' },
+      { path: 'login', component: LoginComponent, title: 'login', canActivate: [AuthGuard] },
+      { path: 'register', component: RegisterComponent, title: 'register',canActivate: [AuthGuard] },
       // formularios de  procesos
     ],
   },
-  { path: 'demanda', component: FormDemandaComponent, title: 'Nueva demanda' },
   {
-    path: 'denuncia',
-    component: FormDenunciaComponent,
-    title: 'Nueva denuncia',
+    path: 'consultas/:id',
+    component: FormConsultaComponent,
+    title: 'Formulario'
   },
-  // {
-  //   path: 'admin',
-  //   component: AdminComponent,
-  //   canActivate: [RoleGuard],
-  //   data: { role: 'Admin' },
-  //   children: [
-  //     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  //     { path: 'dashboard', component: DashboardComponent, title: 'dashboard' },
-  //     { path: 'clientes', component: ClientesComponent, title: 'clientes' },
-  //     { path: 'abogados', component: AbogadosComponent, title: 'abogados' },
-  //   ],
-  // },
-  // {
-  //   path: 'abogado',
-  //   component: AbogadoComponent,
-  //   canActivate: [RoleGuard],
-  //   data: { role: 'Abogado' },
-  //   children: [
-  //     { path: '', redirectTo: 'clientes', pathMatch: 'full' },
-  //     { path: 'demandas', component: DemandasComponent, title: 'demandas' },
-  //   ],
-  // },
+
   {
     path: 'cliente',
     component: ClienteComponent,
@@ -79,12 +59,16 @@ export const routes: Routes = [
       },
     ],
   },
-
   {
     path: 'workspace',
     component: WorkspaceComponent,
+    canActivate: [RedirectGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { 
+        path: '',
+        redirectTo: '', 
+        pathMatch: 'full'
+      },
       {
         path: 'dashboard',
         component: DashboardComponent,
@@ -115,9 +99,12 @@ export const routes: Routes = [
       { path: 'abogados', component: AbogadosComponent, title: 'abogados' },
       { path: 'demandas', component: DemandasComponent, title: 'demandas' },
       { path: 'demandas/:id_demanda', component: DetallesDemandaComponent },
+      {
+        path: 'casos',
+        component: CasosComponent
+      }
     ],
   },
-
   {
     path: '**',
     redirectTo: 'home',

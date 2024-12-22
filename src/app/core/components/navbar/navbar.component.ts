@@ -7,17 +7,18 @@ import { DropdownUserComponent } from '../dropdown-user/dropdown-user.component'
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatIconModule, CommonModule, RouterLink, RouterLinkActive, DropdownUserComponent],
+  imports: [MatIconModule, CommonModule, RouterLink, RouterLinkActive,DropdownUserComponent ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   isSticky: boolean = false;
-  isAutenticated: boolean = false;
-  
+  isAuthenticated: boolean = false;
 
-  constructor(private _authService: AuthService) {
-    this.isAutenticated = _authService.isAuthenticated();
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.isAuthenticated = this.authService.isAuthenticated()
   }
 
   // Usamos HostListener para escuchar el evento de scroll

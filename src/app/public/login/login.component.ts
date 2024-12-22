@@ -20,7 +20,6 @@ export class LoginComponent {
     event.stopPropagation();
   }
 
-
   loginForm: FormGroup
 
   constructor(
@@ -35,27 +34,11 @@ export class LoginComponent {
   }
 
   login(){
-
     if (this.loginForm.valid) {
       const formValues = this.loginForm.value;
       this.authService.login(formValues).subscribe(
         res => {
-          localStorage.setItem('token', res.token)
-          
-          const tokenPayload = this.authService.decodeToken(res.token);
-          console.log(tokenPayload.rol);
-
-          // Redirigir al usuario basándose en su rol
-          if (tokenPayload.rol === 'Admin') {
-            console.log("Admin")
-            this.router.navigate(['/workspace']);
-          } else if (tokenPayload.rol === 'Abogado') {
-            console.log("abogado")
-            this.router.navigate(['/workspace']);
-          } else {
-            // Redirigir a una página de error o de inicio si el rol no es reconocido
-            this.router.navigate(['/']);
-          }
+          this.router.navigate(['/workspace']);
         },
         err => console.log(err)
       )

@@ -39,7 +39,7 @@ import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
   templateUrl: './clientes.component.html',
   styleUrl: './clientes.component.css',
 })
-export class ClientesComponent   {
+export class ClientesComponent implements AfterViewInit {
   loading = true;
   displayedColumns: string[] = [
     'foto',
@@ -53,9 +53,12 @@ export class ClientesComponent   {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private clienteService: ClienteService) {}
+  constructor(private clienteService: ClienteService) { }
 
-
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   ngOnInit(): void {
     this.loadClientes();
@@ -65,8 +68,7 @@ export class ClientesComponent   {
     this.clienteService.getClientes().subscribe(
       clientes => {
         this.dataSource.data = clientes;
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+
         this.loading = false;
       },
       error => console.error('Error cargando clientes', error)
@@ -91,22 +93,16 @@ export class ClientesComponent   {
       data: { cliente: cliente },
       height: 'auto'
     });
-    // Detectar cuando el modal se cierre y recargar los datos si es necesario
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('cliente agregado:', result);
-      }
-    });
   }
 
-  openDialogDelete(id: any){
+  openDialogDelete(id: any) {
     let dialogRef = this.dialog.open(DialogDeleteComponent, {
-      data: { id: id}
+      data: { id: id }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('cliente agregado:', result);
+        console.log('cliente eliminado:', result);
       }
     });
   }
@@ -115,17 +111,17 @@ export class ClientesComponent   {
   printPreview(): void {
     // Crear una nueva ventana de impresión
     const printWindow = window.open('', '', 'height=800,width=1000');
-    
+
     // Obtener el contenido HTML de la tabla
     const tableElement = document.getElementById('printableTable');
-    
+
     if (tableElement) {
       // Clonar la tabla para no modificar la original
       const clonedTable = tableElement.cloneNode(true) as HTMLElement;
-  
+
       // Eliminar la columna de opciones CRUD de la tabla clonada
       const rows = clonedTable.querySelectorAll('tr'); // Obtener todas las filas de la tabla clonada
-      
+
       rows.forEach(row => {
         // Encontrar la celda de la columna CRUD (por ejemplo, la última columna)
         const crudCell = row.querySelector('td:last-child, th:last-child'); // Cambia esto si no es la última columna
@@ -133,10 +129,10 @@ export class ClientesComponent   {
           crudCell.remove(); // Eliminar la celda de la columna CRUD
         }
       });
-      
+
       // Crear el contenido HTML de la ventana de impresión con la tabla clonada modificada
       const modifiedTableContent = clonedTable.outerHTML;
-  
+
       printWindow?.document.write(`
         <html>
           <head>
@@ -154,45 +150,44 @@ export class ClientesComponent   {
             </style>
           </head>
           <body>
-            <h2>Listado de Abogados</h2>
+            <h2>Listado de Clientes</h2>
             ${modifiedTableContent}
           </body>
         </html>
       `);
-      
+
       // Cerrar el documento y enfocar la ventana antes de imprimir
       printWindow?.document.close();
       printWindow?.focus();
       printWindow?.print();
     }
   }
-  
-    
-    exportToCSV(): void {
-      // Definir las columnas que queremos exportar (excluyendo la columna "acciones")
-      const header = this.displayedColumns.filter(col => col !== 'acciones');
-    
-      // Mapeamos los datos para formar las filas
-      const rows = this.dataSource.data.map((row: Cliente) => {
-        return header.map((col) => {
-          // Aquí usamos as keyof Abogado para hacer la afirmación de tipo
-          const value = row[col as keyof Cliente] || ''; // Accedemos de forma segura a las propiedades
-          return value;
-        }).join(',');
-      });
-    
-      // Convertimos el contenido del CSV, agregamos el encabezado y las filas
-      const csvContent = [header.join(','), ...rows].join('\n');
-    
-      // Creamos un Blob con el contenido CSV
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
-    
-      link.setAttribute('href', url);
-      link.setAttribute('download', 'tabla_abogados.csv'); // Nombre del archivo
-      document.body.appendChild(link);
-      link.click(); // Iniciamos la descarga
-      document.body.removeChild(link); // Limpiamos el DOM después de la descarga
-    }
+
+  exportToCSV(): void {
+    // Definir las columnas que queremos exportar (excluyendo la columna "acciones")
+    const header = this.displayedColumns.filter(col => col !== 'acciones');
+
+    // Mapeamos los datos para formar las filas
+    const rows = this.dataSource.data.map((row: Cliente) => {
+      return header.map((col) => {
+        // Aquí usamos as keyof Abogado para hacer la afirmación de tipo
+        const value = row[col as keyof Cliente] || ''; // Accedemos de forma segura a las propiedades
+        return value;
+      }).join(',');
+    });
+
+    // Convertimos el contenido del CSV, agregamos el encabezado y las filas
+    const csvContent = [header.join(','), ...rows].join('\n');
+
+    // Creamos un Blob con el contenido CSV
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'tabla_abogados.csv'); // Nombre del archivo
+    document.body.appendChild(link);
+    link.click(); // Iniciamos la descarga
+    document.body.removeChild(link); // Limpiamos el DOM después de la descarga
+  }
 }

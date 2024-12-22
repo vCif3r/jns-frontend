@@ -30,8 +30,8 @@ export class ClienteService  {
   registerCliente(cliente: Omit<Cliente, 'id'>): Observable<Cliente> {
     return this.http_.post<Cliente>(`${this.urlRegister}/register/cliente/`, cliente).pipe(
       tap(newCliente => {
-        const currentTasks = this.clientesSubject.value;
-        this.clientesSubject.next([...currentTasks, newCliente]);
+        const currentClientes = this.clientesSubject.value;
+        this.clientesSubject.next([...currentClientes, newCliente]);
       })
     );
   }

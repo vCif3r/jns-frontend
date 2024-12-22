@@ -22,7 +22,7 @@ export class MenuUserComponent {
   constructor(private _authService: AuthService) {
     this.email = _authService.getEmailUser();
     this.role = _authService.getRole();
-    this.fullname = _authService.getFullnameUser();
+    this.fullname = _authService.getnameUser();
   }
 
 }

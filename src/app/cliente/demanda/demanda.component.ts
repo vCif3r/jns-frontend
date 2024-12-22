@@ -68,7 +68,7 @@ export class DemandaComponent {
   }
 
   ngOnInit(): void {
-    this.demandante = this._auth.getFullnameUser();
+    this.demandante = this._auth.getnameUser();
     this._demandaService.findAll().subscribe(
       (data) => {
         this.dataSource = data;

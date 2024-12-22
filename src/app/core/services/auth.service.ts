@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { Abogado } from '../models/abogado';
 
 @Injectable({
   providedIn: 'root'
@@ -10,37 +9,31 @@ import { Abogado } from '../models/abogado';
 export class AuthService {
 
   private url = "http://localhost:3000/auth"
-  private userSubject = new BehaviorSubject<any>(null);
-  user$: Observable<any> = this.userSubject.asObservable();
 
-  constructor(private _http: HttpClient) { }
+
+  constructor(private _http: HttpClient) {}
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this._http.post<any>(`${this.url}/login/`, credentials)
+    return this._http.post<any>(`${this.url}/login/`, credentials).pipe(
+      tap((response) => this.setSession(response.token)),
+      catchError((error) => {
+        console.error('Login error', error);
+        throw error;
+      })
+    )
   }
 
-  
+  private setSession(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return false;
-    }
-    const decodedToken: any = jwtDecode(token);
-    return decodedToken.exp > Date.now() / 1000;
-  }
-
-  getToken(){
-    return localStorage.getItem('token')
-  }
-
-  decodeToken(token: string): any {
-    try {
-      return jwtDecode(token);
-    } catch (error) {
-      console.error('Error decoding token', error);
-      return null;
-    }
+    return !!this.getToken();
   }
 
   getRole(): any {
@@ -61,7 +54,7 @@ export class AuthService {
     return null;
   }
 
-  getEmailUser():any{
+  getEmailUser(): any {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken: any = jwtDecode(token);
@@ -70,20 +63,20 @@ export class AuthService {
     return null;
   }
 
-  getFullnameUser():any{
+  getnameUser(): any {
     const token = localStorage.getItem('token');
-    if(token){
-      const decodedToken:any = jwtDecode(token)
-      return decodedToken.nombre + ' ' + decodedToken.apellido
+    if (token) {
+      const decodedToken: any = jwtDecode(token)
+      return decodedToken.nombre
     }
     return null;
   }
 
 
 
-  
-  logout(){
+
+  logout(): void {
     localStorage.removeItem('token');
-    window.location.reload()
+    window.location.reload();
   }
 }

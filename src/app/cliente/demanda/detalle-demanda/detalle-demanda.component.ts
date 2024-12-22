@@ -62,7 +62,7 @@ export class DetalleDemandaComponent {
       }
     );
 
-    this.demandante =  this._auth.getFullnameUser()
+    this.demandante =  this._auth.getnameUser()
   }
 
   

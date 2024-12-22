@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 /*******************************/
@@ -9,27 +9,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /*******************************/
 
 body {
-    color: #797979;
     background: #ffffff;
 }
 
-.whatsapp-icon {
-    position: fixed;
-    bottom: 20px; /* Distancia desde la parte inferior */
-    left: 20px; /* Distancia desde la izquierda */
-    background-color: #25D366; /* Color de fondo de WhatsApp */
-    color: white; /* Color del ícono */
-    border-radius: 50%; /* Esquinas redondeadas */
-    padding: 15px; /* Espaciado interno */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra para destacar el ícono */
-    font-size: 24px; /* Tamaño del ícono */
-    z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
-    text-align: center; /* Centrar el ícono */
-}
-
-.whatsapp-icon:hover {
-    opacity: 0.8; /* Efecto al pasar el mouse */
-}
 
 
 .carousel-img::before {
@@ -64,7 +46,7 @@ body {
 
 
 a {
-    color: #454545;
+    /* color: #454545; */
     transition: .3s;
 }
 
@@ -1539,6 +1521,7 @@ mat-sidenav{
     position: fixed; /* Fijar en la parte inferior */
     bottom: 30px;
     right: 35px;
+    z-index: 1000;
 }
 .chat-header {
     background: linear-gradient(135deg, rgb(9, 32, 63) 0%, rgb(83, 120, 149) 100%);
@@ -1956,4 +1939,22 @@ input[type="text"] {
     display: none !important;
 }
 
+
+/*******************
+ Breadcrumb and page title
+*******************/
+.page-breadcrumb {
+    padding: 20px 20px 0 20px;
+}
+
+.page-breadcrumb .page-title {
+    margin-bottom: 15px;
+}
+
+.page-breadcrumb .breadcrumb {
+    padding: 0px;
+    margin: 0px;
+    background: transparent;
+    font-size: 12px;
+}
 /*DENUNCIA*/

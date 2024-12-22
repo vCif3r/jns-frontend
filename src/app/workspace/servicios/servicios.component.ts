@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, AfterViewInit, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { ServicioService } from '../../core/services/servicio.service';
@@ -13,6 +13,9 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Servicio } from '../../core/models/servicio';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DialogDeleteServiceComponent } from './dialog-delete-service/dialog-delete-service.component';
+import { TiposServiciosComponent } from './tipos-servicios/tipos-servicios.component';
 
 @Component({
   selector: 'app-servicios',
@@ -27,67 +30,60 @@ import { Servicio } from '../../core/models/servicio';
     CommonModule,
     RouterLink,
     MatSortModule,
+    MatTabsModule,
+    TiposServiciosComponent
   ],
   templateUrl: './servicios.component.html',
   styleUrl: './servicios.component.css',
-})export class ServiciosComponent implements OnInit {
+})
+export class ServiciosComponent implements AfterViewInit {
+  displayedColumnsServicios: string[] = ['id', 'nombre', 'categoria', 'estado', 'acciones'];
+  dataSourceServicios = new MatTableDataSource<any>();
 
-  displayedColumns: string[] = [
-    'id',
-    'nombre',
-    'categoria',
-    'estado',
-    'fecha_creacion',
-    'acciones',
-  ]; // Definir las columnas
-  dataSource = new MatTableDataSource<any>(); // Definir el origen de datos
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginatorServices!: MatPaginator;
+  @ViewChild(MatSort) sortServices!: MatSort;
 
-  // dialog agregar abogado
   readonly dialog = inject(MatDialog);
 
-  constructor(private servicioService: ServicioService) {}
-
-  ngOnInit(): void {
-    this.subscribeToServicios(); // Suscribirse a los datos reactivos
-  }
+  constructor(
+    private servicioService: ServicioService,
+  ) { }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSourceServicios.paginator = this.paginatorServices;
+    this.dataSourceServicios.sort = this.sortServices;
   }
 
-  openDialog(servicio?: Servicio) {
-    const dialogRef = this.dialog.open(FormServicioComponent, {
-      data: { servicio: servicio}
-      
-    });
+  ngOnInit(): void {
+    this.cargarServicios();
+  }
 
-    console.log('Servicio agregado:', servicio);
-
-    // Detectar cuando el modal se cierre y recargar los datos si es necesario
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('Servicio agregado:', result);
+  cargarServicios() {
+    this.servicioService.getServicios().subscribe(
+      (servicios) => {
+        this.dataSourceServicios.data = servicios;
       }
-    });
+    )
   }
 
-  // Suscribirse a la lista reactiva de servicios
-  subscribeToServicios(): void {
-    this.servicioService.getServicios().subscribe((servicios) => {
-      this.dataSource.data = servicios; // Actualizar la tabla
+  openDialogServicio(servicio?: Servicio) {
+    this.dialog.open(FormServicioComponent, {
+      data: { servicio: servicio }
     });
   }
-
-  applyFilter(event: Event): void {
+  applyFilterServicios(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSourceServicios.filter = filterValue.trim().toLowerCase();
 
     // Si hay algún filtro, activa la paginación
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.dataSourceServicios.paginator) {
+      this.dataSourceServicios.paginator.firstPage();
     }
+  }
+
+  openDialogDeleteServicio(id: any) {
+    this.dialog.open(DialogDeleteServiceComponent, {
+      data: { id: id }
+    });
   }
 }

@@ -24,4 +24,8 @@ export class StatisticService {
     return this.http.get<any[]>(`${this.baseUrl}/especialidad/count`)
   }
 
+  countClientesByTipo() {
+    return this.http.get<any[]>(`${this.baseUrl}/tipo-cliente/count`)
+  }
+
 }

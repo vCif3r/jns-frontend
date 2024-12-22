@@ -73,7 +73,7 @@
                 <a routerLink="/contact" routerLinkActive="active" class="nav-item nav-link">Contacto</a>
 
             </div>
-            @if (!isAutenticated) {
+            @if (!isAuthenticated) {
                 <a routerLink="/login" class="btn-login">Iniciar sesión</a>
             }@else {
                 <app-dropdown-user/>

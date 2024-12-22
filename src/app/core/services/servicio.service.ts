@@ -8,18 +8,17 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 })
 export class ServicioService {
   private url = 'http://localhost:3000/servicios'; // URL para obtener la lista de servicios
-  private serviciosSubject = new BehaviorSubject<any[]>([]); 
-  
+
+  private serviciosSubject = new BehaviorSubject<Servicio[]>([]);
+  servicios$ = this.serviciosSubject.asObservable();
+
+
   constructor(private http: HttpClient) {
     this.loadServicios();
   }
 
-  findAll(){
-    return this.http.get<Servicio[]>(this.url);
-  }
-
   private loadServicios() {
-    this.findAll().subscribe(
+    this.http.get<Servicio[]>(this.url).subscribe(
       (servicios) => this.serviciosSubject.next(servicios),
       (err) => console.error('Error al cargar servicios:', err)
     );
@@ -27,25 +26,49 @@ export class ServicioService {
 
   // Método para obtener los servicios de forma reactiva
   getServicios(): Observable<Servicio[]> {
-    return this.serviciosSubject.asObservable();
+    return this.servicios$;
   }
 
-  save(servicioDTO: any): Observable<Servicio> {
-    return this.http.post<Servicio>(this.url, servicioDTO).pipe(
-      tap((nuevoServicio) => {
-        // Actualizar la lista en el BehaviorSubject
-        const serviciosActuales = this.serviciosSubject.value;
-        this.serviciosSubject.next([...serviciosActuales, nuevoServicio]);
+  save(servicio: Omit<Servicio, 'id'>): Observable<Servicio> {
+    return this.http
+      .post<Servicio>(`${this.url}`, servicio)
+      .pipe(
+        tap((newService) => {
+          const current = this.serviciosSubject.value;
+          this.serviciosSubject.next([...current, newService]);
+        })
+      );
+  }
+
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`).pipe(
+      tap(() => {
+        const current = this.serviciosSubject.value;
+        this.serviciosSubject.next(current.filter((s) => s.id !== id));
       })
     );
   }
-  
-  getServicio(id: string) {
-    return this.http.get(`${this.url}/${id}`);
+
+  update(id: number, updateService: Servicio): Observable<Servicio> {
+    return this.http.patch<Servicio>(`${this.url}/${id}`, updateService).pipe(
+      tap((cliente) => {
+        const currents = this.serviciosSubject.value;
+        const index = currents.findIndex((c) => c.id === id);
+        if (index !== -1) {
+          currents[index] = cliente;
+          this.serviciosSubject.next([...currents]);
+        }
+      })
+    );
   }
-  
-  update(id: string, servicio: Servicio)  {
-    return this.http.patch(`${this.url}/${id}`, servicio)
+
+  getServicio(id: string) {
+    return this.http.get<any>(`${this.url}/${id}`);
+  }
+
+
+  findAllActivos(){
+    return this.http.get<Servicio[]>(`${this.url}/activos`);
   }
 
 

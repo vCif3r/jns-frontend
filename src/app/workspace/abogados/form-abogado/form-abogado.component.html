@@ -1,5 +1,5 @@
 <div>
-    <h2 mat-dialog-title>Nuevo abogado</h2>
+    <h2 mat-dialog-title>{{ isEditMode ? 'Editar abogado' : 'Agregar Nuevo abogado' }}</h2>
 
     <mat-dialog-content>Completa los campos del formulario.</mat-dialog-content>
     <form (ngSubmit)="onSubmit()" [formGroup]="abogadoForm">
@@ -39,24 +39,27 @@
                 </div>
             </div>
 
-            <div class="w-100">
-                <mat-form-field appearance="outline">
-                    <mat-label>Correo</mat-label>
-                    <input matInput required formControlName="email">
-                </mat-form-field>
-            </div>
-
-            <div class="w-100">
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Contraseña</mat-label>
-                    <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
-                    <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide()">
-                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                </mat-form-field>
-            </div>
+            @if (isEditMode == false) {
+                <div class="w-100">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Correo</mat-label>
+                        <input matInput required formControlName="email">
+                    </mat-form-field>
+                </div>
+    
+                <div class="w-100">
+    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+                        <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide()">
+                            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            }
+            
 
             <div class="w-100">
                 <mat-form-field appearance="outline">
@@ -116,7 +119,7 @@
         </div>
 
         <mat-dialog-actions>
-            <button type="submit" mat-button>Agregar</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="abogadoForm.invalid">{{ isEditMode ? 'Actualizar' : 'Agregar' }}</button>
             <button mat-button mat-dialog-close>Cancelar</button>
         </mat-dialog-actions>
 
