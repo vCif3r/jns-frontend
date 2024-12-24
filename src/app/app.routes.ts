@@ -22,6 +22,7 @@ import { RedirectGuard } from './core/guards/RedirectGuard.guard';
 import { AuthGuard } from './core/guards/auth.guard';
 import { CasosComponent } from './workspace/casos/casos.component';
 import { FormConsultaComponent } from './public/form-consulta/form-consulta.component';
+import { ConsultasComponent } from './workspace/consultas/consultas.component';
 
 export const routes: Routes = [
   {
@@ -59,6 +60,7 @@ export const routes: Routes = [
       },
     ],
   },
+
   {
     path: 'workspace',
     component: WorkspaceComponent,
@@ -66,7 +68,7 @@ export const routes: Routes = [
     children: [
       { 
         path: '',
-        redirectTo: '', 
+        redirectTo: 'dashboard', 
         pathMatch: 'full'
       },
       {
@@ -74,7 +76,14 @@ export const routes: Routes = [
         component: DashboardComponent,
         title: 'dashboard',
         canActivate: [RoleGuard],
-        data: { roles: ['Admin', 'Cliente', 'Abogado'] },
+        data: { roles: ['Admin', 'Abogado'] },
+      },
+      {
+        path: 'consultas',
+        component: ConsultasComponent,
+        title: 'consultas',
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin', 'Abogado'] },
       },
       {
         path: 'clientes',
@@ -86,7 +95,7 @@ export const routes: Routes = [
       {
         path: 'servicios',
         component: ServiciosComponent,
-        title: 'demandas',
+        title: 'servicios',
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
       },
@@ -96,7 +105,12 @@ export const routes: Routes = [
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
       },
-      { path: 'abogados', component: AbogadosComponent, title: 'abogados' },
+      { path: 'abogados',
+        component: AbogadosComponent,
+        title: 'abogados',
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin'] },
+      },
       { path: 'demandas', component: DemandasComponent, title: 'demandas' },
       { path: 'demandas/:id_demanda', component: DetallesDemandaComponent },
       {

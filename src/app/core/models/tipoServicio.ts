@@ -1,7 +1,9 @@
+import { Servicio } from "./servicio";
+
 export interface TipoServicio{
     id: any;
     nombre: string;
-    servicio: any;
+    servicio: Servicio;
     descripcion: string;
     estado: string;
 }

@@ -1,12 +1,9 @@
-import { Abogado } from './abogado';
-import { Cliente } from "./cliente";
+
+import { Consulta } from './consulta';
 
 export interface Caso{
     id: any;
-    cliente: Cliente;
-    abogado: Abogado;
-    titulo: string;
-    descripcion: string;
+    consulta: Consulta;
     estado: string;
     createdAt: Date;
     updatedAt: Date;

@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{consulta?.tipoServicio?.nombre}}</h2>
+<mat-dialog-content>
+  <p>Detalles: {{ consulta?.detalles }}</p>
+  <p>Hechos: {{ consulta?.hechos }}.</p>
+  <p>Cliente: {{ consulta?.nombreCompleto }}.</p>
+
+ 
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button (click)="iniciarCaso(consulta?.id)">Empezar caso</button>
+</mat-dialog-actions>

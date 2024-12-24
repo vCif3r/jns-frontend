@@ -1,14 +1,16 @@
-import { Servicio } from "./servicio";
+
+import { TipoServicio } from "./tipoServicio";
 
 export interface Consulta{
-    id: number;
-    servicio: Servicio
-    tipo_servicio: string;
+    id: any;
+    tipoServicio: TipoServicio;
     fecha: string;
     hora: string;
     detalles: string;
-    demandante: string;
-    correo: string;
+    nombreCompleto: string;
+    email: string;
     //lugar: string;
     hechos: string;
+    createdAt: Date;
+    updatedAt: Date;
 }

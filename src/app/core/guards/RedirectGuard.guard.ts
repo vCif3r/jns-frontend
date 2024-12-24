@@ -22,7 +22,7 @@ export class RedirectGuard implements CanActivate {
     } else if (userRole === 'Cliente') {
       redirectPath = '/workspace/casos';
     } else if (userRole === 'Abogado') {
-      redirectPath = '/workspace/abogados';
+      redirectPath = '/workspace/dashboard';
     } else {
       redirectPath = '/workspace/dashboard'; // Ruta por defecto
     }

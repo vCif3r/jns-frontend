@@ -59,4 +59,10 @@ export class AbogadoService {
       })
     );
   }
+
+  // otros metodos
+
+  findAbogadosDisponibles(){
+    return this.http.get<Abogado[]>(`${this.url}/abogados/disponibles`)
+  }
 }

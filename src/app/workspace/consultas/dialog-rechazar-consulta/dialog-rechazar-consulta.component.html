@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Rechazar consulta</h2>
+<mat-dialog-content>
+  ¿Quieres rechazar la consulta?
+  <p>La consulta volverá a aparecer en la lista de pendientes del administrador para ser asignado nuevamente</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="rechazar()">Si</button>
+</mat-dialog-actions>

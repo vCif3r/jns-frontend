@@ -1,0 +1,39 @@
+<div class="card mb-1">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <p class="fw-bold">{{consulta?.tipoServicio?.nombre}}</p>
+                <p> <small>{{consulta?.nombreCompleto}}</small></p>
+                <p> <small>{{consulta?.email}}</small></p>
+            </div>
+            <div class="col-auto">
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <p class="text-secondary mb-0" style="font-size: 13px;">
+                        <small>creado: {{consulta?.createdAt | date: 'dd/MM/yyyy - hh:mm'}}</small>
+                    </p>
+                    
+                </div>                                         
+            </div>
+        </div>
+        
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-end">
+            @if (role == 'Admin' || role == 'admin') {
+                <button mat-button (click)="openDialogCancelar(consulta?.id)">
+                    <mat-icon>delete</mat-icon>Cancelar
+                </button>
+                <button mat-flat-button (click)="openDialog(consulta?.id)">
+                    <mat-icon>info</mat-icon>ver más
+                </button>
+            }@else if (role == 'Abogado' || role == 'abogado') {
+                <button mat-button color="" (click)="openDialogRechazar(consulta?.id)">
+                    <mat-icon>delete</mat-icon>rechazar
+                </button>
+                <button mat-flat-button (click)="openDialogIniciarCaso(consulta?.id)">
+                    <mat-icon>info</mat-icon>iniciar proceso
+                </button>
+            }             
+        </div>
+    </div>
+</div>

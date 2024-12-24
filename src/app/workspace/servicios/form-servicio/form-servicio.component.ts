@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Servicio } from '../../../core/models/servicio';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-servicio',
@@ -40,6 +41,7 @@ import { Servicio } from '../../../core/models/servicio';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatIconModule,
+    CommonModule
   ],
   templateUrl: './form-servicio.component.html',
   styleUrl: './form-servicio.component.css',
@@ -116,15 +118,13 @@ export class FormServicioComponent {
           this.dialogRef.close(true); // Cerrar el diálogo al finalizar
         },
         (error) => {
-          this.snackBar.open('Error al registrar el servicio', 'Cerrar', {
-            duration: 3000,
+          console.log(error);
+          this.snackBar.open(`Error al registrar el servicio. ${error.error.message}`, 'Cerrar', {
+            duration: 6000,
             panelClass: ['error-snackbar']
           });
         }
       );
     }
   }
-  
-
- 
 }

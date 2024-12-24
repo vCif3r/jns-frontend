@@ -32,15 +32,17 @@ export class SidenavComponent implements OnInit{
   updateSidebar() {
     if (this.userRole === 'Abogado') {
       this.sidebarItems = [
-        { title: 'Dashboard', icon: 'dashboard', url: '/abogado/dashboard' },
-        { title: 'Clientes', icon: 'people', url: '/abogado/clientes' },
-        { title: 'Demandas', icon: 'people', url: '/abogado/demandas' },
-        { title: 'Procesos', icon: 'library_books', url: '/abogado/procesos' },
-        { title: 'help', icon: 'assignment', url: '/abogado/help' },
+        { title: 'Dashboard', icon: 'dashboard', url: '/workspace/dashboard' },
+        { title: 'Consultas', icon: 'library_books', url: '/workspace/consultas' },
+        { title: 'Clientes', icon: 'people', url: '/workspace/clientes' },
+        { title: 'Demandas', icon: 'people', url: '/workspace/demandas' },
+        { title: 'Procesos', icon: 'library_books', url: '/workspace/procesos' },
+        { title: 'help', icon: 'assignment', url: '/workspace/help' },
       ];
     } else if (this.userRole === 'Admin') {
       this.sidebarItems = [
         { title: 'Dashboard', icon: 'dashboard', url: '/workspace/dashboard' },
+        { title: 'Consultas', icon: 'library_books', url: '/workspace/consultas' },
         { title: 'Servicios', icon: 'library_books', url: '/workspace/servicios' },
         { title: 'Casos', icon: 'library_books', url: '/workspace/casos' },
         { title: 'Clientes', icon: 'people', url: '/workspace/clientes' },
