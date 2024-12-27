@@ -1,1 +1,19 @@
-<p>casos works!</p>
+<h1 class="fs-5">Lista de casos</h1>
+<div class="w-100 row">
+    @for (c of casos; track c.id) {
+        <div class="col-12 col-lg-6 col-xl-4">
+            <app-card-caso [caso]="c"></app-card-caso>
+        </div>
+    }
+    @if (casos.length == 0) {
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="w-100 text-center text-primary">
+                    <mat-icon style="font-size: 50px; height: 50px; width: 50px;">gavel</mat-icon>
+                </div>
+                <span class="text-secondary">No hay casos pendientes por ahora</span>
+            </div>
+        </div>
+       
+    }
+</div>

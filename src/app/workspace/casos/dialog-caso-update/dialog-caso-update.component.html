@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Actualizar el caso</h2>
+<mat-dialog-content>
+   <h6>Seleccionar estado</h6>
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-select [value]="caso?.estado" [(ngModel)]="selectedEstado">
+            @for (option of estadoOptions; track option) {
+            <mat-option [value]="option.value" selected="caso.?.estado">{{ option.viewValue }}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="d-flex justify-content-between align-items-center w-100">
+        <div class="d-flex gap-1 align-items-center text-muted text-sm-start">
+            <mat-icon style="font-size: 14px;height: 14px;width: 14px;">update</mat-icon>
+            <small>Actualizado {{caso?.updatedAt | timeAgo}}</small>
+        </div>
+        
+        <div>
+            <button mat-button (click)="onNoClick()">Cancelar</button>
+            <button mat-button cdkFocusInitial (click)="updateEstado()"  [disabled]="validate()">Actualizar</button>
+        </div>
+    </div>
+</mat-dialog-actions>

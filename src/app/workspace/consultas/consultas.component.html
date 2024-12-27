@@ -1,19 +1,23 @@
-<h1 class="fs-5">{{ titulo }}</h1>
-<div class="w-100 row">
-    @for (c of consultas; track c.id) {
+<div class="w-100">
+    <h1 class="fs-5">{{ titulo }}</h1>
+    <div class="row">
+        @for (c of consultas; track c.id) {
         <div class="col-12 col-lg-6 col-xl-4">
             <app-card-consulta [consulta]="c"></app-card-consulta>
         </div>
-    }
+        }
+    </div>
     @if (consultas.length == 0) {
-        <div class="card">
+        <div class="card w-100">
             <div class="card-body text-center">
                 <div class="w-100 text-center text-primary">
-                    <mat-icon style="font-size: 50px; height: 50px; width: 50px;">gavel</mat-icon>
+                    <mat-icon style="font-size: 70px; height: 70px; width: 70px;">gavel</mat-icon>
                 </div>
-                <span class="text-secondary">No hay consultas pendientes por ahora</span>
+                <span>No hay consultas pendientes</span>
+                <p class="text-secondary">Puede que tengas casos en proceso por revisar</p>
+                <button class="btn btn-primary" routerLink="/workspace/casos">ver casos</button>
             </div>
         </div>
-       
-    }
+
+        }
 </div>

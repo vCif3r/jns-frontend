@@ -10,10 +10,12 @@ import { ConsultaService } from '../../../core/services/consulta.service';
 import { DialogCancelarConsultaComponent } from '../../consultas/dialog-cancelar-consulta/dialog-cancelar-consulta.component';
 import { DialogRechazarConsultaComponent } from '../../consultas/dialog-rechazar-consulta/dialog-rechazar-consulta.component';
 import { DialogIniciarCasoComponent } from '../../consultas/dialog-iniciar-caso/dialog-iniciar-caso.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { TimeAgoPipe } from '../../../core/pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-card-consulta',
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [TimeAgoPipe, MatIconModule, MatButtonModule, MatMenuModule],
   templateUrl: './card-consulta.component.html',
   styleUrl: './card-consulta.component.css'
 })

@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Observable } from 'rxjs';
-import { RouterLink } from '@angular/router';
 import { MenuUserComponent } from '../../../workspace/components/menu-user/menu-user.component';
+import { NotificacionService } from '../../services/notificacion.service';
+import { AuthService } from '../../services/auth.service';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
   selector: 'app-toolbar',
@@ -16,12 +18,13 @@ import { MenuUserComponent } from '../../../workspace/components/menu-user/menu-
     MatMenuModule,
     CommonModule,
     MatButtonModule,
-    MenuUserComponent
+    MenuUserComponent,
+    MatBadgeModule
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css',
 })
-export class ToolbarComponent {
+export class ToolbarComponent  {
   @Output() toggleSidenav = new EventEmitter<void>();
   @Input() isHandset$?: Observable<boolean>;
 
@@ -29,4 +32,5 @@ export class ToolbarComponent {
     this.toggleSidenav.emit();
   }
 
+  
 }

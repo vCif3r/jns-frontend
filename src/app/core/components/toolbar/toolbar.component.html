@@ -11,12 +11,21 @@
             </button> -->
 
             <button mat-icon-button>
-                <mat-icon class="material-icons-outlined" matBadge="0" matBadgeColor="warn">dark_mode</mat-icon>
+                <mat-icon class="material-icons-outlined" >dark_mode</mat-icon>
             </button>
 
-            <button mat-icon-button>
-                <mat-icon class="material-icons-outlined" matBadge="0" matBadgeColor="warn">notifications</mat-icon>
+            <!-- <button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
+                <mat-icon class="material-icons-outlined" matBadge="{{notifications.length}}" matBadgeColor="warn">notifications</mat-icon>
             </button>
+            <mat-menu #notificationsMenu="matMenu" xPosition="before">
+                @for (item of notifications; track $index) {
+                    <div class="px-2">
+                        <small>{{ item.mensaje }}</small>
+                    </div>
+                    <hr>
+                }
+                
+            </mat-menu> -->
 
             <app-menu-user></app-menu-user>
         </div>

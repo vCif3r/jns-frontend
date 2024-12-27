@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StatisticCardComponent } from '../../core/components/statistic-card/statistic-card.component';
+import { StatisticCardComponent } from '../components/statistic-card/statistic-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { ClienteService } from '../../core/services/cliente.service';
 import { MatTableModule } from '@angular/material/table';

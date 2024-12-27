@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 interface Navmenu {
   title: string;
@@ -33,29 +33,24 @@ export class SidenavComponent implements OnInit{
     if (this.userRole === 'Abogado') {
       this.sidebarItems = [
         { title: 'Dashboard', icon: 'dashboard', url: '/workspace/dashboard' },
-        { title: 'Consultas', icon: 'library_books', url: '/workspace/consultas' },
-        { title: 'Clientes', icon: 'people', url: '/workspace/clientes' },
-        { title: 'Demandas', icon: 'people', url: '/workspace/demandas' },
-        { title: 'Procesos', icon: 'library_books', url: '/workspace/procesos' },
-        { title: 'help', icon: 'assignment', url: '/workspace/help' },
+        { title: 'Consultas', icon: 'assignment', url: '/workspace/consultas' },
+        { title: 'Casos', icon: 'gavels', url: '/workspace/casos' },
+        { title: 'Reportes', icon: 'summarize ', url: '/workspace/reportes' },
       ];
     } else if (this.userRole === 'Admin') {
       this.sidebarItems = [
         { title: 'Dashboard', icon: 'dashboard', url: '/workspace/dashboard' },
-        { title: 'Consultas', icon: 'library_books', url: '/workspace/consultas' },
         { title: 'Servicios', icon: 'library_books', url: '/workspace/servicios' },
-        { title: 'Casos', icon: 'library_books', url: '/workspace/casos' },
-        { title: 'Clientes', icon: 'people', url: '/workspace/clientes' },
-        { title: 'Abogados', icon: 'people', url: '/workspace/abogados' },
-        { title: 'Reportes', icon: 'people', url: '/workspace/reportes' },
+        { title: 'Consultas', icon: 'assignment', url: '/workspace/consultas' },
+        { title: 'Casos', icon: 'gavels', url: '/workspace/casos' },
+        { title: 'Abogados', icon: 'groups', url: '/workspace/abogados' },
+        { title: 'Reportes', icon: 'summarize ', url: '/workspace/reportes' },
         { title: 'Documentos', icon: 'assignment', url: '/workspace/documentos' },
       ];
     } else{
       this.sidebarItems = [
-        { title: 'Demandas', icon: 'dashboard', url: '/cliente/demandas' },
         { title: 'Clientes', icon: 'people', url: '/admin/clientes' },
         { title: 'Abogados', icon: 'people', url: '/admin/abogados' },
-        { title: 'help', icon: 'assignment', url: '/admin/help' },
       ];
     }
   }

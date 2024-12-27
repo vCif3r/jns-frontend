@@ -64,7 +64,7 @@ export const routes: Routes = [
   {
     path: 'workspace',
     component: WorkspaceComponent,
-    canActivate: [RedirectGuard],
+    //canActivate: [RedirectGuard],
     children: [
       { 
         path: '',
@@ -115,7 +115,9 @@ export const routes: Routes = [
       { path: 'demandas/:id_demanda', component: DetallesDemandaComponent },
       {
         path: 'casos',
-        component: CasosComponent
+        component: CasosComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin', 'Abogado'] },
       }
     ],
   },

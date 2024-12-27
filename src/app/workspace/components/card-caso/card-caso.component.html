@@ -1,0 +1,57 @@
+<div class="w-100">
+
+    <div class="card text-small">
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between">
+                <div class="d-flex flex-column">
+                    <small class="mb-0 fw-bold">{{caso?.consulta?.nombreCompleto}}</small>
+                    <small class="mb-0">{{caso?.consulta?.email}}</small>          
+                </div>
+                <small class="text-muted text-sm">{{caso?.createdAt | timeAgo}}</small>
+            </div>
+
+            <div class="pt-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <small>Servicio</small>
+                    <small>{{caso?.consulta?.tipoServicio?.nombre}}</small>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <small>Estado</small>
+                    <small>{{caso?.estado}}</small>
+                </div>
+
+                @if (role == 'Admin' || role == 'admin') {
+                <div class="d-flex justify-content-between align-items-center">
+                    <small>Abogado</small>
+                    <small>{{ caso?.consulta?.abogado?.nombre }} {{ caso?.consulta?.abogado?.apellido }}</small>
+                    <!-- <div class="d-flex gap-2 align-items-center">
+                        <img src="{{ caso?.consulta?.abogado?.foto || 'https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg' }} " alt="" width="40" height="40" class="rounded-circle border">
+                        <div>
+                            <small>{{ caso?.consulta?.abogado?.nombre }} {{ caso?.consulta?.abogado?.apellido }}</small><br>
+                            <small>{{ caso?.consulta?.abogado?.email }}</small>
+                        </div>
+                    </div> -->
+                </div>
+                }
+            </div>
+
+
+        </div>
+        <div class="card-footer">
+            
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-dark" (click)="openDialogDetalle(caso?.id)">
+                    ver más
+                </button>
+                @if (role == 'Abogado' || role == 'abogado') {
+                    <button class="btn btn-sm btn-outline-dark" (click)="openDialogUpdate(caso?.id)">
+                        actualizar estado
+                    </button>
+                }
+                
+            </div>
+        </div>
+
+    </div>
+</div>

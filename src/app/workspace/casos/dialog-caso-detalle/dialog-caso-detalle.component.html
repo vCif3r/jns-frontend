@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Detalles del caso</h2>
+<mat-dialog-content>
+    <div class="d-flex justify-content-between align-items-center">
+        <p>Creado {{caso?.createdAt | timeAgo}}</p>
+        <p>Código: {{caso?.codigo}}</p>
+    </div>
+    <h6>Detalles del caso</h6>
+    <p>{{ caso?.consulta?.detalles }}</p>
+    <h6>Descipción de los hechos</h6>
+    <p>{{ caso?.consulta?.hechos }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="d-flex justify-content-between align-items-center w-100">
+        <div class="d-flex gap-1 align-items-center text-muted text-sm-start">
+            <mat-icon style="font-size: 14px;height: 14px;width: 14px;">update</mat-icon>
+            <small>Actualizado {{caso?.updatedAt | timeAgo}}</small>
+        </div>
+        <button mat-button (click)="onNoClick()" cdkFocusInitial>Ok</button>
+    </div>
+</mat-dialog-actions>
