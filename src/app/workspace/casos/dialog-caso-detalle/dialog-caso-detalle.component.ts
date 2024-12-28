@@ -1,7 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CasoService } from '../../../core/services/caso.service';
-import { DialogData } from '../../../cliente/demanda/detalle-demanda/detalle-demanda.component';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { Caso } from '../../../core/models/caso';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,7 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class DialogCasoDetalleComponent {
   readonly dialogRef = inject(MatDialogRef<DialogCasoDetalleComponent>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+  readonly data = inject<any>(MAT_DIALOG_DATA);
   caso?: Caso;
 
   constructor(

@@ -1,0 +1,58 @@
+<h3 mat-dialog-title>Buscar caso</h3>
+<mat-dialog-content>
+    <mat-stepper linear #stepper>
+        <mat-step [stepControl]="formulario">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit(stepper)">
+                <ng-template matStepLabel>Formulario</ng-template>
+                <div class="pt-3 w-75 m-auto">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Correo Eléctronico</mat-label>
+                        <input matInput placeholder="Cédula" required placeholder="Correo Eléctronico"
+                            formControlName="email" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Código caso</mat-label>
+                        <input matInput placeholder="Cédula" required placeholder="Código caso"
+                            formControlName="codigo" />
+                    </mat-form-field>
+                </div>
+                <div class="d-flex justify-content-center gap-2">
+                    <button mat-button mat-dialog-close>Cancelar</button>
+                    <button mat-button type="submit" [disabled]="formulario.invalid">
+                        Buscar
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step disabled="!casoEncontrado">
+            <ng-template matStepLabel>Estado del caso</ng-template>
+            <div class="container">
+                <h4 class="text-center mb-4">Progreso de su caso</h4>
+                <div class="alert alert-warning" role="alert">
+                    Hola <b>{{ casoEncontrado?.consulta?.nombreCompleto }}</b>, su caso actualmente se encuentra en el
+                    estado:
+                    <b>{{ casoEncontrado?.estado }}</b>. A continuación, puede observar el progreso detallado.
+                </div>
+                <div class="p-2" style="background-color: #f2f8f6">
+                    <p class="fw-bold">Contacto</p>
+                    <p>
+                        Si necesitas más información o tienes alguna duda, no dudes en
+                        ponerte en contacto con nosotros.
+                    </p>
+                    <div class="d-flex align-items-center gap-1 mb-1">
+                        <mat-icon>phone</mat-icon>
+                        Télefono de soporte: <b>+51 123 456 789</b>
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <mat-icon>mail</mat-icon>
+                        Correo electrónico: <b>{{ "asesoresjns@gmail.com" }}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end pt-1">
+                <button mat-button mat-dialog-close>Aceptar</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</mat-dialog-content>

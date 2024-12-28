@@ -8,8 +8,7 @@ import { BlogComponent } from './public/blog/blog.component';
 import { ContactComponent } from './public/contact/contact.component';
 import { RoleGuard } from './core/guards/role.guard';
 import { ExperienceComponent } from './public/experience/experience.component';
-import { DemandaComponent } from './cliente/demanda/demanda.component';
-import { ClienteComponent } from './cliente/cliente.component';
+
 import { RegisterComponent } from './public/register/register.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { DemandasComponent } from './workspace/demandas/demandas.component';
@@ -23,6 +22,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { CasosComponent } from './workspace/casos/casos.component';
 import { FormConsultaComponent } from './public/form-consulta/form-consulta.component';
 import { ConsultasComponent } from './workspace/consultas/consultas.component';
+import { CasoClienteComponent } from './caso-cliente/caso-cliente.component';
 
 export const routes: Routes = [
   {
@@ -38,7 +38,6 @@ export const routes: Routes = [
       { path: 'experience', component: ExperienceComponent },
       { path: 'login', component: LoginComponent, title: 'login', canActivate: [AuthGuard] },
       { path: 'register', component: RegisterComponent, title: 'register',canActivate: [AuthGuard] },
-      // formularios de  procesos
     ],
   },
   {
@@ -46,21 +45,10 @@ export const routes: Routes = [
     component: FormConsultaComponent,
     title: 'Formulario'
   },
-
   {
-    path: 'cliente',
-    component: ClienteComponent,
-    canActivate: [RoleGuard],
-    data: { role: 'Cliente' },
-    children: [
-      {
-        path: 'demanda',
-        component: DemandaComponent,
-        title: 'Demanda',
-      },
-    ],
+    path: 'miscasos/:idCaso',
+    component: CasoClienteComponent,
   },
-
   {
     path: 'workspace',
     component: WorkspaceComponent,

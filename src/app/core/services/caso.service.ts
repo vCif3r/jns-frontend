@@ -63,4 +63,8 @@ export class CasoService {
       })
     );
   }
+
+  getCasoByEmailAndCodigo(data: any){
+    return this.http.post<Caso>(`${this.url}/codigo-email`, data);
+  }
 }

@@ -4,7 +4,7 @@ import { TimeAgoPipe } from '../../../core/pipes/time-ago.pipe';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DialogData } from '../../../cliente/demanda/detalle-demanda/detalle-demanda.component';
+
 import { Caso } from '../../../core/models/caso';
 import { CasoService } from '../../../core/services/caso.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,7 +35,7 @@ interface Estados {
 })
 export class DialogCasoUpdateComponent {
   readonly dialogRef = inject(MatDialogRef<DialogCasoUpdateComponent>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+  readonly data = inject<any>(MAT_DIALOG_DATA);
   caso?: Caso;
 
   selectedEstado?: string;

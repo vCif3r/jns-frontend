@@ -14,6 +14,10 @@
     background-color: #333; /* Asegúrate de que haya un fondo para que el contenido sea visible */
 }
 
+a{
+    cursor: pointer;
+}
+
 /* Estilo para cuando la barra de navegación se fija en la parte superior */
 .navbar.nav-sticky {
     position: fixed;

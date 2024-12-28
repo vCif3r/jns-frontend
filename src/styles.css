@@ -1957,4 +1957,8 @@ input[type="text"] {
     background: transparent;
     font-size: 12px;
 }
-/*DENUNCIA*/
+
+.mat-horizontal-content-container {
+    padding: 0 !important;
+}
+

@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { DropdownUserComponent } from '../dropdown-user/dropdown-user.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { BuscarCasoComponent } from '../buscar-caso/buscar-caso.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatIconModule, CommonModule, RouterLink, RouterLinkActive,DropdownUserComponent ],
+  imports: [MatIconModule, CommonModule, RouterLink, RouterLinkActive,DropdownUserComponent, MatDialogModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -30,6 +32,13 @@ export class NavbarComponent {
     } else {
       this.isSticky = false; // Remover la clase cuando estamos en la parte superior
     }
+  }
+
+  readonly dialog = inject(MatDialog);
+  openDialog(){
+    this.dialog.open(BuscarCasoComponent,{
+      maxWidth: '60vw',
+    })
   }
 
   
