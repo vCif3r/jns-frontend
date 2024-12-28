@@ -133,7 +133,6 @@ export class FormAbogadoComponent {
           (error) => {
             this.snackBar.open('Error al actualizar el abogado', 'Cerrar', {
               duration: 5000,
-              panelClass: ['error-snackbar'],
             });
           }
         );

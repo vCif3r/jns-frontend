@@ -4,12 +4,14 @@ import { Caso } from '../../core/models/caso';
 import { CardCasoComponent } from '../components/card-caso/card-caso.component';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../core/services/auth.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-casos',
   imports: [
     CardCasoComponent,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './casos.component.html',
   styleUrl: './casos.component.css'
@@ -17,6 +19,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class CasosComponent {
   role: any;
   casos: Caso[] = []; //
+  isLoading = true;
 
   constructor(
     private authSerice: AuthService,  //
@@ -24,7 +27,7 @@ export class CasosComponent {
 
   ngOnInit(): void {
     this.role = this.authSerice.getRole();
-    if(this.role === 'Admin' || this.role === 'admin') {
+    if (this.role === 'Admin' || this.role === 'admin') {
       this.loadCasosAdmin();
     } else if (this.role === 'Abogado' || this.role === 'abogado') {
       this.loadCasosAbogado();
@@ -36,16 +39,18 @@ export class CasosComponent {
     });
   }
 
-  loadCasosAdmin(){
+  loadCasosAdmin() {
     this.casoService.cargarCasosAdmin();
-    this.casoService.casosAbogado$.subscribe((casos)=>{
+    this.casoService.casosAbogado$.subscribe((casos) => {
+      this.isLoading = false;
       this.casos = casos;
     })
   }
 
-  loadCasosAbogado(){
+  loadCasosAbogado() {
     this.casoService.cargarCasosAbogado(this.authSerice.getID());
-    this.casoService.casosAbogado$.subscribe((casos)=>{
+    this.casoService.casosAbogado$.subscribe((casos) => {
+      this.isLoading = false;
       this.casos = casos;
     })
   }

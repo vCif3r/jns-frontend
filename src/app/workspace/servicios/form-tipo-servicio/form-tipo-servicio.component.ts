@@ -56,7 +56,7 @@ export class FormTipoServicioComponent implements OnInit {
       this.tpsvForm = this.fb.group({
         id: [data.tipo.id || '', Validators.required],
         nombre: [data.tipo.nombre || '', Validators.required],
-        servicio: [data.tipo.servicio || '', Validators.required],
+        servicio: [data.tipo.servicio.id || '', Validators.required],
         estado: [data.tipo.estado, Validators.required],
         descripcion: [data.tipo.descripcion || '', Validators.required],
       });

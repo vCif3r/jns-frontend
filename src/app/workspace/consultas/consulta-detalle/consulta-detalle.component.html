@@ -5,12 +5,16 @@
   <p>Cliente: {{ consulta?.nombreCompleto }}.</p>
 
     <p>*Asigna un abogado disponible para su revisión.</p>
-  <select class="form-select" [(ngModel)]="selectedAbogadoId">
+  <select class="form-select" [(ngModel)]="selectedAbogadoId" [disabled]="isDateBeforeToday(consulta?.fecha)">
     <option selected disabled hidden>Selecciona un abogado</option>
     @for(abogado of abogadosDisponibles; track abogado.id){
         <option value="{{abogado.id}}">{{abogado.nombre}} {{abogado.apellido}} - {{abogado.especialidad}} </option>
     }
   </select>
+  @if (isDateBeforeToday(consulta?.fecha)) {
+    <p class="text-danger">La fecha de la consulta es anterior a la fecha actual.</p>
+  }
+  
 
   @if(abogadosDisponibles.length == 0){
     <p class="text-danger">No hay abogados disponibles.</p>
@@ -18,5 +22,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button (click)="asignarAbogado()">Asignar</button>
+  <button mat-button (click)="asignarAbogado()" [disabled]="!selectedAbogadoId">Asignar</button>
 </mat-dialog-actions>

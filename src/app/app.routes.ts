@@ -22,7 +22,6 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { CasosComponent } from './workspace/casos/casos.component';
 import { FormConsultaComponent } from './public/form-consulta/form-consulta.component';
 import { ConsultasComponent } from './workspace/consultas/consultas.component';
-import { CasoClienteComponent } from './caso-cliente/caso-cliente.component';
 
 export const routes: Routes = [
   {
@@ -44,10 +43,6 @@ export const routes: Routes = [
     path: 'consultas/:id',
     component: FormConsultaComponent,
     title: 'Formulario'
-  },
-  {
-    path: 'miscasos/:idCaso',
-    component: CasoClienteComponent,
   },
   {
     path: 'workspace',

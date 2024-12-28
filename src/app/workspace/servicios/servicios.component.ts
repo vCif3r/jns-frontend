@@ -16,6 +16,9 @@ import { Servicio } from '../../core/models/servicio';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DialogDeleteServiceComponent } from './dialog-delete-service/dialog-delete-service.component';
 import { TiposServiciosComponent } from './tipos-servicios/tipos-servicios.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-servicios',
@@ -31,13 +34,16 @@ import { TiposServiciosComponent } from './tipos-servicios/tipos-servicios.compo
     RouterLink,
     MatSortModule,
     MatTabsModule,
-    TiposServiciosComponent
+    TiposServiciosComponent,
+    MatSlideToggleModule,
+    FormsModule,
+    MatSnackBarModule
   ],
   templateUrl: './servicios.component.html',
   styleUrl: './servicios.component.css',
 })
 export class ServiciosComponent implements AfterViewInit {
-  displayedColumnsServicios: string[] = ['id', 'nombre', 'categoria', 'estado', 'acciones'];
+  displayedColumnsServicios: string[] = ['id', 'nombre', 'categoria', 'estado','publicado', 'acciones'];
   dataSourceServicios = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginatorServices!: MatPaginator;
@@ -46,6 +52,7 @@ export class ServiciosComponent implements AfterViewInit {
   readonly dialog = inject(MatDialog);
 
   constructor(
+    private snackbar: MatSnackBar,
     private servicioService: ServicioService,
   ) { }
 
@@ -84,6 +91,21 @@ export class ServiciosComponent implements AfterViewInit {
   openDialogDeleteServicio(id: any) {
     this.dialog.open(DialogDeleteServiceComponent, {
       data: { id: id }
+    });
+  }
+
+  onPublicadoChange(element: any): void {
+    this.servicioService.actualizarPublicado(element.id, element.publicado).subscribe({
+      next: (response) => {
+        this.snackbar.open('Actualizado con éxito', 'Cerrar', {
+          duration: 1000,
+        });
+      },
+      error: (error) => {
+        this.snackbar.open(`${error.error.message}`, 'Cerrar', {
+          duration: 5000,
+        });
+      }
     });
   }
 }

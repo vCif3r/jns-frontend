@@ -7,6 +7,10 @@
     </div>
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
+            <small>Fecha </small>
+            <small [ngStyle]="{ 'color': isDateBeforeToday(consulta?.fecha) ? 'red' : 'orange' }">{{consulta?.fecha | date: 'dd/MM/yyyy' }} - {{ consulta?.hora }}</small>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
             <small>Correo electrónico </small>
             <small>{{consulta?.email}}</small>
         </div>
@@ -29,7 +33,8 @@
     <div class="card-footer">
         <div class="d-flex justify-content-end gap-2">
             @if (role == 'Admin' || role == 'admin') {
-                <button class="btn btn-sm btn-danger" (click)="openDialogCancelar(consulta?.id)">
+                <button class="btn btn-sm btn-danger" (click)="openDialogCancelar(consulta?.id)"
+                [disabled]="isDateBeforeToday(consulta?.fecha)">
                     Cancelar
                 </button>
                 <button class="btn btn-sm btn-info" (click)="openDialog(consulta?.id)">

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Servicio } from '../models/servicio';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -72,4 +72,13 @@ export class ServicioService {
   }
 
 
+  actualizarPublicado(id: number, publicado: boolean) {
+    return this.http.put(`${this.url}/publicado/${id}`, { publicado }).pipe(
+      catchError(error => {
+        // Aquí puedes manejar errores globales
+        console.error('Error en la actualización:', error);
+        return throwError(error); // Re-throw para que el error llegue al componente
+      })
+    );
+  }
 }

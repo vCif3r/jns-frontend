@@ -15,7 +15,7 @@ import { TimeAgoPipe } from '../../../core/pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-card-consulta',
-  imports: [TimeAgoPipe, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [TimeAgoPipe, MatIconModule, MatButtonModule, MatMenuModule, CommonModule],
   templateUrl: './card-consulta.component.html',
   styleUrl: './card-consulta.component.css'
 })
@@ -57,4 +57,27 @@ export class CardConsultaComponent {
     });
   }
 
+  isToday(fecha: any | null): boolean {
+    if (!fecha) return false;
+
+    const today = new Date();
+    const consultaDate = new Date(fecha);
+
+    // Compara solo el día, mes y año
+    return today.toDateString() === consultaDate.toDateString();
+  }
+
+  isDateBeforeToday(fecha: any | null): boolean {
+    if (!fecha) return false;
+
+    const today = new Date();
+    const consultaDate = new Date(fecha);
+
+    // Compara solo el día, mes y año, sin considerar la hora
+    today.setHours(0, 0, 0, 0);
+    consultaDate.setHours(0, 0, 0, 0);
+
+    // Compara si la fecha de la consulta es anterior a hoy
+    return consultaDate < today;
+  }
 }

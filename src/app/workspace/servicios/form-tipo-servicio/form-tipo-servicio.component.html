@@ -16,7 +16,7 @@
                 <div class="col-12 col-xl-6">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Servicio</mat-label>
-                        <mat-select formControlName="servicio">
+                        <mat-select formControlName="servicio" value="servicio">
                             @for (servicio of servicios; track servicio.id) {
                                 <mat-option [value]="servicio.id">{{ servicio.nombre }}</mat-option> 
                             }                     
