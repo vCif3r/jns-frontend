@@ -66,9 +66,13 @@ export class ServicioService {
     return this.http.get<any>(`${this.url}/${id}`);
   }
 
+  getServicioPublicado(id: any) {
+    return this.http.get<any>(`${this.url}/publicado/${id}`);
+  }
 
-  findAllActivos(){
-    return this.http.get<Servicio[]>(`${this.url}/activos`);
+
+  findAllPublicados(){
+    return this.http.get<Servicio[]>(`${this.url}/publicados`);
   }
 
 

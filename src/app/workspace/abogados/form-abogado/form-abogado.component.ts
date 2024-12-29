@@ -25,6 +25,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; //
 import { MatIconModule } from '@angular/material/icon';
 import { AbogadoService } from '../../../core/services/abogado.service';
 import { Abogado } from '../../../core/models/abogado';
+import { CommonModule } from '@angular/common';
 
 interface Especialidad {
   value: string;
@@ -48,6 +49,7 @@ interface Especialidad {
     ReactiveFormsModule,
     MatSnackBarModule,
     MatIconModule,
+    CommonModule
   ],
   templateUrl: './form-abogado.component.html',
   styleUrl: './form-abogado.component.css',
@@ -63,9 +65,14 @@ export class FormAbogadoComponent {
   isEditMode: boolean;
 
   especialidades: Especialidad[] = [
-    { value: 'Civil', viewValue: 'Civil' },
-    { value: 'Laboral', viewValue: 'Laboral' },
+    { value: 'Derecho Laboral', viewValue: 'Derecho Laboral' },
     { value: 'Penal', viewValue: 'Penal' },
+    { value: 'de Familia', viewValue: 'de Familia' },
+    { value: 'Civil', viewValue: 'Civil' },
+    { value: 'Administrativo', viewValue: 'Administrativo' },
+    { value: 'Registro de Marca', viewValue: 'Registro de Marca' },
+    { value: 'Derecho de consumidores', viewValue: 'Derecho de consumidores' },
+    { value: 'Seguros', viewValue: 'Seguros' },
   ];
 
   hide = signal(true);
@@ -104,7 +111,7 @@ export class FormAbogadoComponent {
         cedula: ['', [Validators.required]],
         especialidad: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(5)]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
         direccion: ['', [Validators.required]],
         telefono: ['', [Validators.required]],
         genero: [null, [Validators.required]],
@@ -154,5 +161,9 @@ export class FormAbogadoComponent {
         }
       );
     }
+  }
+
+  get f() {
+    return this.abogadoForm.controls;
   }
 }

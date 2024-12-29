@@ -12,20 +12,20 @@ export class StatisticService {
   constructor(private http: HttpClient) {}
 
   // Método para obtener el total de abogados
-  getTotalAbogados(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/abogados`);
-  }
-
-  getTotalClientes(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/clientes`);
+  getStatisticsCards() {
+    return this.http.get<any[]>(`${this.baseUrl}/cards`);
   }
 
   countAbogadosByEspecialidad() {
     return this.http.get<any[]>(`${this.baseUrl}/especialidad/count`)
   }
 
-  countClientesByTipo() {
-    return this.http.get<any[]>(`${this.baseUrl}/tipo-cliente/count`)
+  latestAbogados() {
+    return this.http.get<any>(`${this.baseUrl}/latest/abogados`)
+  }
+
+  casosChart() {
+    return this.http.get<any>(`${this.baseUrl}/casos-por-mes`)
   }
 
 }

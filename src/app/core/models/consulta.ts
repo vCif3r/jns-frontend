@@ -5,8 +5,7 @@ import { TipoServicio } from "./tipoServicio";
 export interface Consulta{
     id: any;
     tipoServicio: TipoServicio;
-    fecha: string;
-    hora: string;
+    fechaHora: string;
     detalles: string;
     nombreCompleto: string;
     email: string;

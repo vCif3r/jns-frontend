@@ -4,18 +4,17 @@ import { MatCardModule } from '@angular/material/card';
 import { ClienteService } from '../../core/services/cliente.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
-import { ChartDemandaComponent } from './charts/chart-demanda/chart-demanda.component';
-import { PieChartClientesComponent } from './charts/pie-chart-clientes/pie-chart-clientes.component';
 import { PieChartAbogadosComponent } from './charts/pie-chart-abogados/pie-chart-abogados.component';
 import { StatisticService } from '../../core/services/statistic.service';
+import { MatIconModule } from '@angular/material/icon';
+import { BarchartTotalCasosComponent } from './charts/barchart-total-casos/barchart-total-casos.component';
 
-export interface Cliente {
-  id: string;
-  nombre: string;
-  apellido: string;
-  email: string;
+interface Card {
+  label: string;
+  value: any;
+  icon: string;
 }
+
 
 @Component({
   selector: 'app-dashboard',
@@ -24,52 +23,38 @@ export interface Cliente {
     MatCardModule,
     MatTableModule, 
     MatButtonModule,
-    RouterLink,
-    ChartDemandaComponent,
-    PieChartClientesComponent,
-    PieChartAbogadosComponent
+    PieChartAbogadosComponent,
+    MatIconModule,
+    BarchartTotalCasosComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correo'];
-  dataSource: any[] = [];
+  statsCards: Card[] = [];
+  latestAbogados?: any;
 
-  totalAbogados: number = 0;
-  totalClientes: number = 0;
-
-  constructor(private _clienteService: ClienteService, 
+  constructor(
     private statisticService: StatisticService
   ){}
 
   ngOnInit(): void {
-    this.findAllClientes()
-    this.getStatistic()
+    this.getlatestAbogados()
+    this.getStatisticCards()
   }
 
-  getStatistic(){
-    this.statisticService.getTotalAbogados().subscribe(
+  getStatisticCards(){
+    this.statisticService.getStatisticsCards().subscribe(
       (data) => {
-        this.totalAbogados = data;
-      }
-    )
-
-    this.statisticService.getTotalClientes().subscribe(
-      (data) => {
-        this.totalClientes = data;
+        this.statsCards = data;
       }
     )
   }
 
-  findAllClientes(){
-    this._clienteService.getClientes().subscribe(
+  getlatestAbogados(){
+    this.statisticService.latestAbogados().subscribe(
       (data) => {
-        this.dataSource = data; // Asigna la respuesta a la variable dataSource
-        console.log('Clientes obtenidos exitosamente', data);
-      },
-      (error) => {
-        console.error('Hubo un error al obtener los clientes', error);
+        this.latestAbogados = data;
       }
     );
   }

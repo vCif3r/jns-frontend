@@ -1,89 +1,66 @@
-<div>
-    <h1 class="fs-5">Dashboard</h1>
+<div class="d-flex justify-content-between align-items-center pb-3">
+    <span class="fs-4 fw-bold">Dashboard</span>
+    <button class="btn btn-dark">
+        <div class="d-flex gap-2">
+            <mat-icon>download</mat-icon>Descargar
+        </div>
+    </button>
 </div>
+
 <div class="row">
-    <div class="col-9">
+    <!-- left column -->
+    <div class="col-12 col-xl-9">
 
         <div class="statistic-section mb-2">
-            <app-statistic-card title="Clientes" [number]="totalClientes" icon="person"></app-statistic-card>
-            <app-statistic-card title="Abogados" [number]="totalAbogados" icon="person"></app-statistic-card>
-            <app-statistic-card title="Procesos" [number]="540" icon="book"></app-statistic-card>
+            @for (card of statsCards; track $index) {
+                <app-statistic-card title="{{card.label}}" [number]="card.value" icon="{{card.icon}}"></app-statistic-card>
+            }
         </div>
 
-        <div class="row mb-2">
-            <div class="col-6">
-                <mat-card appearance="outlined">
-                    <mat-card-header>
-                        <mat-card-title>Demandas</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <app-chart-demanda></app-chart-demanda>
-                    </mat-card-content>
-                </mat-card>
+        <div class="card mb-2">
+            <div class="card-body">
+                <h3 class="card-title fw-medium fs-5">Casos</h3>
+                <app-barchart-total-casos></app-barchart-total-casos>
             </div>
         </div>
 
-        <div class="mb-2">
-            <mat-card appearance="outlined">
-                <mat-card-header>
-                    <mat-card-title>Clientes recientes</mat-card-title>
+        <div class="row">
+            <div class="col-12 col-xl-6">
 
-                </mat-card-header>
-                <mat-card-content>
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                        <!-- Position Column -->
-                        <ng-container matColumnDef="id">
-                            <th mat-header-cell *matHeaderCellDef> ID. </th>
-                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                        </ng-container>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title fw-medium mb-0">Ultimos abogados</p>
+                        <p><small class="text-secondary fw-lighter">Se registraron {{latestAbogados?.countLastMonth}} abogados este mes.</small></p>
+                        @for (item of latestAbogados?.listAbogados; track $index) {
+                            <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ item.foto || 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'}}"
+                                        alt="Avatar" class="rounded-circle" width="32" height="32" />
 
-                        <!-- Name Column -->
-                        <ng-container matColumnDef="nombre">
-                            <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                        </ng-container>
+                                    <div class="ms-2 d-flex flex-column">
+                                        <small class="mb-0">{{ item.nombre }}</small>
+                                        <small class="mb-0 fw-lighter text-secondary">{{ item.email }}</small>
+                                    </div>
+                                </div>
 
-                        <!-- Weight Column -->
-                        <ng-container matColumnDef="apellido">
-                            <th mat-header-cell *matHeaderCellDef> Apellido </th>
-                            <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="correo">
-                            <th mat-header-cell *matHeaderCellDef> Correo </th>
-                            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-
-
-                </mat-card-content>
-                <mat-card-actions align="end">
-                    <a routerLink="/admin/clientes" mat-button>ver más</a>
-                </mat-card-actions>
-            </mat-card>
+                                <div class="d-flex flex-column">
+                                    <small>cédula</small>
+                                    <span class="fw-medium">{{item.cedula}}</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-        
 
     </div>
 
+    <!-- rigth column -->
+
     <div class="col-3">
         <div class="row">
-            <div class="col-12 mb-2">
-                <mat-card appearance="outlined">
-                    <mat-card-header>
-                        <mat-card-title>Clientes</mat-card-title>
-                        <mat-card-subtitle>Tipos de clientes</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <app-pie-chart-clientes></app-pie-chart-clientes>
-                    </mat-card-content>
-                </mat-card>
-            </div>
+            
 
             <div class="col-12">
                 <mat-card appearance="outlined">
@@ -97,8 +74,5 @@
                 </mat-card>
             </div>
         </div>
-        
-
-        
     </div>
 </div>

@@ -13,7 +13,7 @@
                     <!-- fechas -->
                     <div class="row mb-2">
                         <span class="fs-6 mb-2">Fecha y hora de la cita</span>
-                        <div class="col-12 col-xl-6">
+                        <!-- <div class="col-12 col-xl-6">
                             <mat-form-field appearance="outline">
                                 <mat-label>Fecha</mat-label>
                                 <input matInput [matDatepicker]="picker" formControlName="fecha" />
@@ -21,14 +21,19 @@
                                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
+                        </div> -->
+
+                        <div class="mb-2">
+                            <input matInput type="datetime-local" class="form-control p-3 " formControlName="fechaHora" [min]="minDate">                      
                         </div>
-                        <div class="col-12 col-xl-6">
+
+                        <!-- <div class="col-12 col-xl-6">
                             <mat-form-field appearance="outline">
                                 <mat-label>Hora</mat-label>
                                 <input type="time" matInput formControlName="hora"  />
                                 
                             </mat-form-field>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- tipo demanda -->

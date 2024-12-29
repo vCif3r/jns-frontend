@@ -35,18 +35,17 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatSelectModule,
     CommonModule,
     RouterLink,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   templateUrl: './form-consulta.component.html',
   styleUrl: './form-consulta.component.css'
 })
 export class FormConsultaComponent {
-  
   value?: Date;
   consultaForm: FormGroup;
-
+  minDate: any
   servicio?: Servicio;
-  id: any;
+
 
   constructor(
     private router: Router,
@@ -56,8 +55,7 @@ export class FormConsultaComponent {
     private snackbar: MatSnackBar
   ) {
     this.consultaForm = new FormGroup({
-      fecha: new FormControl(null, Validators.required),
-      hora: new FormControl(null, Validators.required),
+      fechaHora: new FormControl(null, Validators.required),
       tipoServicio: new FormControl(null, Validators.required),
       detalles: new FormControl('', Validators.required),
       nombreCompleto: new FormControl('', Validators.required),
@@ -67,13 +65,25 @@ export class FormConsultaComponent {
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id')!;
+    const id = this.route.snapshot.paramMap.get('id')!;
 
-    if (this.id) {
-      this.servicioService.getServicio(this.id).subscribe(data => {
-        this.servicio = data;
-      })
+    if (id) {
+      this.servicioService.getServicioPublicado(id).subscribe(
+        (data) => {
+          if (!data) {  
+            this.router.navigate(['/']);  // Redirigir si no se encuentra el servicio
+          } else {
+            this.servicio = data;  // Asignar el servicio recibido
+          }
+        },
+        (error) => {
+          console.log('Error al cargar el servicio');
+        })
     }
+
+    let today = new Date();
+    today.setDate(today.getDate() + 1); // Establecer al día siguiente
+    this.minDate = today.toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:mm
   }
 
 
@@ -94,13 +104,13 @@ export class FormConsultaComponent {
           duration: 5000
         });
       },
-      (error: any) => {
-        console.log('Error al guardar la consulta');
-        this.snackbar.open('Error al guardar la consulta', 'Cerrar', {
-          duration: 5000
-        });
-      }
-    );
+        (error: any) => {
+          console.log('Error al guardar la consulta');
+          this.snackbar.open('Error al guardar la consulta', 'Cerrar', {
+            duration: 5000
+          });
+        }
+      );
     } else {
       console.log('Formulario no válido');
     }

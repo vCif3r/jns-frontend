@@ -38,12 +38,39 @@
                     </mat-form-field>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Dirección</mat-label>
+                        <input matInput required formControlName="direccion">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nacionalidad</mat-label>
+                        <mat-select formControlName="pais" value="pais">
+                            @for (country of countries; track country) {
+                            <mat-option [value]="country.name.common">
+                                <img [src]="country.flags.png" alt="Bandera" width="24" height="16"
+                                    style="margin-right: 10px;">
+                                {{country.name.common}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
 
             @if (isEditMode == false) {
                 <div class="w-100">
                     <mat-form-field appearance="outline">
                         <mat-label>Correo</mat-label>
                         <input matInput required formControlName="email">
+
+                        <mat-error *ngIf="f['email'].hasError('required')">*El correo electrónico es
+                            requerido</mat-error>
+                        <mat-error *ngIf="f['email'].hasError('email')">*Correo electrónico no válido</mat-error>
+                        
                     </mat-form-field>
                 </div>
     
@@ -52,22 +79,17 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Contraseña</mat-label>
                         <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
-                        <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                        <button mat-icon-button matSuffix (click)="clickEvent($event)" 
                             [attr.aria-pressed]="hide()">
                             <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
+
+                        <mat-error *ngIf="f['password'].hasError('required')">*La contraseña es requerida</mat-error>
+                        <mat-error *ngIf="f['password'].hasError('minlength')">*La contraseña debe tener al menos 8 caracteres</mat-error>
                     </mat-form-field>
                 </div>
             }
             
-
-            <div class="w-100">
-                <mat-form-field appearance="outline">
-                    <mat-label>Dirección</mat-label>
-                    <input matInput required formControlName="direccion">
-                </mat-form-field>
-            </div>
-
             <div class="row">
                 <div class="col-12 col-xl-6">
                     <mat-form-field appearance="outline">
@@ -82,28 +104,15 @@
                         <mat-select formControlName="genero">
                             <mat-option value="Masculino">Masculino</mat-option>
                             <mat-option value="Femenino">Femenino</mat-option>
-
+                            <mat-option value="Otro">Otro</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="">
 
-                <div class="col-12 col-xl-12">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Nacionalidad</mat-label>
-                        <mat-select formControlName="pais">
-                            @for (country of countries; track country) {
-                            <mat-option [value]="country.name.common">
-                                <img [src]="country.flags.png" alt="Bandera" width="24" height="16"
-                                    style="margin-right: 10px;">
-                                {{country.name.common}}
-                            </mat-option>
-                            }
-                        </mat-select>
-                    </mat-form-field>
-                </div>
+                
 
                 <!-- <div class="col-12 col-xl-6">
                 <mat-form-field appearance="outline">

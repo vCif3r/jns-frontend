@@ -18,7 +18,7 @@ export class HomeComponent {
   ){}
 
   ngOnInit(){
-    this.servicioService.findAllActivos().subscribe(data => {
+    this.servicioService.findAllPublicados().subscribe(data => {
       this.servicios = data;
     });
   }

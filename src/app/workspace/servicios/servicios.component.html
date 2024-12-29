@@ -87,7 +87,11 @@
                                     @if (element.tipos_servicios.length <= 0) {
                                         <mat-slide-toggle disabled></mat-slide-toggle>
                                         <small>agrega un tipo</small>
-                                    }@else {
+                                    }@else if( element.disponible == false){
+                                        <mat-slide-toggle disabled></mat-slide-toggle>
+                                        <small>servicio deshabilitado</small>
+                                    }
+                                    @else {
                                         <mat-slide-toggle [(ngModel)]="element.publicado"
                                         (ngModelChange)="onPublicadoChange(element)"></mat-slide-toggle>
                                         <small>{{ element.publicado ? 'publicado': 'sin publicar' }}</small>

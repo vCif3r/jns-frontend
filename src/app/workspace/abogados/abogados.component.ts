@@ -91,6 +91,7 @@ export class AbogadosComponent implements AfterViewInit {
   openDialog(abogado?: Abogado) {
     this.dialog.open(FormAbogadoComponent, {
       data: { abogado: abogado },
+      minWidth: '60vw'
     });
   }
 
