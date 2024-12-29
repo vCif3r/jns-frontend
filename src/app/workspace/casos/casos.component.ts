@@ -33,15 +33,11 @@ export class CasosComponent {
       this.loadCasosAbogado();
     }
 
-    this.casoService.findAll().subscribe(casos => {
-      this.casos = casos
-      console.log(casos);
-    });
   }
 
   loadCasosAdmin() {
     this.casoService.cargarCasosAdmin();
-    this.casoService.casosAbogado$.subscribe((casos) => {
+    this.casoService.casosAdmin$.subscribe((casos) => {
       this.isLoading = false;
       this.casos = casos;
     })
@@ -52,6 +48,7 @@ export class CasosComponent {
     this.casoService.casosAbogado$.subscribe((casos) => {
       this.isLoading = false;
       this.casos = casos;
+      console.log(casos);
     })
   }
 

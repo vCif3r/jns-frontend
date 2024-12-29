@@ -9,7 +9,7 @@
     }@else {
         @if (casos.length > 0) {
             @for (c of casos; track c.id) {
-                <div class="col-12 col-lg-6 col-xl-4">
+                <div class="col-12 col-lg-6 col-xl-4 mb-4">
                     <app-card-caso [caso]="c"></app-card-caso>
                 </div>
             }
