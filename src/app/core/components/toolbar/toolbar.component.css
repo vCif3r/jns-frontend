@@ -1,3 +1,15 @@
 mat-toolbar{
     background-color: #141619;
 }
+
+.leido{
+    background-color: #ffff; /* Cambiar el fondo cuando está leída */
+    color: #aaa !important;
+}
+
+.btn-read{
+    text-decoration: none;
+    outline: none;
+    border: none;
+    text-align: center;
+}

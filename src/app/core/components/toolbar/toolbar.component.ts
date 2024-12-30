@@ -36,6 +36,7 @@ export class ToolbarComponent implements OnInit  {
     this.toggleSidenav.emit();
   }
 
+  unreadCount: number = 0;
   private socket: any;
   notifications: any[] = [];
 
@@ -51,13 +52,38 @@ export class ToolbarComponent implements OnInit  {
     // Escuchar las notificaciones del servidor
     this.socket.on('notifications', (notifications: any[]) => {
       this.notifications = notifications;
+      this.updateUnreadCount(); 
       console.log(notifications);
     });
 
     // Escuchar una nueva notificación individual
     this.socket.on('notification', (notification: any) => {
       this.notifications.unshift(notification); // Agregar la nueva notificación
+      this.updateUnreadCount(); 
       console.log(notification);
+    }); 
+
+    this.socket.on('notificationsRead', () => {
+      this.notifications.forEach(notification => {
+        if (!notification.leido) {
+          notification.leido = true; // Cambiar el estado de las notificaciones no leídas a leídas
+        }
+      });
+      this.updateUnreadCount(); 
     });
+  }
+
+  
+
+  markNotificationsRead() {
+    const userId = this.authService.getID()
+    console.log('id recibido: ', userId);
+    // Emitir un evento para marcar las notificaciones como leídas en el servidor
+    this.socket.emit('markNotificationsAsRead', userId);
+  }
+
+
+  updateUnreadCount() {
+    this.unreadCount = this.notifications.filter(n => !n.leido).length;
   }
 }
