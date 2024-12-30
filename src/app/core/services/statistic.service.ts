@@ -25,7 +25,11 @@ export class StatisticService {
   }
 
   casosChart() {
-    return this.http.get<any>(`${this.baseUrl}/casos-por-mes`)
+    return this.http.get<any>(`${this.baseUrl}/casos-consultas-por-mes`)
+  }
+
+  countConsultasByService(){
+    return this.http.get<any>(`${this.baseUrl}/servicios/count/consultas`)
   }
 
 }

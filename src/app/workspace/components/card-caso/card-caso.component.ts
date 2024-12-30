@@ -36,8 +36,8 @@ export class CardCasoComponent {
 
   openDialogDetalle(idCaso: any):void{
     this.dialog.open(DialogCasoDetalleComponent, {
-
       data: {id: idCaso},
+      minWidth: '40vw'
     });
   }
 

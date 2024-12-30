@@ -1,77 +1,101 @@
-<div class="d-flex justify-content-between align-items-center pb-3">
-    <span class="fs-4 fw-bold">Dashboard</span>
-    <button class="btn btn-dark">
-        <div class="d-flex gap-2">
-            <mat-icon>download</mat-icon>Descargar
-        </div>
-    </button>
-</div>
-
-<div class="row">
-    <!-- left column -->
-    <div class="col-12 col-xl-9">
-
-        <div class="statistic-section mb-2">
-            @for (card of statsCards; track $index) {
-                <app-statistic-card title="{{card.label}}" [number]="card.value" icon="{{card.icon}}"></app-statistic-card>
-            }
-        </div>
-
-        <div class="card mb-2">
-            <div class="card-body">
-                <h3 class="card-title fw-medium fs-5">Casos</h3>
-                <app-barchart-total-casos></app-barchart-total-casos>
+<div #contenido>
+    <div class="d-flex justify-content-between align-items-center pb-3">
+        <span class="fs-4 fw-bold">Dashboard</span>
+        <button class="btn btn-dark" >
+            <div class="d-flex gap-2">
+                <mat-icon>download</mat-icon>Descargar
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12 col-xl-6">
-
-                <div class="card">
-                    <div class="card-body">
-                        <p class="card-title fw-medium mb-0">Ultimos abogados</p>
-                        <p><small class="text-secondary fw-lighter">Se registraron {{latestAbogados?.countLastMonth}} abogados este mes.</small></p>
-                        @for (item of latestAbogados?.listAbogados; track $index) {
-                            <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ item.foto || 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'}}"
-                                        alt="Avatar" class="rounded-circle" width="32" height="32" />
-
-                                    <div class="ms-2 d-flex flex-column">
-                                        <small class="mb-0">{{ item.nombre }}</small>
-                                        <small class="mb-0 fw-lighter text-secondary">{{ item.email }}</small>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex flex-column">
-                                    <small>cédula</small>
-                                    <span class="fw-medium">{{item.cedula}}</span>
-                                </div>
-                            </div>
-                        }
-                    </div>
+        </button>
+    </div>
+    
+    <div class="row" >
+        <!-- left column -->
+        <div class="col-12 col-xl-9">
+    
+            <div class="statistic-section mb-2">
+                @for (card of statsCards; track $index) {
+                    <app-statistic-card title="{{card.label}}" [number]="card.value" icon="{{card.icon}}"></app-statistic-card>
+                }
+            </div>
+    
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h3 class="card-title fw-medium fs-5">Casos/Consultas</h3>
+                    <app-barchart-total-casos></app-barchart-total-casos>
                 </div>
             </div>
+    
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-card appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>Ultimos abogados</mat-card-title>
+                            <mat-card-subtitle>Se registraron {{latestAbogados?.countLastMonth}} abogados este mes.</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>                      
+                            @for (item of latestAbogados?.listAbogados; track $index) {
+                                <div class="d-flex justify-content-between align-items-center gap-2 my-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ item.foto || 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'}}"
+                                            alt="Avatar" class="rounded-circle" width="32" height="32" />
+    
+                                        <div class="ms-2 d-flex flex-column">
+                                            <small class="mb-0">{{ item.nombre }}</small>
+                                            <small class="mb-0 fw-lighter text-secondary">{{ item.email }}</small>
+                                        </div>
+                                    </div>
+    
+                                    <div class="d-flex flex-column">
+                                        <small>cédula</small>
+                                        <span class="fw-medium">{{item.cedula}}</span>
+                                    </div>
+                                </div>
+                            }
+                            @if (latestAbogados?.listAbogados.length < 0) {
+                                <p class="text-center text-secondary">
+                                    No se registraron abogados este mes.
+                                    <a routerLink="/workspace/abogados" class="btn-link">agregar</a>
+                                </p>                        
+                            }
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+    
+    
+                <div class="col-12 col-xl-6">
+                    <mat-card appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>Servicios</mat-card-title>
+                            <mat-card-subtitle>consultas por servicio</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <app-horizontal-barchart-consultas-servicio></app-horizontal-barchart-consultas-servicio>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+    
         </div>
-
-    </div>
-
-    <!-- rigth column -->
-
-    <div class="col-3">
-        <div class="row">
-            
-
-            <div class="col-12">
-                <mat-card appearance="outlined">
-                    <mat-card-header>
-                        <mat-card-title>Abogados</mat-card-title>
-                        <mat-card-subtitle>Especialidad de abogados</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <app-pie-chart-abogados></app-pie-chart-abogados>
-                    </mat-card-content>
-                </mat-card>
+    
+        <!-- rigth column -->
+    
+        <div class="col-12 col-xl-3 ">
+            <div class="row">
+                
+    
+                <div class="col-12">
+                    <mat-card appearance="outlined">
+                        <mat-card-header>
+                            <mat-card-title>Abogados</mat-card-title>
+                            <mat-card-subtitle>Especialidad de abogados</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <app-pie-chart-abogados></app-pie-chart-abogados>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+    
+                
             </div>
         </div>
     </div>

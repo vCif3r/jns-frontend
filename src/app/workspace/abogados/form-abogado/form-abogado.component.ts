@@ -114,8 +114,8 @@ export class FormAbogadoComponent {
         password: ['', [Validators.required, Validators.minLength(8)]],
         direccion: ['', [Validators.required]],
         telefono: ['', [Validators.required]],
-        genero: [null, [Validators.required]],
-        pais: [null, [Validators.required]],
+        genero: ['', [Validators.required]],
+        pais: ['', [Validators.required]],
       });
     }
     // end form construction

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { StatisticCardComponent } from '../components/statistic-card/statistic-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { ClienteService } from '../../core/services/cliente.service';
@@ -8,6 +8,8 @@ import { PieChartAbogadosComponent } from './charts/pie-chart-abogados/pie-chart
 import { StatisticService } from '../../core/services/statistic.service';
 import { MatIconModule } from '@angular/material/icon';
 import { BarchartTotalCasosComponent } from './charts/barchart-total-casos/barchart-total-casos.component';
+import { RouterLink } from '@angular/router';
+import { HorizontalBarchartConsultasServicioComponent } from './charts/horizontal-barchart-consultas-servicio/horizontal-barchart-consultas-servicio.component';
 
 interface Card {
   label: string;
@@ -15,47 +17,46 @@ interface Card {
   icon: string;
 }
 
-
 @Component({
   selector: 'app-dashboard',
   imports: [
+    RouterLink,
     StatisticCardComponent,
     MatCardModule,
-    MatTableModule, 
+    MatTableModule,
     MatButtonModule,
     PieChartAbogadosComponent,
     MatIconModule,
-    BarchartTotalCasosComponent
+    BarchartTotalCasosComponent,
+    HorizontalBarchartConsultasServicioComponent,
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
   statsCards: Card[] = [];
   latestAbogados?: any;
 
-  constructor(
-    private statisticService: StatisticService
-  ){}
+  constructor(private statisticService: StatisticService) {}
 
   ngOnInit(): void {
-    this.getlatestAbogados()
-    this.getStatisticCards()
+    this.getlatestAbogados();
+    this.getStatisticCards();
   }
 
-  getStatisticCards(){
-    this.statisticService.getStatisticsCards().subscribe(
-      (data) => {
-        this.statsCards = data;
-      }
-    )
+  getStatisticCards() {
+    this.statisticService.getStatisticsCards().subscribe((data) => {
+      this.statsCards = data;
+    });
   }
 
-  getlatestAbogados(){
-    this.statisticService.latestAbogados().subscribe(
-      (data) => {
-        this.latestAbogados = data;
-      }
-    );
+  getlatestAbogados() {
+    this.statisticService.latestAbogados().subscribe((data) => {
+      this.latestAbogados = data;
+    });
   }
+
+ 
+  
+  
 }
