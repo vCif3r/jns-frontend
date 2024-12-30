@@ -9,6 +9,9 @@ import { MenuUserComponent } from '../../../workspace/components/menu-user/menu-
 import { NotificacionService } from '../../services/notificacion.service';
 import { AuthService } from '../../services/auth.service';
 import {MatBadgeModule} from '@angular/material/badge';
+import { io } from 'socket.io-client';
+import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -19,12 +22,13 @@ import {MatBadgeModule} from '@angular/material/badge';
     CommonModule,
     MatButtonModule,
     MenuUserComponent,
-    MatBadgeModule
+    MatBadgeModule,
+    TimeAgoPipe
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css',
 })
-export class ToolbarComponent  {
+export class ToolbarComponent implements OnInit  {
   @Output() toggleSidenav = new EventEmitter<void>();
   @Input() isHandset$?: Observable<boolean>;
 
@@ -32,5 +36,28 @@ export class ToolbarComponent  {
     this.toggleSidenav.emit();
   }
 
-  
+  private socket: any;
+  notifications: any[] = [];
+
+  constructor(private authService: AuthService){}
+
+  ngOnInit(): void {
+    const userId = this.authService.getID();
+
+    this.socket = io('http://localhost:3001', {
+      query: { userId }
+    });
+
+    // Escuchar las notificaciones del servidor
+    this.socket.on('notifications', (notifications: any[]) => {
+      this.notifications = notifications;
+      console.log(notifications);
+    });
+
+    // Escuchar una nueva notificación individual
+    this.socket.on('notification', (notification: any) => {
+      this.notifications.unshift(notification); // Agregar la nueva notificación
+      console.log(notification);
+    });
+  }
 }
