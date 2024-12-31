@@ -101,7 +101,6 @@ export class FormAbogadoComponent {
         direccion: [data.abogado.direccion || '', [Validators.required]],
         telefono: [data.abogado.telefono || '', [Validators.required]],
         genero: [data.abogado.genero || null, [Validators.required]],
-        pais: [data.abogado.pais || '', [Validators.required]],
       });
     } else {
       this.isEditMode = false;
@@ -115,7 +114,6 @@ export class FormAbogadoComponent {
         direccion: ['', [Validators.required]],
         telefono: ['', [Validators.required]],
         genero: ['', [Validators.required]],
-        pais: ['', [Validators.required]],
       });
     }
     // end form construction

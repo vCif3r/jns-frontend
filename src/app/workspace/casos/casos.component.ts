@@ -1,28 +1,36 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { CasoService } from '../../core/services/caso.service';
 import { Caso } from '../../core/models/caso';
 import { CardCasoComponent } from '../components/card-caso/card-caso.component';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../core/services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-casos',
   imports: [
     CardCasoComponent,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   templateUrl: './casos.component.html',
   styleUrl: './casos.component.css'
 })
-export class CasosComponent {
+export class CasosComponent  {
   role: any;
-  casos: Caso[] = []; //
+  casos: Caso[] = []; // Lista de casos
+  casosFiltrados: Caso[] = []; // Lista de casos filtrados
   isLoading = true;
 
+  pageSize = 10;
+  pageIndex = 0;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+ 
+
   constructor(
-    private authSerice: AuthService,  //
+    private authSerice: AuthService,  // Servicio de autenticación
     private casoService: CasoService) { }
 
   ngOnInit(): void {
@@ -32,7 +40,6 @@ export class CasosComponent {
     } else if (this.role === 'Abogado' || this.role === 'abogado') {
       this.loadCasosAbogado();
     }
-
   }
 
   loadCasosAdmin() {
@@ -40,7 +47,10 @@ export class CasosComponent {
     this.casoService.casosAdmin$.subscribe((casos) => {
       this.isLoading = false;
       this.casos = casos;
-    })
+      this.casosFiltrados = casos; 
+      this.getEstadosEncontrados();
+      this.updatePagination();
+    });
   }
 
   loadCasosAbogado() {
@@ -48,9 +58,54 @@ export class CasosComponent {
     this.casoService.casosAbogado$.subscribe((casos) => {
       this.isLoading = false;
       this.casos = casos;
-      console.log(casos);
-    })
+      this.casosFiltrados = casos;
+      this.getEstadosEncontrados();
+      this.updatePagination();
+    });
+  }
+
+  ordenarPorFecha(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+  
+    if (selectedValue === 'asc') {
+      // Ordenar de forma ascendente
+      this.casosFiltrados = this.casosFiltrados.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    } else if (selectedValue === 'desc') {
+      // Ordenar de forma descendente
+      this.casosFiltrados = this.casosFiltrados.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    }
+  }
+
+  estadosEncontrados:any[] = [];
+  getEstadosEncontrados() {
+    this.casos.forEach(caso => {
+      if (!this.estadosEncontrados.includes(caso.estado)) {
+        this.estadosEncontrados.push(caso.estado);
+      }
+    });
+  }
+  
+  filtrarPorEstado(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+    if (selectedValue === 'todos') {
+      this.casosFiltrados = [...this.casos];
+    } else {
+      this.casosFiltrados = this.casos.filter(caso => caso.estado === selectedValue);
+    }
   }
 
 
+  updatePagination(): void {
+    const startIndex = this.pageIndex * this.pageSize;
+    this.casosFiltrados = this.casos.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  // Método para manejar cambios en la paginación
+  onPageChange(event: any): void {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updatePagination();
+  }
 }

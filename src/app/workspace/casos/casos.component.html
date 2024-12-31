@@ -1,27 +1,57 @@
 <h1 class="fs-5">Lista de casos</h1>
+<div class="row w-100">
+  <div class="col-12 col-xl-3 py-2">
+    <p class="mb-0">Estados encontrados</p>
+    <select (change)="filtrarPorEstado($event)" class="form-select">
+      <option value="todos" selected>Todos</option>
+      @for (estado of estadosEncontrados; track $index) {
+      <option [value]="estado">{{ estado }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="col-12 col-xl-3 py-2">
+    <p class="mb-0">Fecha</p>
+    <select (change)="ordenarPorFecha($event)" class="form-select">
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
+  </div>
+</div>
+
 <div class="w-100 row">
-    @if (isLoading) {
-        <div class="card">
-            <div class="card-body d-flex justify-content-center">
-                <mat-spinner ></mat-spinner>
-            </div>
-        </div>
-    }@else {
-        @if (casos.length > 0) {
-            @for (c of casos; track c.id) {
-                <div class="col-12 col-lg-6 col-xl-4 mb-4">
-                    <app-card-caso [caso]="c"></app-card-caso>
-                </div>
-            }
-        }@else {
-            <div class="card">
-                <div class="card-body text-center">
-                    <div class="w-100 text-center text-primary">
-                        <mat-icon style="font-size: 50px; height: 50px; width: 50px;">gavel</mat-icon>
-                    </div>
-                    <span class="text-secondary">No hay casos pendientes por ahora</span>
-                </div>
-            </div>
-        }
-    }
+  @if (isLoading) {
+  <div class="card">
+    <div class="card-body d-flex justify-content-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  } @if (casosFiltrados.length > 0) { @for (c of casosFiltrados; track c.id) {
+  <div class="col-12 col-lg-6 col-xl-4 mb-4">
+    <app-card-caso [caso]="c"></app-card-caso>
+  </div>
+  }
+
+  <mat-paginator
+    [length]="casos.length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[10, 25, 50]"
+    (page)="onPageChange($event)"
+    class="bg-transparent "
+  >
+  </mat-paginator>
+
+  }@else {
+  <div class="card">
+    <div class="card-body text-center">
+      <div class="w-100 text-center text-primary">
+        <mat-icon style="font-size: 50px; height: 50px; width: 50px"
+          >gavel</mat-icon
+        >
+      </div>
+      <span class="text-secondary">No hay casos pendientes por ahora</span>
+    </div>
+  </div>
+  }
 </div>

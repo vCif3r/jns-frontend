@@ -14,7 +14,7 @@
                 <mat-icon class="material-icons-outlined" >dark_mode</mat-icon>
             </button>
 
-             <button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
+             <button mat-icon-button [matMenuTriggerFor]="notificationsMenu" (click)="markNotificationsRead()">
                 <mat-icon class="material-icons-outlined" matBadge="{{ unreadCount }}" matBadgeColor="warn">notifications</mat-icon>
             </button>
             <mat-menu #notificationsMenu="matMenu" xPosition="before">
@@ -27,9 +27,9 @@
                     </div>
                 }
 
-                <button class="btn-read text-center" 
+                <!-- <button class="btn-read text-center" 
                 (click)="markNotificationsRead()" [disabled]="unreadCount == 0">marcar todas como leídas</button>
-                
+                 -->
             </mat-menu> 
 
             <app-menu-user></app-menu-user>

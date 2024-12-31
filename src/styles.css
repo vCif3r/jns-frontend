@@ -25,7 +25,7 @@ body {
     z-index: 1;
 }
 
-.carousel-item {
+.carousel-item.carousel-home {
     height: calc(100vh - 35px) !important;
 }
 
