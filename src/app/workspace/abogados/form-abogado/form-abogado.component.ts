@@ -55,12 +55,12 @@ interface Especialidad {
   styleUrl: './form-abogado.component.css',
 })
 export class FormAbogadoComponent {
-  countries: any[] = [];
-  ngOnInit(): void {
-    this.countryService.getCountries().subscribe((data) => {
-      this.countries = data;
-    });
-  }
+  // countries: any[] = [];
+  // ngOnInit(): void {
+  //   this.countryService.getCountries().subscribe((data) => {
+  //     this.countries = data;
+  //   });
+  // }
 
   isEditMode: boolean;
 
