@@ -20,11 +20,14 @@ import { ServicioService } from '../../core/services/servicio.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ConsultaService } from '../../core/services/consulta.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-form-consulta',
   providers: [provideNativeDateAdapter()],
-  imports: [MatCardModule,
+  imports: [
+    MatIconModule,
+    MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,

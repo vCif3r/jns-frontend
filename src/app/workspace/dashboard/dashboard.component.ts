@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { StatisticCardComponent } from '../components/statistic-card/statistic-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { ClienteService } from '../../core/services/cliente.service';
@@ -33,15 +33,17 @@ interface Card {
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   statsCards: Card[] = [];
   latestAbogados?: any;
+  currentYear?: number;
 
   constructor(private statisticService: StatisticService) {}
 
   ngOnInit(): void {
     this.getlatestAbogados();
     this.getStatisticCards();
+    this.currentYear = new Date().getFullYear();
   }
 
   getStatisticCards() {

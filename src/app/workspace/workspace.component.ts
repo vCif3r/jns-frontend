@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { ToolbarComponent } from '../core/components/toolbar/toolbar.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-workspace',

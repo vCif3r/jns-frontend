@@ -24,7 +24,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { Cliente } from '../../../core/models/cliente';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
-import { PaisService } from '../../../core/services/pais.service';
 
 @Component({
   selector: 'app-form-cliente',
@@ -47,14 +46,9 @@ import { PaisService } from '../../../core/services/pais.service';
   templateUrl: './form-cliente.component.html',
   styleUrl: './form-cliente.component.css',
 })
-export class FormClienteComponent implements OnInit {
+export class FormClienteComponent {
   countries: any[] = [];
 
-  ngOnInit(): void {
-    this.countryService.getCountries().subscribe((data) => {
-      this.countries = data;
-    });
-  }
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
@@ -70,7 +64,6 @@ export class FormClienteComponent implements OnInit {
     private clienteService: ClienteService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<FormClienteComponent>,
-    private countryService: PaisService,
     @Inject(MAT_DIALOG_DATA) public data: { cliente: Cliente }
   ) {
     if (data && data.cliente && data.cliente.id) {
@@ -84,7 +77,7 @@ export class FormClienteComponent implements OnInit {
         estado_civil: [data.cliente.estado_civil || '', Validators.required],
         direccion: [data.cliente.direccion || '', [Validators.required]],
         telefono: [data.cliente.telefono || '', [Validators.required]],
-        pais: [data.cliente.pais || '', [Validators.required]],
+    
       });
     } else {
       this.isEditMode = false; // Modo creación
@@ -97,7 +90,6 @@ export class FormClienteComponent implements OnInit {
         estado_civil: ['', Validators.required],
         direccion: ['', Validators.required],
         telefono: ['', Validators.required],
-        pais: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', Validators.required],
       });

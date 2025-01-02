@@ -8,8 +8,6 @@ import { BlogComponent } from './public/blog/blog.component';
 import { ContactComponent } from './public/contact/contact.component';
 import { RoleGuard } from './core/guards/role.guard';
 import { ExperienceComponent } from './public/experience/experience.component';
-
-import { RegisterComponent } from './public/register/register.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { DemandasComponent } from './workspace/demandas/demandas.component';
 import { DetallesDemandaComponent } from './workspace/demandas/detalles-demanda/detalles-demanda.component';
@@ -36,7 +34,6 @@ export const routes: Routes = [
       { path: 'contact', component: ContactComponent },
       { path: 'experience', component: ExperienceComponent },
       { path: 'login', component: LoginComponent, title: 'login', canActivate: [AuthGuard] },
-      { path: 'register', component: RegisterComponent, title: 'register',canActivate: [AuthGuard] },
     ],
   },
   {

@@ -20,7 +20,6 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { PaisService } from '../../../core/services/pais.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Para mostrar mensajes
 import { MatIconModule } from '@angular/material/icon';
 import { AbogadoService } from '../../../core/services/abogado.service';
@@ -84,7 +83,6 @@ export class FormAbogadoComponent {
   abogadoForm: FormGroup;
 
   constructor(
-    private countryService: PaisService,
     private abogadoService: AbogadoService,
     private dialogRef: MatDialogRef<FormAbogadoComponent>,
     private fb: FormBuilder,

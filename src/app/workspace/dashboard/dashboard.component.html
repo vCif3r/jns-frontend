@@ -20,7 +20,7 @@
     
             <div class="card mb-2">
                 <div class="card-body">
-                    <h3 class="card-title fw-medium fs-5">Casos/Consultas</h3>
+                    <h3 class="card-title fw-medium fs-5">Casos vs Consultas {{currentYear}}</h3>
                     <app-barchart-total-casos></app-barchart-total-casos>
                 </div>
             </div>
@@ -30,7 +30,9 @@
                     <mat-card appearance="outlined">
                         <mat-card-header>
                             <mat-card-title>Ultimos abogados</mat-card-title>
-                            <mat-card-subtitle>Se registraron {{latestAbogados?.countLastMonth}} abogados este mes.</mat-card-subtitle>
+                            @if (latestAbogados?.listAbogados.length > 0) {
+                                <mat-card-subtitle>Se registraron {{latestAbogados?.countLastMonth}} abogados este mes.</mat-card-subtitle>
+                            }
                         </mat-card-header>
                         <mat-card-content>                      
                             @for (item of latestAbogados?.listAbogados; track $index) {
@@ -51,8 +53,8 @@
                                     </div>
                                 </div>
                             }
-                            @if (latestAbogados?.listAbogados.length < 0) {
-                                <p class="text-center text-secondary">
+                            @if (latestAbogados?.listAbogados.length == 0) {
+                                <p class="text-center text-secondary pt-2">
                                     No se registraron abogados este mes.
                                     <a routerLink="/workspace/abogados" class="btn-link">agregar</a>
                                 </p>                        

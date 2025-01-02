@@ -5,12 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Observable } from 'rxjs';
-import { MenuUserComponent } from '../../../workspace/components/menu-user/menu-user.component';
-import { NotificacionService } from '../../services/notificacion.service';
-import { AuthService } from '../../services/auth.service';
+import { MenuUserComponent } from '../menu-user/menu-user.component';
+import { AuthService } from '../../../core/services/auth.service';
 import {MatBadgeModule} from '@angular/material/badge';
 import { io } from 'socket.io-client';
-import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
+import { TimeAgoPipe } from '../../../core/pipes/time-ago.pipe';
 
 
 @Component({
@@ -45,7 +44,7 @@ export class ToolbarComponent implements OnInit  {
   ngOnInit(): void {
     const userId = this.authService.getID();
 
-    this.socket = io('http://localhost:3001', {
+    this.socket = io('http://localhost:3000', {
       query: { userId }
     });
 
@@ -53,14 +52,12 @@ export class ToolbarComponent implements OnInit  {
     this.socket.on('notifications', (notifications: any[]) => {
       this.notifications = notifications;
       this.updateUnreadCount(); 
-      console.log(notifications);
     });
 
     // Escuchar una nueva notificación individual
     this.socket.on('notification', (notification: any) => {
       this.notifications.unshift(notification); // Agregar la nueva notificación
       this.updateUnreadCount(); 
-      console.log(notification);
     }); 
 
     this.socket.on('notificationsRead', () => {
@@ -73,15 +70,11 @@ export class ToolbarComponent implements OnInit  {
     });
   }
 
-  
-
   markNotificationsRead() {
     const userId = this.authService.getID()
-    console.log('id recibido: ', userId);
     // Emitir un evento para marcar las notificaciones como leídas en el servidor
     this.socket.emit('markNotificationsAsRead', userId);
   }
-
 
   updateUnreadCount() {
     this.unreadCount = this.notifications.filter(n => !n.leido).length;
