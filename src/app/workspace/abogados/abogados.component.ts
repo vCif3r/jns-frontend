@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormAbogadoComponent } from './form-abogado/form-abogado.component';
 import { DIalogDeleteAbogadoComponent } from './dialog-delete-abogado/dialog-delete-abogado.component';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-abogados',
@@ -34,6 +35,7 @@ import { DIalogDeleteAbogadoComponent } from './dialog-delete-abogado/dialog-del
     MatButtonModule,
     CommonModule,
     MatProgressSpinnerModule,
+    MatCardModule
   ],
   templateUrl: './abogados.component.html',
   styleUrl: './abogados.component.css',

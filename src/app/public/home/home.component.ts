@@ -1,3 +1,4 @@
+import { StatisticService } from './../../core/services/statistic.service';
 import { Component } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
@@ -13,14 +14,20 @@ import { Servicio } from '../../core/models/servicio';
 export class HomeComponent {
 
   servicios: Servicio[] = [];
+  caracteristicas: any;
   constructor(
     private servicioService: ServicioService,
+    private statisticService: StatisticService
   ){}
 
   ngOnInit(){
     this.servicioService.findAllPublicados().subscribe(data => {
       this.servicios = data;
     });
+
+    this.statisticService.getCaracteristicasHome().subscribe(data => {
+      this.caracteristicas = data;
+    })
   }
 
   

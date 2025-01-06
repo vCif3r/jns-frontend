@@ -18,11 +18,13 @@ export class MenuUserComponent {
   email: any;
   role: string;
   fullname: string;
+  id: any
 
   constructor(private _authService: AuthService) {
     this.email = _authService.getEmailUser();
     this.role = _authService.getRole();
     this.fullname = _authService.getnameUser();
+    this.id = _authService.getID()
   }
 
 }

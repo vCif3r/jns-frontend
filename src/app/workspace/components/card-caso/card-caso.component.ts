@@ -1,7 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
 import { Caso } from '../../../core/models/caso';
-import { CasoService } from '../../../core/services/caso.service';
-import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../../core/services/auth.service';
@@ -9,6 +7,7 @@ import { TimeAgoPipe } from '../../../core/pipes/time-ago.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCasoDetalleComponent } from '../../casos/dialog-caso-detalle/dialog-caso-detalle.component';
 import { DialogCasoUpdateComponent } from '../../casos/dialog-caso-update/dialog-caso-update.component';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-card-caso',
@@ -16,6 +15,7 @@ import { DialogCasoUpdateComponent } from '../../casos/dialog-caso-update/dialog
     TimeAgoPipe,
     MatIconModule,
     MatButtonModule,
+    MatCardModule
   ],
   templateUrl: './card-caso.component.html',
   styleUrl: './card-caso.component.css'

@@ -4,13 +4,14 @@ import { Caso } from '../models/caso';
 import { BehaviorSubject, tap } from 'rxjs';
 import { ConsultaService } from './consulta.service';
 import { AuthService } from './auth.service';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CasoService {
 
-  private url = 'http://localhost:3000/casos';
+  private url = `${environment.API_URL}/casos`;
 
   private casosAdminSubject = new BehaviorSubject<Caso[]>([]);
   casosAdmin$ = this.casosAdminSubject.asObservable();

@@ -11,5 +11,5 @@
 <mat-menu #beforeMenu="matMenu" xPosition="before">
     <div class="px-2">{{ email }}</div>
     <hr>
-    <button mat-menu-item routerLink="/profile">Mi perfil</button>
+    <button mat-menu-item [routerLink]="['/workspace/profile', id]">Mi perfil</button>
 </mat-menu>

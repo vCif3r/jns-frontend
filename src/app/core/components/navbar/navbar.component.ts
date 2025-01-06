@@ -37,7 +37,8 @@ export class NavbarComponent {
   readonly dialog = inject(MatDialog);
   openDialog(){
     this.dialog.open(BuscarCasoComponent,{
-      maxWidth: '60vw',
+      maxWidth: '100vw',
+      minWidth: '65vw'
     })
   }
 

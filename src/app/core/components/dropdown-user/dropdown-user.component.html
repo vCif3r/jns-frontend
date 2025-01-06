@@ -11,7 +11,7 @@
         <button mat-menu-item routerLink="/workspace">Dashboard</button>
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
     }@else if (role == "Abogado") {
-        <button mat-menu-item routerLink="/workspace">Dashboard</button>
+        <button mat-menu-item routerLink="/workspace/consultas">Consultas</button>
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
     }
 </mat-menu>

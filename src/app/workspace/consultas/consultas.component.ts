@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardConsultaComponent } from '../components/card-consulta/card-consulta.component';
 import { AuthService } from '../../core/services/auth.service';
 import { RouterLink } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-consultas',
@@ -15,7 +16,8 @@ import { RouterLink } from '@angular/router';
     MatIconModule,
     MatButtonModule,
     CardConsultaComponent,
-    RouterLink
+    RouterLink,
+    MatCardModule
   ],
   templateUrl: './consultas.component.html',
   styleUrl: './consultas.component.css'

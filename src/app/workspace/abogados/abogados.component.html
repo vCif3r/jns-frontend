@@ -16,12 +16,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <!-- Título de la tabla -->
-                    <h5 class="card-title">Abogados</h5>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title class="mb-2">Abogados</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
                     <!-- Botones de acción -->
-                    <div class="mb-3 d-flex gap-2">
+                    <div class="mb-3 d-flex gap-2 w-100">
                         <a class="btn btn-success btn-sm" (click)="openDialog()">
                             <div class="d-flex align-items-center gap-2">
                                 <mat-icon>add_circle</mat-icon>
@@ -38,7 +40,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <mat-icon>description</mat-icon>
                                 Save CSV
-                            </div>                   
+                            </div>
                         </button>
                     </div>
 
@@ -46,22 +48,23 @@
                     <div *ngIf="loading" class="loading-container">
                         <mat-spinner></mat-spinner> <!-- Spinner de carga -->
                     </div>
-                      
+
                     <!-- Buscador -->
                     <div *ngIf="!loading">
                         <div class="w-100 p-2">
-                            <mat-form-field appearance="outline" class="w-100">                       
+                            <mat-form-field appearance="outline" class="w-50">
                                 <input matInput (keyup)="applyFilter($event)" placeholder="Buscar...">
                             </mat-form-field>
                         </div>
 
-                        <table mat-table [dataSource]="dataSource" matSort  id="printableTable">
+                        <table mat-table [dataSource]="dataSource" matSort id="printableTable">
 
                             <!-- Definir las columnas de la tabla -->
                             <ng-container matColumnDef="foto">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Foto</th>
                                 <td mat-cell *matCellDef="let element">
-                                    <img src="{{ element.foto || 'https://www.w3schools.com/howto/img_avatar.png' }}" alt="" class="img-thumbnail" style="width: 50px" />
+                                    <img src="{{ element.foto || 'https://www.w3schools.com/howto/img_avatar.png' }}"
+                                        alt="" class="img-thumbnail" style="width: 50px" />
                                 </td>
                             </ng-container>
 
@@ -73,30 +76,30 @@
                             <ng-container matColumnDef="especialidad">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Especialidad</th>
                                 <td mat-cell *matCellDef="let element">
-                                    {{element.especialidad}} 
+                                    {{element.especialidad}}
                                 </td>
                             </ng-container>
 
                             <ng-container matColumnDef="nombre">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-                                <td mat-cell *matCellDef="let element">                               
+                                <td mat-cell *matCellDef="let element">
                                     {{element.nombre}} {{element.apellido}}
                                 </td>
                             </ng-container>
 
                             <ng-container matColumnDef="email">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
-                                <td mat-cell *matCellDef="let element">                               
+                                <td mat-cell *matCellDef="let element">
                                     {{element.email}}
                                 </td>
                             </ng-container>
 
                             <ng-container matColumnDef="acciones">
                                 <th mat-header-cell *matHeaderCellDef>Acciones</th>
-                                <td mat-cell *matCellDef="let element">  
+                                <td mat-cell *matCellDef="let element">
                                     <a mat-icon-button (click)="openDialog(element)">
                                         <mat-icon>edit</mat-icon>
-                                    </a>                             
+                                    </a>
                                     <a mat-icon-button (click)="openDialogDelete(element.id)">
                                         <mat-icon>delete</mat-icon>
                                     </a>
@@ -110,8 +113,9 @@
                         <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
                             showFirstLastButtons></mat-paginator>
                     </div>
-                </div>
-            </div>
+                </mat-card-content>
+            </mat-card>
+
         </div>
     </div>
 </div>

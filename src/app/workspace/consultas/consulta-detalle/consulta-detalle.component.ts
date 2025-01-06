@@ -78,17 +78,11 @@ export class ConsultaDetalleComponent {
     }
   }
 
-  isDateBeforeToday(fecha: any | null): boolean {
-    if (!fecha) return false;
-
-    const today = new Date();
-    const consultaDate = new Date(fecha);
-
-    // Compara solo el día, mes y año, sin considerar la hora
-    today.setHours(0, 0, 0, 0);
-    consultaDate.setHours(0, 0, 0, 0);
-
-    // Compara si la fecha de la consulta es anterior a hoy
-    return consultaDate < today;
+  isDateTimeBeforeToday(fechaHora: any): boolean {
+    const currentDate = new Date(); // Obtiene la fecha y hora actuales
+    const inputDate = new Date(fechaHora); // Convierte la fecha recibida a un objeto Date
+  
+    // Compara si la fecha recibida es antes de la fecha actual
+    return inputDate < currentDate;
   }
 }

@@ -71,9 +71,9 @@
                 <a routerLink="/services" routerLinkActive="active" class="nav-item nav-link">Servicios</a>
                 <a routerLink="/blog" routerLinkActive="active" class="nav-item nav-link">Blog</a>
                 <a routerLink="/contact" routerLinkActive="active" class="nav-item nav-link">Contacto</a>
-               
+                <a class="nav-item nav-link" (click)="openDialog()">Mis Casos</a>
             </div>
-            <a class="py-2 text-decoration-none bg-transparent text-light mx-2" (click)="openDialog()">Mis Casos</a>
+            
             @if (!isAuthenticated) {
                 <a routerLink="/login" class="btn-login">Iniciar sesión</a>
             }@else {

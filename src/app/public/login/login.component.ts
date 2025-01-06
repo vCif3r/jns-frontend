@@ -38,8 +38,8 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      const formValues = this.loginForm.value;
-      this.authService.login(formValues).subscribe(
+      const { email, password } = this.loginForm.getRawValue();
+      this.authService.login(email, password).subscribe(
         (res) => {
           this.router.navigate(['/workspace']);
         },

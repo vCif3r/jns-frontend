@@ -10,8 +10,10 @@
                 </mat-icon>
             </button> -->
 
-            <button mat-icon-button>
-                <mat-icon class="material-icons-outlined" >dark_mode</mat-icon>
+            <button mat-icon-button (click)="themeService.toggleTheme()">
+                <mat-icon class="material-icons-outlined">
+                    {{ themeService.isDarkModeEnabled() ? 'light_mode' : 'dark_mode' }}
+                </mat-icon>
             </button>
 
              <button mat-icon-button [matMenuTriggerFor]="notificationsMenu" (click)="markNotificationsRead()">

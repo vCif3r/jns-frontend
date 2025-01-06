@@ -1,14 +1,14 @@
-<div class="card mb-1">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
+<mat-card class="mb-1">
+    <mat-card-header>
+        <div class="d-flex w-100 justify-content-between align-items-center pb-2">
             <small>{{consulta?.nombreCompleto}}</small>
             <small class="text-secondary">{{consulta?.createdAt | timeAgo }}</small>
         </div>
-    </div>
-    <div class="card-body">
+    </mat-card-header>
+    <mat-card-content>
         <div class="d-flex justify-content-between align-items-center">
-            <small>Fecha </small>
-            <small [ngStyle]="{ 'color': isDateBeforeToday(consulta?.fechaHora) ? 'red' : 'orange' }">{{consulta?.fechaHora | date: 'short' }}</small>
+            <small>Fecha solicitada</small>
+            <small [ngStyle]="{ 'color': isDateTimeBeforeToday(consulta?.fechaHora) ? 'red' : 'orange' }">{{consulta?.fechaHora | date: 'dd/MM/yyyy HH:mm a' }}</small>
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <small>Correo electrónico </small>
@@ -29,25 +29,25 @@
                 <small class="text-warning">{{consulta?.estado}}</small>
             }
         </div>
-    </div>
-    <div class="card-footer">
-        <div class="d-flex justify-content-end gap-2">
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <div class="d-flex gap-2">
             @if (role == 'Admin' || role == 'admin') {
-                <button class="btn btn-sm btn-danger" (click)="openDialogCancelar(consulta?.id)"
-                [disabled]="isDateBeforeToday(consulta?.fechaHora)">
-                    Cancelar
+                <button mat-button (click)="openDialogCancelar(consulta?.id)"
+                [disabled]="isDateTimeBeforeToday(consulta?.fechaHora)">
+                    cancelar
                 </button>
-                <button class="btn btn-sm btn-info" (click)="openDialog(consulta?.id)">
+                <button mat-button (click)="openDialog(consulta?.id)">
                     ver más
                 </button>
             }@else if (role == 'Abogado' || role == 'abogado') {
-                <button class="btn btn-sm btn-danger" (click)="openDialogRechazar(consulta?.id)">
+                <button mat-button (click)="openDialogRechazar(consulta?.id)">
                     rechazar
                 </button>
-                <button class="btn btn-sm btn-info" (click)="openDialogIniciarCaso(consulta?.id)">
+                <button mat-button (click)="openDialogIniciarCaso(consulta?.id)">
                     iniciar proceso
                 </button>
             }             
         </div>
-    </div>
-</div>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,23 @@
+<div class="stepper-container">
+  <div class="step" *ngFor="let step of steps; let i = index">
+
+    <div class="d-flex flex-column align-items-center">
+      <!-- Paso (círculo) -->
+      <div class="circle" [ngClass]="{
+  active: i + 1 === currentIndex,
+  completed: i + 1 < currentIndex
+}">
+        {{ i + 1 }}
+      </div>
+
+      <!-- Etiqueta del paso -->
+      <span class="label" [ngClass]="{ active: i + 1 <= currentIndex }">
+        {{ step }}
+      </span>
+    </div>
+
+
+    <!-- Línea entre pasos -->
+    <div *ngIf="i < steps.length - 1" class="line" [ngClass]="{ completed: i + 1 < currentIndex }"></div>
+  </div>
+</div>

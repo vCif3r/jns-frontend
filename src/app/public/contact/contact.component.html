@@ -40,27 +40,27 @@
         <div class="col-lg-6 mb-5 mb-lg-0">
             <div class="contact-form">
                 <div id="success"></div>
-                <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                <form [formGroup]="form" (ngSubmit)="submit()">
                     <div class="row">
                         <div class="col-sm-6 control-group">
-                            <input type="text" class="form-control p-4" id="name" placeholder="Nombre y Apellidos" required="required" data-validation-required-message="Please enter your name" />
+                            <input type="text" class="form-control p-4" id="name" placeholder="Nombre y Apellidos" formControlName="nombreCompleto" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="col-sm-6 control-group">
-                            <input type="email" class="form-control p-4" id="email" placeholder="Correo Electronico" required="required" data-validation-required-message="Please enter your email" />
+                            <input type="email" class="form-control p-4" id="email" placeholder="Correo Electronico" required="required" formControlName="email" />
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="control-group">
-                        <input type="text" class="form-control p-4" id="subject" placeholder="Tema" required="required" data-validation-required-message="Please enter a subject" />
+                        <input type="text" class="form-control p-4" id="subject" placeholder="Tema" formControlName="tema" />
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="control-group">
-                        <textarea class="form-control p-4" rows="6" id="message" placeholder="Mensaje" required="required" data-validation-required-message="Please enter your message"></textarea>
+                        <textarea class="form-control p-4" rows="6" id="message" placeholder="Mensaje" formControlName="mensaje"></textarea>
                         <p class="help-block text-danger"></p>
                     </div>
                     <div>
-                        <button class="btn btn_e_m btn-block" type="submit" id="sendMessageButton">Enviar Mensaje</button>
+                        <button class="btn btn_e_m btn-block" type="submit" [disabled]="!form.valid">Enviar Mensaje</button>
                     </div>
                 </form>
             </div>

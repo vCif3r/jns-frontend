@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,6 +10,8 @@ import { AuthService } from '../../../core/services/auth.service';
 import {MatBadgeModule} from '@angular/material/badge';
 import { io } from 'socket.io-client';
 import { TimeAgoPipe } from '../../../core/pipes/time-ago.pipe';
+import { environment } from '../../../../environments/environment.development';
+import { Theme, ThemeService } from '../../../core/services/theme.service';
 
 
 @Component({
@@ -35,6 +37,10 @@ export class ToolbarComponent implements OnInit  {
     this.toggleSidenav.emit();
   }
 
+  // THEME
+  readonly themeService = inject(ThemeService);
+ 
+
   unreadCount: number = 0;
   private socket: any;
   notifications: any[] = [];
@@ -44,7 +50,7 @@ export class ToolbarComponent implements OnInit  {
   ngOnInit(): void {
     const userId = this.authService.getID();
 
-    this.socket = io('http://localhost:3000', {
+    this.socket = io(`${environment.API_URL}`, {
       query: { userId }
     });
 

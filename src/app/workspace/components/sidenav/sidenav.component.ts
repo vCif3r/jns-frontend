@@ -32,7 +32,6 @@ export class SidenavComponent implements OnInit{
   updateSidebar() {
     if (this.userRole === 'Abogado') {
       this.sidebarItems = [
-        { title: 'Dashboard', icon: 'dashboard', url: '/workspace/dashboard' },
         { title: 'Consultas', icon: 'assignment', url: '/workspace/consultas' },
         { title: 'Casos', icon: 'gavels', url: '/workspace/casos' },
         { title: 'Reportes', icon: 'summarize ', url: '/workspace/reportes' },
@@ -45,7 +44,7 @@ export class SidenavComponent implements OnInit{
         { title: 'Casos', icon: 'gavels', url: '/workspace/casos' },
         { title: 'Abogados', icon: 'groups', url: '/workspace/abogados' },
         { title: 'Reportes', icon: 'summarize ', url: '/workspace/reportes' },
-        { title: 'Documentos', icon: 'assignment', url: '/workspace/documentos' },
+        { title: 'contactos', icon: 'assignment', url: '/workspace/contactos' },
       ];
     } else{
       this.sidebarItems = [

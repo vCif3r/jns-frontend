@@ -1,6 +1,0 @@
-textarea {
-    min-height: 150px;  /* altura mínima, puedes ajustarlo */
-    overflow-y: auto;  /* Aparecerá la barra de desplazamiento si el contenido excede el área visible */
-    box-sizing: border-box; /* Para que el padding no afecte el tamaño */
-  }
-  

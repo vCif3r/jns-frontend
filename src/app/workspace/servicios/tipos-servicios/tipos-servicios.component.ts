@@ -25,7 +25,7 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatTableModule,
     CommonModule,
-    MatSortModule
+    MatSortModule,
   ],
   templateUrl: './tipos-servicios.component.html',
   styleUrl: './tipos-servicios.component.css'

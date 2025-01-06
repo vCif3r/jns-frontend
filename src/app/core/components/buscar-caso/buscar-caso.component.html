@@ -9,8 +9,9 @@
                         <mat-label>Correo Eléctronico</mat-label>
                         <input matInput placeholder="Cédula" required placeholder="Correo Eléctronico"
                             formControlName="email" />
+                        <mat-error *ngIf="f['email'].hasError('required')">*correo que usaste al crear la consulta</mat-error>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="w-100">
+                    <mat-form-field appearance="outline" class="w-100 pt-2">
                         <mat-label>Código caso</mat-label>
                         <input matInput placeholder="Cédula" required placeholder="Código caso"
                             formControlName="codigo" />
@@ -29,11 +30,33 @@
             <ng-template matStepLabel>Estado del caso</ng-template>
             <div class="container">
                 <h4 class="text-center mb-4">Progreso de su caso</h4>
-                <div class="alert alert-warning" role="alert">
-                    Hola <b>{{ casoEncontrado?.consulta?.nombreCompleto }}</b>, su caso actualmente se encuentra en el
-                    estado:
-                    <b>{{ casoEncontrado?.estado }}</b>. A continuación, puede observar el progreso detallado.
-                </div>
+
+                @if (casoEncontrado?.estado == 'Cancelado') {
+                    <div class="alert alert-danger" role="alert">
+                        Lamentamos informarle que ha ocurrido un error en el procesamiento de su caso. Esto puede deberse a:
+
+                        <div class="px-3">
+                            - Datos incompletos o incorrectos en el registro.
+                            - Problemas tecnicos en nuestro sistema.
+                            - Falta de documentacion necesaria.
+                        </div>
+                        Por favor, intente nuevamente o póngase en contacto con nuestro equipo de soporte para obtener ayuda adicional.
+                    </div>
+                }@else if (casoEncontrado?.estado == 'Resuelto') {
+                    <div class="alert alert-success" role="alert">
+                        Hola <b>{{ casoEncontrado?.consulta?.nombreCompleto }}</b>! Nos complace informarte que tu caso ha sido resuelto exitosamente.
+                        Si necesitas más información o documentos relacionados, no dudes en ponerte en contacto con nosotros. 
+                    </div>
+                }@else {
+                    <div class="alert alert-info" role="alert">
+                        Hola <b>{{ casoEncontrado?.consulta?.nombreCompleto }}</b>, su caso actualmente se encuentra en el
+                        estado:
+                        <b>{{ casoEncontrado?.estado }}</b>. A continuación, puede observar el progreso detallado.
+                    </div>
+    
+                    <app-stepper *ngIf="casoEncontrado?.estado" [currentState]="casoEncontrado?.estado"></app-stepper>
+                }
+
                 <div class="p-2" style="background-color: #f2f8f6">
                     <p class="fw-bold">Contacto</p>
                     <p>

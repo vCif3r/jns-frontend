@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../core/services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-casos',
@@ -13,7 +14,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     CardCasoComponent,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
   ],
   templateUrl: './casos.component.html',
   styleUrl: './casos.component.css'

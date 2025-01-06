@@ -43,15 +43,16 @@
   </mat-paginator>
 
   }@else {
-  <div class="card">
-    <div class="card-body text-center">
-      <div class="w-100 text-center text-primary">
-        <mat-icon style="font-size: 50px; height: 50px; width: 50px"
-          >gavel</mat-icon
-        >
-      </div>
-      <span class="text-secondary">No hay casos pendientes por ahora</span>
-    </div>
-  </div>
+    <mat-card >
+      <mat-card-content>
+        <div class="w-100 text-center text-primary">
+          <mat-icon style="font-size: 50px; height: 50px; width: 50px"
+            >gavel</mat-icon
+          >
+        </div>
+        <p class="text-secondary text-center">No hay casos pendientes por ahora</p>
+      </mat-card-content>
+    </mat-card>
+
   }
 </div>

@@ -5,13 +5,13 @@
   <p>Cliente: {{ consulta?.nombreCompleto }}.</p>
 
     <p>*Asigna un abogado disponible para su revisión.</p>
-  <select class="form-select" [(ngModel)]="selectedAbogadoId" [disabled]="isDateBeforeToday(consulta?.fechaHora)">
+  <select class="form-select" [(ngModel)]="selectedAbogadoId" [disabled]="isDateTimeBeforeToday(consulta?.fechaHora)">
     <option selected disabled hidden>Selecciona un abogado</option>
     @for(abogado of abogadosDisponibles; track abogado.id){
         <option value="{{abogado.id}}">{{abogado.nombre}} {{abogado.apellido}} - {{abogado.especialidad}} </option>
     }
   </select>
-  @if (isDateBeforeToday(consulta?.fechaHora)) {
+  @if (isDateTimeBeforeToday(consulta?.fechaHora)) {
     <p class="text-danger">La fecha de la consulta es anterior a la fecha actual.</p>
   }
   

@@ -1,0 +1,79 @@
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <h4 class="page-title">Datos</h4>
+            <div class=" text-right" style="margin-left: auto;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/workspace">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contactos</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title class="mb-2">Contactos</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+                    
+                    <div class="table-responsive">
+                        <div class="w-100 p-2">
+                            <mat-form-field appearance="outline" class="w-50">                   
+                                <input matInput (keyup)="applyFilterTiposContactos($event)" placeholder="Filtrar">
+                            </mat-form-field>
+                        </div>
+                        <table mat-table [dataSource]="dataSourceContactos" matSort #paginatorTipos>
+        
+                            <!-- Definir las columnas de la tabla -->
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="nombreCompleto">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                                <td mat-cell *matCellDef="let element"> {{element.nombreCompleto}} </td>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+                                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="tema">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tema</th>
+                                <td mat-cell *matCellDef="let element"> {{element.tema}} </td>
+                            </ng-container>
+        
+                            <ng-container matColumnDef="acciones">
+                                <th mat-header-cell *matHeaderCellDef >Acciones</th>
+                                <td mat-cell *matCellDef="let element">                               
+                                    <button mat-icon-button>
+                                        <mat-icon>visibility</mat-icon>
+                                    </button>
+                                    
+                                </td>
+                            </ng-container>
+        
+                            <!-- Definir las filas de la tabla -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumnsContactos"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumnsContactos;"></tr>
+                        </table>
+                        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+                            showFirstLastButtons #paginatorContactos></mat-paginator>
+        
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
+

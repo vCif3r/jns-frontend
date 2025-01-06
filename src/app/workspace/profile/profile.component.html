@@ -1,0 +1,115 @@
+<div>
+
+    @if (!editMode) {
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-6">
+            <mat-card>
+                <mat-card-content>
+                    <div class="w-100 d-flex flex-column justify-content-center gap-3">
+                        <img src="{{ profile?.foto || 'https://www.w3schools.com/howto/img_avatar.png' }}" alt=""
+                            style="width: 150px; border-radius: 100%; margin: auto; " />
+
+                        <div class="w-100">
+                            <p class="text-center mb-0">{{ profile?.nombre }} {{ profile?.apellido }}</p>
+                            <div class="d-flex justify-content-center">
+                                <mat-chip-set>
+                                    <mat-chip>{{ profile?.role?.nombre }}</mat-chip>
+                                </mat-chip-set>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <div class="d-flex justify-content-between">
+                            <p>Correo Electrónico</p>
+                            <p>{{ profile?.email }} </p>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <p>Dirección</p>
+                            <p>{{ profile?.direccion }} </p>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <p>Teléfono</p>
+                            <p>{{ profile?.telefono }} </p>
+                        </div>
+
+
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <div class="w-100 d-flex justify-content-between align-items-center p-2">
+                        <small>Se unió el {{ profile?.createdAt | date: 'dd/MM/yyyy' }}</small>
+                        @if (isUserAuthenticated) {
+                        <button mat-stroked-button (click)="setEditMode()">Editar perfil</button>
+                        }
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+
+
+    }@else {
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-8">
+            <mat-card>
+                <form [formGroup]="form" (ngSubmit)="submit()">
+
+
+                    <mat-card-header>
+                        <mat-card-title>Editar Perfil</mat-card-title>
+                        <mat-card-subtitle>Completa los datos</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+
+                        <div class="row pt-4">
+                            <div class="col-12 col-lg-6 col-xl-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput placeholder="nombre" [value]="profile.nombre" formControlName="nombre">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Apellido</mat-label>
+                                    <input matInput placeholder="nombre" [value]="profile.apellido" formControlName="apellido">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput placeholder="nombre" [value]="profile.direccion" formControlName="direccion">
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>País</mat-label>
+                            <input matInput placeholder="nombre" [value]="profile.pais" formControlName="pais">
+                        </mat-form-field>
+
+                        <mat-radio-group aria-label="Select an option" [value]="profile.genero" formControlName="genero">
+                            <mat-radio-button value="Masculino">Masculino</mat-radio-button>
+                            <mat-radio-button value="Femenino">Femenino</mat-radio-button>
+                            <mat-radio-button value="Otro">Otro</mat-radio-button>
+                        </mat-radio-group>
+
+
+                    </mat-card-content>
+                    <mat-card-actions align="end">
+                        <button mat-stroked-button (click)="cancelEditMode()">Cancelar</button>
+                        <button mat-button type="submit">Actualizar</button>
+                    </mat-card-actions>
+
+                </form>
+            </mat-card>
+        </div>
+    </div>
+
+    }
+
+</div>
+

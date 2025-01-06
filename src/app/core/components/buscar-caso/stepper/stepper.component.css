@@ -1,0 +1,67 @@
+/* Contenedor general del stepper */
+.stepper-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+/* Cada paso */
+.step {
+  display: flex;
+  align-items: center;
+}
+
+/* Círculo de cada paso */
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: lightgray;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12;
+  margin: 0 10px;
+  transition: background-color 0.3s ease;
+}
+
+/* Círculo activo (paso actual) */
+.circle.active {
+  background-color: #1FBA9F; /* Verde */
+  color: white;
+}
+
+/* Círculo completado */
+.circle.completed {
+  background-color: #1FBA9F; /* Verde */
+}
+
+/* Línea entre pasos */
+.line {
+  width: 50px;
+  height: 3px;
+  background-color: lightgray;
+  transition: background-color 0.3s ease;
+}
+
+/* Línea completada */
+.line.completed {
+  background-color: #1FBA9F; /* Verde */
+}
+
+/* Etiquetas de los pasos */
+.label {
+  font-size: 14px;
+  font-weight: 300;
+  color: gray;
+  margin-top: 5px;
+  transition: color 0.3s ease;
+}
+
+/* Etiqueta activa */
+.label.active {
+  color: #1FBA9F; /* Verde */
+  font-weight: bold;
+}

@@ -32,4 +32,7 @@ export class StatisticService {
     return this.http.get<any>(`${this.baseUrl}/servicios/count/consultas`)
   }
 
+  getCaracteristicasHome(){
+    return this.http.get<any>(`${this.baseUrl}/caracteristicas`)
+  }
 }

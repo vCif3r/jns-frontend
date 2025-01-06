@@ -37,7 +37,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     TiposServiciosComponent,
     MatSlideToggleModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ],
   templateUrl: './servicios.component.html',
   styleUrl: './servicios.component.css',
@@ -73,11 +74,7 @@ export class ServiciosComponent implements AfterViewInit {
     )
   }
 
-  openDialogServicio(servicio?: Servicio) {
-    this.dialog.open(FormServicioComponent, {
-      data: { servicio: servicio }
-    });
-  }
+
   applyFilterServicios(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceServicios.filter = filterValue.trim().toLowerCase();
@@ -87,6 +84,13 @@ export class ServiciosComponent implements AfterViewInit {
       this.dataSourceServicios.paginator.firstPage();
     }
   }
+
+  openDialogServicio(servicio?: Servicio) {
+    this.dialog.open(FormServicioComponent, {
+      data: { servicio: servicio }
+    });
+  }
+  
 
   openDialogDeleteServicio(id: any) {
     this.dialog.open(DialogDeleteServiceComponent, {

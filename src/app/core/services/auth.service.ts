@@ -1,21 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from '../../../environments/environment.development';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  
+  private _storage = inject(StorageService)
+  private _http = inject(HttpClient);
 
-  private url = "http://localhost:3000/auth"
-
-
-  constructor(private _http: HttpClient) {}
-
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this._http.post<any>(`${this.url}/login/`, credentials).pipe(
-      tap((response) => this.setSession(response.token)),
+  login(email: string, password: string ): Observable<any> {
+    return this._http.post<any>(`${environment.API_URL}/auth/login/`, {email, password}).pipe(
+      tap((response) => {
+        this._storage.set('session', JSON.stringify(response));
+      }),
       catchError((error) => {
         console.error('Login error', error);
         throw error;
@@ -23,13 +25,8 @@ export class AuthService {
     )
   }
 
-  private setSession(token: string): void {
-    localStorage.setItem('token', token);
-  }
-
-
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('session');
   }
 
   isAuthenticated(): boolean {
@@ -37,7 +34,7 @@ export class AuthService {
   }
 
   getRole(): any {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('session');
     if (token) {
       const decodedToken: any = jwtDecode(token);
       return decodedToken.rol;
@@ -46,7 +43,7 @@ export class AuthService {
   }
 
   getID(): any {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('session');
     if (token) {
       const decodedToken: any = jwtDecode(token);
       return decodedToken.id;
@@ -55,7 +52,7 @@ export class AuthService {
   }
 
   getEmailUser(): any {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('session');
     if (token) {
       const decodedToken: any = jwtDecode(token);
       return decodedToken.email;
@@ -64,7 +61,7 @@ export class AuthService {
   }
 
   getnameUser(): any {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('session');
     if (token) {
       const decodedToken: any = jwtDecode(token)
       return decodedToken.nombre
@@ -72,11 +69,8 @@ export class AuthService {
     return null;
   }
 
-
-
-
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('session');
     window.location.reload();
   }
 }

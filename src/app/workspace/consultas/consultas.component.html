@@ -8,16 +8,19 @@
         }
     </div>
     @if (consultas.length == 0) {
-        <div class="card w-100">
-            <div class="card-body text-center">
+        <mat-card>
+            <mat-card-content>
                 <div class="w-100 text-center text-primary">
                     <mat-icon style="font-size: 70px; height: 70px; width: 70px;">gavel</mat-icon>
                 </div>
-                <span>No hay consultas pendientes</span>
-                <p class="text-secondary">Puede que tengas casos en proceso por revisar</p>
-                <button class="btn btn-primary" routerLink="/workspace/casos">ver casos</button>
-            </div>
-        </div>
-
+                <p class="text-secondary text-center mb-0">No hay consultas pendientes</p>
+                <p class="text-secondary text-center">Puede que tengas casos en proceso por revisar</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="d-flex justify-content-center w-100">
+                    <button class="btn btn-primary" routerLink="/workspace/casos">ver casos</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
         }
 </div>
