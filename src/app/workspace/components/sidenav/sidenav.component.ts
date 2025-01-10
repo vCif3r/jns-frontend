@@ -6,7 +6,8 @@ import { AuthService } from '../../../core/services/auth.service';
 interface Navmenu {
   title: string;
   icon: string;
-  url: string;
+  url?: string;
+  children?: any[]
 } 
 
 @Component({
@@ -43,7 +44,12 @@ export class SidenavComponent implements OnInit{
         { title: 'Consultas', icon: 'assignment', url: '/workspace/consultas' },
         { title: 'Casos', icon: 'gavels', url: '/workspace/casos' },
         { title: 'Abogados', icon: 'groups', url: '/workspace/abogados' },
-        { title: 'Reportes', icon: 'summarize ', url: '/workspace/reportes' },
+        { title: 'Reportes', icon: 'summarize ', 
+          children: [
+            { title: 'casos', url: '/workspace/reportes/casos' },
+            { title: 'consultas', url: '/workspace/reportes/consultas' }
+          ]
+        },
         { title: 'contactos', icon: 'assignment', url: '/workspace/contactos' },
       ];
     } else{

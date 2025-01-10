@@ -6,10 +6,28 @@
     <hr>
     <ul class="nav nav-pills flex-column gap-1 mb-auto">
         @for (item of sidebarItems; track $index) {
-            <a routerLink="{{item.url}}" class="sidenav-link" routerLinkActive="active-link">
-                <mat-icon matListItemIcon class="material-icons-outlined">{{ item.icon }}</mat-icon>
-                <span>{{ item.title }}</span>
-            </a>
+            @if (!item.children) {
+                <a routerLink="{{item.url}}" class="sidenav-link" routerLinkActive="active-link">
+                    <mat-icon matListItemIcon class="material-icons-outlined">{{ item.icon }}</mat-icon>
+                    <span>{{ item.title }}</span>
+                </a>
+            }
+            
+            @if (item.children) {
+                <a class="sidenav-link" routerLinkActive="active-link" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false" aria-controls="home-collapse">
+                    <mat-icon matListItemIcon class="material-icons-outlined">{{ item.icon }}</mat-icon>
+                    <span>{{ item.title }}</span>
+                </a>
+                <div class="collapse show" id="home-collapse" >
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        @for (c of item.children; track $index) {
+                            <li>
+                                <a class="sidenav-link ms-lg-4 rounded" routerLink="{{c.url}}" routerLinkActive="active-link">{{c.title}}</a>
+                            </li>
+                        }                 
+                    </ul>
+                </div>
+            }
         }
     </ul>
     <a class="sidenav-link" (click)="logout()">

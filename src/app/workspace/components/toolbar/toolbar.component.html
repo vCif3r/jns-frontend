@@ -20,13 +20,18 @@
                 <mat-icon class="material-icons-outlined" matBadge="{{ unreadCount }}" matBadgeColor="warn">notifications</mat-icon>
             </button>
             <mat-menu #notificationsMenu="matMenu" xPosition="before">
-                <div class="w-100 p-2 border-bottom">Notificaciones</div>
+                <button mat-menu-item disabled>
+                    <span>Notificaciones</span>
+                </button>
 
                 @for (notification of notifications; track $index) {
-                    <div class="p-2 d-flex flex-column border-bottom" [class.leido]="notification.leido">
-                        <small>{{ notification.mensaje }}</small>
-                        <small class="text-secondary">{{ notification.createdAt | timeAgo }}</small>
-                    </div>
+                    <button mat-menu-item>
+                        <div class="d-flex flex-column">
+                            <small>{{ notification.mensaje }}</small>
+                            <small class="text-secondary">{{ notification.createdAt | timeAgo }}</small>
+                        </div>
+                    </button>
+                    
                 }
 
                 <!-- <button class="btn-read text-center" 

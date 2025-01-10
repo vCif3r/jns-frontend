@@ -82,5 +82,7 @@ export class ConsultaService {
   }
 
   
-
+  findAll(){
+    return this.http.get<Consulta[]>(this.url)
+  }
 }

@@ -66,5 +66,8 @@ export class TipoServicioService {
     return this.http.get(`${this.url}/${id}`);
   }
 
+  findAll(){
+    return this.http.get<TipoServicio[]>(this.url)
+  }
 
 }

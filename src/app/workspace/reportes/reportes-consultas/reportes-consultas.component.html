@@ -1,0 +1,104 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Reportes consultas</mat-card-title>
+        <mat-card-subtitle class="text-secondary fw-normal" >Búsqueda de consultas</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row pt-2">
+            <div class="col-12 col-xl-3">
+                <label for="fecha-inicio">Desde:</label>
+                <input type="date" id="fecha-inicio" class="form-control" [(ngModel)]="fechaInicio" >
+            </div>
+            <div class="col-12 col-xl-3">
+                <label for="fecha-fin">Hasta:</label>
+                <input type="date" id="fecha-fin" class="form-control" [(ngModel)]="fechaFin">
+            </div>
+            <div class="col-12 col-xl-3">
+                <label for="servicio">Servicio:</label>
+                <select id="servicio" class="form-select" [(ngModel)]="servicio">
+                    @for (item of tpServicios; track $index) {
+                        <option value="{{item.nombre}}">{{item.nombre}}</option>
+                    }         
+                </select>
+            </div>
+            
+            <div class="col-12 col-xl-3 d-flex align-items-end gap-2">
+                <button mat-stroked-button (click)="applyCustomFilters()">Aplicar</button>
+                <button mat-stroked-button (click)="clearFilters()">Limpiar</button>
+            </div>
+        </div>
+
+    </mat-card-content>
+</mat-card>
+
+<br>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-subtitle class="text-secondary fw-normal" >Lista de consultas</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <div class="w-100 py-3">
+                <input (keyup)="applyFilter($event)" placeholder="Buscar..." class="form-control w-25">
+            </div>
+
+            <div class="table-responsive">
+                <table mat-table [dataSource]="dataSource" matSort id="printableTable">
+
+                    <!-- Definir las columnas de la tabla -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.id}}
+                        </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <p class="mb-0">{{element.createdAt | date: 'dd/MM/yyyy'}} </p>
+                            <small class="text-secondary">{{element.createdAt | date: 'HH:mm a'}}</small>
+                        </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="cliente">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+                        <td mat-cell *matCellDef="let element">
+                            <p class="mb-0">{{element.nombreCompleto}}</p>
+                            <small class="text-secondary">{{element.email}}</small>
+                        </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="tiposervicio">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Servicio</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.tipoServicio.nombre}}
+                        </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="abogado">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.estado}}
+                        </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                        <td mat-cell *matCellDef="let element">
+                            
+                            <span class="badge" [ngClass]="getStyles(element.estado)">{{element.estado}}</span>
+                        </td>
+                    </ng-container>
+    
+                    <!-- Definir las filas de la tabla -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 100]"
+                showFirstLastButtons></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

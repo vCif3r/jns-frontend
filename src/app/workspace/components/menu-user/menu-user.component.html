@@ -9,7 +9,6 @@
     </div>
 </button>
 <mat-menu #beforeMenu="matMenu" xPosition="before">
-    <div class="px-2">{{ email }}</div>
-    <hr>
+    <button mat-menu-item disabled>{{ email }}</button>
     <button mat-menu-item [routerLink]="['/workspace/profile', id]">Mi perfil</button>
 </mat-menu>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AuthService } from './core/services/auth.service';
+import { Component, HostListener, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,5 +9,11 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'app-jns';
+
+  private authService = inject(AuthService)
+
+  // @HostListener('window:beforeunload', ['$event'])
+  // unloadNotification($event: any): void {
+  //   this.authService.logout();
+  // }
 }

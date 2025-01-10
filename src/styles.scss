@@ -10,7 +10,7 @@ html {
   }
 
 html.dark-mode {
-  color-scheme: light dark;
+  color-scheme: dark;
   @include mat.theme((
     color: mat.$violet-palette,
     typography: Roboto,

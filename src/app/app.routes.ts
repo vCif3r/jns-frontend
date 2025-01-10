@@ -27,7 +27,7 @@ export const routes: Routes = [
     component: PublicComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
+      { path: 'home', loadComponent: () => import('./public/home/home.component').then((c)=>c.HomeComponent) },
       { path: 'services', component: ServicesComponent },
       { path: 'about', component: AboutComponent },
       { path: 'blog', component: BlogComponent },
@@ -53,47 +53,35 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: DashboardComponent,
+        loadComponent: ()=> import('./workspace/dashboard/dashboard.component').then((c)=> c.DashboardComponent),
         title: 'dashboard',
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
       },
       {
         path: 'consultas',
-        component: ConsultasComponent,
+        loadComponent: ()=>import('./workspace/consultas/consultas.component').then((c)=>c.ConsultasComponent),
         title: 'consultas',
         canActivate: [RoleGuard],
         data: { roles: ['Admin', 'Abogado'] },
       },
       {
-        path: 'clientes',
-        component: ClientesComponent,
-        title: 'clientes',
-        canActivate: [RoleGuard],
-        data: { roles: ['Admin'] },
-      },
-      {
         path: 'servicios',
-        component: ServiciosComponent,
+        loadComponent: () => import('./workspace/servicios/servicios.component').then((c)=>c.ServiciosComponent),
         title: 'servicios',
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
       },
-      {
-        path: 'servicios/:id',
-        component: ServiciosComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['Admin'] },
-      },
+      
       { path: 'abogados',
-        component: AbogadosComponent,
+        loadComponent: ()=> import('./workspace/abogados/abogados.component').then((c)=>c.AbogadosComponent),
         title: 'abogados',
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
       },
       {
         path: 'casos',
-        component: CasosComponent,
+        loadComponent: () => import('./workspace/casos/casos.component').then((c)=>c.CasosComponent),
         canActivate: [RoleGuard],
         data: { roles: ['Admin', 'Abogado'] },
       },
@@ -105,9 +93,23 @@ export const routes: Routes = [
       },
       {
         path: 'contactos',
-        component: ContactosComponent,
+        loadComponent: () => import('./workspace/contactos/contactos.component').then((c)=>c.ContactosComponent),
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
+      },
+      {
+        path: 'reportes/casos',
+        loadComponent: () => import('./workspace/reportes/reportes-casos/reportes-casos.component').then(c => c.ReportesCasosComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin'] },
+        title: 'resportes'
+      },
+      {
+        path: 'reportes/consultas',
+        loadComponent: () => import('./workspace/reportes/reportes-consultas/reportes-consultas.component').then(c => c.ReportesConsultasComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin'] },
+        title: 'consultas'
       }
     ],
   },
