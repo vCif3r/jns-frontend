@@ -1,0 +1,8 @@
+button:disabled{
+    color: #90a4ae !important;
+    border-color: #90a4ae !important;
+}
+
+button:disabled:hover {
+    background-color: #fff !important; 
+}

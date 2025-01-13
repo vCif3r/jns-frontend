@@ -6,29 +6,36 @@
             <h2>Lo último de nuestro blog de asesoría</h2>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <img src="blog-1.jpg" alt="Blog">
-                    </div>
-                    <div class="blog-content">
-                        <h2 class="blog-title">Estrategias para abordar conflictos legales</h2>
-                        <div class="blog-meta">
-                            <i class="fa fa-list-alt"></i>
-                            <a href="">Categoría</a>
-                            <i class="fa fa-calendar-alt"></i>
-                            <p>01-Ene-2045</p>
+            @for (post of postsList; track post.id) {
+                <div class="col-md-6">
+                    <div class="blog-item">
+                       <div class="blog-img">
+                            <img [src]="getImageUrl(post.imagen)" alt="Blog">
                         </div>
-                        <div class="blog-text">
-                            <p>
-                                Descubre cómo gestionar los conflictos legales de manera efectiva y profesional. En Asesores Legales, nos enfocamos en estrategias que protejan tus derechos y tus intereses.
-                            </p>
-                            <a class="btn" href="">Leer Más</a>
+                        <div class="blog-content">
+                            <h2 class="blog-title">{{ post.titulo }}</h2>
+                            <div class="blog-meta">
+                                <i class="fa fa-list-alt"></i>
+                                <a href="">{{ post.categoria }}</a>
+                                <i class="fa fa-calendar-alt"></i>
+                                <p>{{post.createdAt | date: 'dd-MMMM-yyyy'}}</p>
+                            </div>
+                            <div class="blog-text">
+                                <p>
+                                    {{post.contenido}}
+                                </p>
+                                <a class="btn" href="">Leer Más</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
+            }@empty {
+                <div class="w-100 text-center text-secondary pb-5">
+                    No hay blog publicados, regresa pronto
+                </div>
+            }
+            
+            <!-- <div class="col-md-6">
                 <div class="blog-item">
                     <div class="blog-img">
                         <img src="blog-2.jpg" alt="Blog">
@@ -93,16 +100,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="row">
             <div class="col-12">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item">
+                        <button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+                    </li>
+                    <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
                     <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                    <li class="page-item">
+                        <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+                    </li>
                 </ul> 
             </div>
         </div>

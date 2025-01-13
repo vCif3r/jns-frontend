@@ -1,0 +1,34 @@
+<mat-card>
+    <form [formGroup]="form" (ngSubmit)="create()" enctype="multipart/form-data">
+        <mat-card-header>
+            <h5 mat-dialog-title>Nuevo Post</h5>
+        </mat-card-header>
+        <mat-card-content class="pt-3">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="titulo">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Categoría</mat-label>
+                <input matInput formControlName="categoria">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Contenido</mat-label>
+                <textarea matInput formControlName="contenido"></textarea>
+            </mat-form-field>
+
+            <mat-checkbox formControlName="publicado">Publicado</mat-checkbox>
+
+            <div class="w-100">
+                <input id="image" type="file" (change)="onFileChange($event)" class="form-control"/>
+            </div>
+            
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-button matDialogClose>Cancelar</button>
+            <button mat-button type="submit">Agregar</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

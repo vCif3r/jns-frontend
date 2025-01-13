@@ -15,6 +15,7 @@
                         <mat-label>Código caso</mat-label>
                         <input matInput placeholder="Cédula" required placeholder="Código caso"
                             formControlName="codigo" />
+                        <mat-error *ngIf="f['codigo'].hasError('required')">*codigo proporcionado por su abogado</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="d-flex justify-content-center gap-2">

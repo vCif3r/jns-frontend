@@ -51,6 +51,7 @@ export class SidenavComponent implements OnInit{
           ]
         },
         { title: 'contactos', icon: 'assignment', url: '/workspace/contactos' },
+        { title: 'blog', icon: 'post_add', url: '/workspace/blogs' },
       ];
     } else{
       this.sidebarItems = [

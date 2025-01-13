@@ -32,3 +32,8 @@ main{
     background-color: #000;
     color: #ffffff;
 }
+
+.active-link-child{
+    font-weight: 600;
+    transition: 100ms ease-in;
+}

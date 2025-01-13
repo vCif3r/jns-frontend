@@ -110,6 +110,10 @@ export const routes: Routes = [
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
         title: 'consultas'
+      },
+      {
+        path: 'blogs',
+        loadComponent: () => import('./workspace/blogs/blogs.component').then((c)=>c.BlogsComponent)
       }
     ],
   },

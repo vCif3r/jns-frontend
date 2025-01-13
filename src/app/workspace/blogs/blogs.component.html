@@ -1,0 +1,98 @@
+
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <h4 mat-card-title>Lista de posts</h4>
+    </mat-card-header>
+    <mat-card-content class="pt-2">
+        <div class="mb-3 d-flex gap-2 w-100">
+            <button class="btn btn-success" (click)="agregar()">
+                <div class="d-flex align-items-center gap-2">
+                    <mat-icon>add_circle</mat-icon>
+                    Add New
+                </div>
+            </button>
+        </div>
+
+        @if (postsList) {
+    
+            <div class="table-responsive">
+                <table class="table table-hover text-secondary">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Categoría</th>
+                            <th>Estado</th>
+                            <th>acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                        @for(post of postsList; track post.id) {
+                            <tr>
+                                <td>{{ post.id }}</td>
+                                <td>
+                                    <img [src]="getImageUrl(post.imagen)"
+                                        alt="{{post.titulo}}" class="img-thumbnail" style="width: 50px" />
+                                    {{ post.titulo }}
+                                </td>
+                                <td>{{ post.categoria }}</td>
+                                <td>
+                                    <mat-slide-toggle [(ngModel)]="post.publicado"
+                                        (ngModelChange)="onPublicadoChange(post)">
+                                    </mat-slide-toggle>
+                                    <small>
+                                        {{ post.publicado ? 'publicado': 'sin publicar' }}
+                                    </small>
+                                </td>
+                                <td>
+                                    <a mat-icon-button >
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <mat-icon>edit</mat-icon>
+                                        </div>
+                                     
+                                    </a>
+                                    <a mat-icon-button (click)="dialogDelete(post.id)">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <mat-icon>delete</mat-icon>
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            
+                        } @empty {
+                            <tr>
+                                <td colspan="5" class="px-6 py-4 text-center">No hay posts</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        } 
+        
+    </mat-card-content>
+    @if (postsList.length > 0) {
+        <mat-card-actions align="end">
+            <div class="d-flex gap-2 align-items-center">
+                <span>Página {{ currentPage }} de {{ totalPages }}</span>
+            
+                <div class="d-flex gap-1">
+                    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" mat-icon-button>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <mat-icon>chevron_left</mat-icon>
+                        </div>
+                    </button>
+                    
+                    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" mat-icon-button>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <mat-icon>chevron_right</mat-icon>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </mat-card-actions>
+    }
+    
+</mat-card>
+
+
