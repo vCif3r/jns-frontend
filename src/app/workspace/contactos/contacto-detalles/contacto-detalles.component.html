@@ -1,0 +1,15 @@
+<div>
+    <h4 mat-dialog-title>Detalles</h4>
+    <mat-dialog-content>
+        <p>Nombre: {{ contacto?.nombreCompleto }}</p>
+        <p><small>{{contacto?.email}}</small></p>
+        <p>Tema: {{contacto?.tema}}</p>
+        <p>Mensaje: {{contacto?.mensaje}}</p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <small>creado hace {{ contacto?.createdAt | timeAgo }}</small>
+            <button mat-button mat-dialog-close>cerrar</button>
+        </div>
+    </mat-dialog-actions>
+</div>

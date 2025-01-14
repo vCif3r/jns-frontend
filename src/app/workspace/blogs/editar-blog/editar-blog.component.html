@@ -1,0 +1,45 @@
+
+<form [formGroup]="form" (ngSubmit)="edit()" enctype="multipart/form-data" >
+  <mat-dialog-content>
+    <h5 mat-dialog-title>Editar Post</h5>
+
+    <div class="row">
+      <div class="col-12 col-xl-8">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="titulo">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Categoría</mat-label>
+          <input matInput formControlName="categoria">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Contenido</mat-label>
+          <textarea matInput formControlName="contenido"></textarea>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="publicado">Publicado</mat-checkbox>
+      </div>
+      <div class="col-12 col-xl-4">
+        <p class="text-center mb-0">Imagen actual</p>
+        <div class="d-flex justify-content-center w-100 pb-2">
+          <img [src]="getImageUrl(data.imagen)"
+          alt="{{data.titulo}}" style="width: 250px" />
+        </div>
+
+        <div class="w-100">
+          editar imagen
+          <input id="image" type="file" (change)="onFileChange($event)" class="form-control" />
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose>Cancelar</button>
+    <button mat-button type="submit" [disabled]="form.invalid">Actualizar</button>
+  </mat-dialog-actions>
+</form>

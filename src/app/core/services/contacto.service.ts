@@ -21,4 +21,8 @@ export class ContactoService {
   findAll() {
     return this.http.get<Contacto[]>(`${this.urlApi}/contactos`);
   }
+
+  findOne(id: any){
+    return this.http.get<Contacto>(`${this.urlApi}/contactos/${id}`);
+  }
 }

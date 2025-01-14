@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, tap } from 'rxjs';
+import { catchError, Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from '../../../environments/environment.development';
 import { StorageService } from './storage.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { StorageService } from './storage.service';
 export class AuthService {
   
   private _storage = inject(StorageService)
-  private _http = inject(HttpClient);
+  private _http = inject(HttpClient)
+  private router = inject(Router)
 
   login(email: string, password: string ): Observable<any> {
     return this._http.post<any>(`${environment.API_URL}/auth/login/`, {email, password}).pipe(
@@ -19,7 +21,6 @@ export class AuthService {
         this._storage.set('session', JSON.stringify(response));
       }),
       catchError((error) => {
-        console.error('Login error', error);
         throw error;
       })
     )
@@ -66,11 +67,11 @@ export class AuthService {
       const decodedToken: any = jwtDecode(token)
       return decodedToken.nombre
     }
-    return null;
+    return null
   }
 
   logout(): void {
-    localStorage.removeItem('session');
-    window.location.reload();
+    localStorage.removeItem('session')
+    this.router.navigateByUrl('/')
   }
 }

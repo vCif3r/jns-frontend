@@ -13,18 +13,13 @@ export const authInterceptor: HttpInterceptorFn = (
   request: HttpRequest<any>,
   next: HttpHandlerFn
 ) => {
-  const router = inject(Router);
-  const authState = inject(AuthStateService);
-
-  const token = authState.getSession();
-
-  if (token) {
-  } else {
-  }
+  const router = inject(Router)
+  const authState = inject(AuthStateService)
+  const session = authState.getSession()
 
   request = request.clone({
     setHeaders: {
-      Authorization: `Bearer ${token?.access_token}`,
+      Authorization: `Bearer ${session?.access_token}`,
     },
   });
   return next(request).pipe(

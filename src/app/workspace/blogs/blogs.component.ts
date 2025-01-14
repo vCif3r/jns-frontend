@@ -16,6 +16,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
+import { EditarBlogComponent } from './editar-blog/editar-blog.component';
 
 @Component({
   selector: 'app-blogs',
@@ -80,6 +81,21 @@ export class BlogsComponent {
     });
   }
 
+  openEditDialog(post: any): void {
+    const dialogRef = this.dialog.open(EditarBlogComponent, {
+      data: post, // Pasamos los datos del post a editar
+      minWidth: '70vw',
+      maxWidth: '100vw',
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.success) {
+        // Recargar los datos o realizar acciones después de la edición
+        this.ngOnInit()
+      }
+    });
+  }
+
   changePage(page: number): void {
     if (page > 0 && page <= this.totalPages) {
       this.currentPage = page;
@@ -103,6 +119,6 @@ export class BlogsComponent {
   }
 
   getImageUrl(imagePath: string): string {
-    return `${environment.API_URL}${imagePath}`;
+    return this.postService.getImageUrl(imagePath)
   }
 }

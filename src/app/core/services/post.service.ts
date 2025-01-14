@@ -35,4 +35,15 @@ export class PostService {
     return this.http.delete(`${environment.API_URL}/posts/${id}`)
   }
 
+  create(data: any){
+    return this.http.post(`${environment.API_URL}/posts`, data)
+  }
+
+  update(id:any, data: any){
+    return this.http.put(`${environment.API_URL}/posts/${id}`, data)
+  }
+
+  getImageUrl(imagePath: string): string {
+    return `${environment.API_URL}${imagePath}`;
+  }
 }

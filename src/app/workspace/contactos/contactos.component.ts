@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ContactoService } from '../../core/services/contacto.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ContactoDetallesComponent } from './contacto-detalles/contacto-detalles.component';
 
 @Component({
   selector: 'app-contactos',
@@ -38,7 +40,7 @@ export class ContactosComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginatorContactos!: MatPaginator;
   @ViewChild(MatSort) sortContactos!: MatSort;
 
-  constructor(private contactoService: ContactoService) {}
+  private contactoService = inject(ContactoService)
 
   ngAfterViewInit(): void {
     this.dataSourceContactos.paginator = this.paginatorContactos;
@@ -63,5 +65,17 @@ export class ContactosComponent implements AfterViewInit {
     if (this.dataSourceContactos.paginator) {
       this.dataSourceContactos.paginator.firstPage();
     }
+  }
+
+  readonly dialog = inject(MatDialog);
+  openDialog(id: any){
+    this.dialog.open(ContactoDetallesComponent,{
+      enterAnimationDuration: 500,
+      exitAnimationDuration: 500,
+      data: {id : id},
+      minWidth: '60vw',
+      maxWidth: '90vw'
+    }
+    )
   }
 }
