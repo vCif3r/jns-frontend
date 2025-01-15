@@ -67,6 +67,7 @@ export class ServiciosComponent implements AfterViewInit {
   }
 
   cargarServicios() {
+    this.servicioService.loadServicios()
     this.servicioService.getServicios().subscribe(
       (servicios) => {
         this.dataSourceServicios.data = servicios;

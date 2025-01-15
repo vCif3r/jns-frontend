@@ -27,7 +27,7 @@ export const routes: Routes = [
     component: PublicComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', loadComponent: () => import('./public/home/home.component').then((c)=>c.HomeComponent) },
+      { path: 'home', component: HomeComponent },
       { path: 'services', component: ServicesComponent },
       { path: 'about', component: AboutComponent },
       { path: 'blog', component: BlogComponent },
@@ -37,7 +37,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'consultas/:id',
+    path: 'nueva-consulta/:id',
     component: FormConsultaComponent,
     title: 'Formulario'
   },

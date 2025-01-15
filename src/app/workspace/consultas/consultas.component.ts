@@ -47,12 +47,14 @@ export class ConsultasComponent {
   }
 
   loadConsultasAdmin(){
+    this.consultaService.cargarConsultasPendientes()
     this.consultaService.getConsultasPendientes().subscribe(consultas => {
       this.consultas = consultas;
     });
   }
 
   loadConsultasAbogado(){
+    this.consultaService.cargarConsultasAbogado(this.authSerice.getID())
     this.consultaService.cargarConsultasAbogado(this.authSerice.getID());
     this.consultaService.consultasAbogado$.subscribe((consultas)=>{
       this.consultas = consultas;

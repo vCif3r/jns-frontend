@@ -19,15 +19,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   selector: 'app-editar-blog',
   imports: [
     MatCardModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDialogClose,
-        ReactiveFormsModule,
-        MatSnackBarModule,
-        MatCheckboxModule,
-        MatDialogContent,
-        MatDialogActions,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogClose,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatDialogContent,
+    MatDialogActions,
   ],
   templateUrl: './editar-blog.component.html',
   styleUrl: './editar-blog.component.css'
@@ -50,8 +50,6 @@ export class EditarBlogComponent {
       publicado: [this.data.publicado],
       categoria: [this.data.categoria, Validators.required],
     });
-
-    console.log(data)
   }
 
   edit() {

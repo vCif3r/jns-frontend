@@ -2,22 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Servicio } from '../models/servicio';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ServicioService {
-  private url = 'http://localhost:3000/servicios'; // URL para obtener la lista de servicios
+  private url = `${environment.API_URL}/servicios`; // URL para obtener la lista de servicios
 
   private serviciosSubject = new BehaviorSubject<Servicio[]>([]);
   servicios$ = this.serviciosSubject.asObservable();
 
-
   constructor(private http: HttpClient) {
-    this.loadServicios();
   }
 
-  private loadServicios() {
+  // Método para cargar los servicios manualmente
+  loadServicios(): void {
     this.http.get<Servicio[]>(this.url).subscribe(
       (servicios) => this.serviciosSubject.next(servicios),
       (err) => console.error('Error al cargar servicios:', err)
@@ -70,11 +71,9 @@ export class ServicioService {
     return this.http.get<any>(`${this.url}/publicado/${id}`);
   }
 
-
   findAllPublicados(){
     return this.http.get<Servicio[]>(`${this.url}/publicados`);
   }
-
 
   actualizarPublicado(id: number, publicado: boolean) {
     return this.http.put(`${this.url}/publicado/${id}`, { publicado }).pipe(
