@@ -6,3 +6,28 @@ button:disabled{
 button:disabled:hover {
     background-color: #fff !important; 
 }
+/* mmm */
+.blog-text {
+    margin-bottom: 20px;
+  }
+  
+  .blog-text p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Número de líneas visibles por defecto */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .btn {
+    display: inline-block;
+    color: #007BFF;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .btn:hover {
+    text-decoration: underline;
+  }
+  

@@ -15,49 +15,91 @@
 <div class="success-cases-section">
     <div class="container">
         <div class="section-header">
-            <p>Casos que hemos venido ganando</p>
-            <h2>Casos con Éxito</h2>
+            <p class="section-subtitle" >Servicios Destacados</p>
+            <h2 class="section-title">Nuestros Servicios de Consultoría</h2>
+            <p class="section-description">
+                En JNS Asesores Legales, nos especializamos en ofrecer soluciones estratégicas y personalizadas en el ámbito laboral. Nos aseguramos de que las empresas y particulares cumplan con las normativas vigentes, evitando riesgos y protegiendo sus intereses legales.
+            </p>
         </div>
+        
         <div class="row">
+            <!-- Asesoría Preventiva Laboral -->
             <div class="col-md-4">
                 <div class="case-card">
                     <div class="case-card-img">
-                        <img src="blog-3.jpg" alt="Caso 1">
+                        <img src="blog-3.jpg" alt="Servicio 1">
                     </div>
                     <div class="case-card-body">
-                        <h3 class="case-title">Asesoría Legal en la Adquisición de una Empresa</h3>
+                        <h3 class="case-title">Asesoría Preventiva Laboral</h3>
                         <p class="case-info">
-                            Asistimos a una empresa en la adquisición de otra compañía, ofreciendo asesoría legal integral durante todo el proceso.
+                            Brindamos asesoría para la correcta elaboración de contratos laborales, políticas internas y manejo de riesgos, garantizando una correcta gestión preventiva.
                         </p>
-                        <a class="btn-more-info" href="#"><i class="fa fa-arrow-right"></i> Más Información</a>
+                        <div class="more-info" [class.hidden]="!showMoreInfo1">
+                            <h4>Detalles del Servicio</h4>
+                            <ul class="case-info">
+                                <li>Elaboración, revisión y actualización de contratos laborales.</li>
+                                <li>Diseño de políticas internas de gestión laboral.</li>
+                                <li>Prevención de riesgos laborales y gestión de seguridad en el trabajo.</li>
+                                <li>Asesoría sobre derechos laborales y normativas vigentes.</li>
+                                <li>Consultoría sobre impacto de cambios legislativos en la empresa.</li>
+                            </ul>
+                        </div>
+                        <a class="btn-more-info" (click)="toggleMoreInfo(1)" [class.hidden]="showMoreInfo1">Más Información</a>
+                        <a class="btn-close2" (click)="toggleMoreInfo(1)" [class.hidden]="!showMoreInfo1">Cerrar</a>
                     </div>
                 </div>
             </div>
+
+            <!-- Gestión de Conflictos Laborales -->
             <div class="col-md-4">
                 <div class="case-card">
                     <div class="case-card-img">
-                        <img src="blog-1.jpg" alt="Caso 2">
+                        <img src="blog-1.jpg" alt="Servicio 2">
                     </div>
                     <div class="case-card-body">
-                        <h3 class="case-title">Resolución de un Conflicto Laboral Complejo.</h3>
+                        <h3 class="case-title">Gestión de Conflictos Laborales</h3>
                         <p class="case-info">
-                            Representamos a una empleada en un conflicto laboral que implicaba acoso y despido injustificado.
+                            Apoyamos a nuestros clientes en la resolución de conflictos laborales, representándolos en procedimientos legales y negociaciones con la Sunafil y otras entidades.
                         </p>
-                        <a class="btn-more-info" href="#"><i class="fa fa-arrow-right"></i> Más Información</a>
+                        <div class="more-info" [class.hidden]="!showMoreInfo2">
+                            <h4>Detalles del Servicio</h4>
+                            <ul class="case-info">
+                                <li>Asesoría y representación en inspecciones laborales.</li>
+                                <li>Defensa legal en procedimientos ante Sunafil.</li>
+                                <li>Negociación y conciliación de despidos y liquidaciones.</li>
+                                <li>Asesoría en conflictos laborales y mediación entre empleadores y empleados.</li>
+                                <li>Resolución de disputas y negociación de acuerdos.</li>
+                            </ul>
+                        </div>
+                        <a class="btn-more-info" (click)="toggleMoreInfo(2)" [class.hidden]="showMoreInfo2">Más Información</a>
+                        <a class="btn-close2" (click)="toggleMoreInfo(2)" [class.hidden]="!showMoreInfo2">Cerrar</a>
                     </div>
                 </div>
             </div>
+
+            <!-- Auditorías Laborales -->
             <div class="col-md-4">
                 <div class="case-card">
                     <div class="case-card-img">
-                        <img src="blog-2.jpg" alt="Caso 3">
+                        <img src="blog-2.jpg" alt="Servicio 3">
                     </div>
                     <div class="case-card-body">
-                        <h3 class="case-title">Asesoría en la Redacción de Contratos Comerciales</h3>
+                        <h3 class="case-title">Auditorías Laborales</h3>
                         <p class="case-info">
-                            Ayudamos a una startup a redactar y negociar contratos comerciales clave para el crecimiento de su negocio.
+                            Realizamos auditorías integrales para asegurar que tu empresa cumpla con todas las normativas laborales, detectando riesgos legales y áreas de mejora.
                         </p>
-                        <a class="btn-more-info" href="#"><i class="fa fa-arrow-right"></i> Más Información</a>
+                        <div class="more-info" [class.hidden]="!showMoreInfo3">
+                            <h4>Detalles del Servicio</h4>
+                            <ul class="case-info">
+                                <li>Revisión exhaustiva de cumplimiento normativo.</li>
+                                <li>Identificación de riesgos laborales y legales.</li>
+                                <li>Asesoría en políticas de contratación y despido.</li>
+                                <li>Recomendaciones sobre seguridad laboral y condiciones de trabajo.</li>
+                                <li>Análisis de oportunidades de mejora en los procesos laborales.</li>
+                            </ul>
+                        </div>
+                        <a class="btn-more-info" (click)="toggleMoreInfo(3)" [class.hidden]="showMoreInfo3">Más Información</a>
+                        <a class="btn-close2" (click)="toggleMoreInfo(3)" [class.hidden]="!showMoreInfo3">Cerrar</a>
                     </div>
                 </div>
             </div>
@@ -65,59 +107,86 @@
     </div>
 </div>
 
-<!-- Service Start -->
+
+
+
+
+
+
+
 <div class="service">
     <div class="container">
         <div class="section-header">
-            <p>Servicios de consultoría</p>
-            <h2>Nuestros mejores servicios de consultoría</h2>
+            <p class="section-subtitle">Servicios de consultoría</p>
+            <h2 class="section-title">Nuestros mejores servicios de consultoría</h2>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="service-item">
-                    <i class="fa fa-gavel fa-3x icon-color"></i> <!-- Ícono más grande -->
-                    <h3>Derecho laboral</h3>
-                    <p>
-                        Asesoría en relaciones laborales. Negociación colectiva. Representación en conflictos laborales
-                    </p>
-                    <a href="DerechoLaboral.html">Leer más</a>
+                  <i class="fa fa-lightbulb fa-3x icon-color"></i>
+                  <h3 style="font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 15px;">Derecho Laboral</h3>
+                  <p  class="section-description" [class.txt-containe]="!showMoreService1" [class.justified]="showMoreService1">
+                    En JNS Asesores Legales, brindamos asesoría integral en Derecho Laboral, abarcando contratos, auditorías, prevención de riesgos laborales, y defensa ante Sunafil. 
+                    <span class="service-more-info" [class.hidden]="!showMoreService1">
+                        Representamos a empresas en conflictos laborales, despidos y conciliaciones, garantizando soluciones estratégicas. Con más de 5 años de experiencia, protegemos los intereses de nuestros clientes y fomentamos una gestión laboral eficiente y transparente.
+                    </span>
+                  </p>
+                  <a class="btn-service-more" (click)="toggleServiceInfo(1)" [class.hidden]="showMoreService1">Leer más</a>
+                  <a class="btn-service-less" (click)="toggleServiceInfo(1)" [class.hidden]="!showMoreService1">Leer menos</a>
                 </div>
-            </div>
+              </div>
+              
             <div class="col-lg-3 col-md-6">
                 <div class="service-item">
-                    <i class="fa fa-lightbulb fa-3x icon-color"></i> <!-- Ícono más grande -->
-                    <h3>Proceso de Ejecución de Garantías</h3>
-                    <p>
-                        Nos especializamos en asesorar a los demandados en procesos de ejecución, 
-                    </p>
-                    <a href="ProcesoejcucionGarantias.html">Leer más</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="service-item">
-                    <i class="fa fa-balance-scale fa-3x icon-color"></i> <!-- Ícono más grande -->
-                    <h3>Propiedad Intelectual y Procedimientos ante INDECOPI</h3>
-                    <p>
-                        Servicios especializados en la protección de marcas.
-                    </p>
-                    <a href="PropiedadIntelectual.html">Leer más</a>
+                    <i class="fa fa-lightbulb fa-3x icon-color"></i> 
+                    <h3 style="font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 15px;">Proceso de Ejecución de Garantías</h3>
+                    <p class="section-description" [class.txt-containe]="!showMoreService2" [class.justified]="showMoreService2">
+                        En JNS Asesores Legales, somos especialistas en la defensa de los ejecutados, renegociación de deudas y protección del patrimonio.
+                        <span class="service-more-info" [class.hidden]="!showMoreService2">
+                            Representamos en procesos judiciales y ante entidades financieras, diseñando estrategias para evitar embargos y remates. Con experiencia sólida, aseguramos soluciones legales que protegen los bienes de nuestros clientes y facilitan acuerdos sostenibles con los acreedores.
+                        </span>
+                      </p>
+                      <a class="btn-service-more" (click)="toggleServiceInfo(2)" [class.hidden]="showMoreService2">Leer más</a>
+                      <a class="btn-service-less" (click)="toggleServiceInfo(2)" [class.hidden]="!showMoreService2">Leer menos</a>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6">
                 <div class="service-item">
-                    <i class="fa fa-file-alt fa-3x icon-color"></i> <!-- Ícono más grande -->
-                    <h3>Derecho Administrativo</h3>
-                    <p>
-                        Asesoría en procedimientos administrativos.
-                    </p>
-                    <a href="Derecho Administrativo.html">Leer más</a>
+                    <i class="fa fa-balance-scale fa-3x icon-color"></i> 
+                    <h3 style="font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 15px;">Propiedad Intelectual y Procedimientos ante INDECOPI</h3>
+                    <p class="section-description" [class.txt-containe]="!showMoreService3" [class.justified]="showMoreService3">
+                        En JNS Asesores Legales, protegemos tus derechos de propiedad intelectual y te representamos ante INDECOPI. 
+                        <span class="service-more-info" [class.hidden]="!showMoreService3">
+                          Ofrecemos registro y defensa de marcas, derechos de autor, patentes, gestión de oposiciones, procedimientos administrativos y estrategias preventivas. Con más de 5 años de experiencia, aseguramos soluciones eficaces para maximizar el valor de tus activos intangibles.
+                        </span>
+                      </p>
+                    
+                      <a class="btn-service-more" (click)="toggleServiceInfo(3)" [class.hidden]="showMoreService3">Leer más</a>
+                      <a class="btn-service-less" (click)="toggleServiceInfo(3)" [class.hidden]="!showMoreService3">Leer menos</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="service-item">
+                    <i class="fa fa-file-alt fa-3x icon-color"></i> 
+                    <h3  style="font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 15px;">Derecho Administrativo</h3>
+                    <p class="section-description" [class.txt-containe]="!showMoreService4" [class.justified]="showMoreService4">
+                        En JNS Asesores Legales, ofrecemos asesoría especializada en Derecho Administrativo, representando a empresas y personas en procedimientos ante entidades públicas. 
+                        <span class="service-more-info" [class.hidden]="!showMoreService4">
+                            Gestionamos licitaciones, fiscalizaciones y recursos administrativos, asegurando el cumplimiento normativo y la defensa eficaz de derechos. Con más de 5 años de experiencia, garantizamos soluciones estratégicas en conflictos y trámites con el Estado.
+                        </span>
+                      </p>
+                  
+                      <a class="btn-service-more" (click)="toggleServiceInfo(4)" [class.hidden]="showMoreService4">Leer más</a>
+                      <a class="btn-service-less" (click)="toggleServiceInfo(4)" [class.hidden]="!showMoreService4">Leer menos</a>
                 </div>
             </div>
             
         </div>
     </div>
-</div> 
+</div>
+
  
 <!-- Service End -->
 
@@ -126,8 +195,8 @@
 <div class="clients-section">
     <div class="container">
         <div class="section-header">
-            <p>Organizaciones que eligen nuestros servicios legales</p>
-            <h2>Nuestros Clientes</h2>
+            <p class="section-subtitle">Organizaciones que eligen nuestros servicios legales</p>
+            <h2 class="section-title">Nuestros Clientes</h2>
         </div>
         <div class="clients-carousel-container">
             <div class="clients-carousel-slide">

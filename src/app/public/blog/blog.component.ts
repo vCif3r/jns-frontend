@@ -8,28 +8,37 @@ import { environment } from '../../../environments/environment.development';
   selector: 'app-blog',
   imports: [CommonModule],
   templateUrl: './blog.component.html',
-  styleUrl: './blog.component.css',
+  styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent {
   private postService = inject(PostService);
   postsList: Post[] = [];
+  expandedPosts: { [id: number]: boolean } = {};
   currentPage: number = 1;
   totalPages: number = 0;
   totalItems: number = 0;
 
   constructor() {}
-
   loadPostPublished() {
-    this.postService.getPostsPublicados(this.currentPage)
-      .subscribe((response: PostResponse) => {
-        this.postsList = response.data;
-        this.totalItems = response.totalItems;
-        this.totalPages = response.totalPages;
+    this.postService.getPostsPublicados(this.currentPage).subscribe((response: PostResponse) => {
+      console.log('Respuesta de la API:', response); // Este console.log solo es válido dentro de la función
+      this.postsList = response.data;
+      this.totalItems = response.totalItems;
+      this.totalPages = response.totalPages;
+  
+      this.postsList.forEach(post => {
+        console.log('Post:', post); // Verifica cada post
+        if (!(post.id in this.expandedPosts)) {
+          this.expandedPosts[post.id] = false;
+        }
       });
+    });
   }
+  
+  
 
   ngOnInit(): void {
-    this.loadPostPublished()
+    this.loadPostPublished();
   }
 
   changePage(page: number): void {
@@ -41,5 +50,13 @@ export class BlogComponent {
 
   getImageUrl(imagePath: string): string {
     return `${environment.API_URL}${imagePath}`;
+  }
+
+  toggleExpand(postId: number): void {
+    this.expandedPosts[postId] = !this.expandedPosts[postId];
+  }
+
+  isExpanded(postId: number): boolean {
+    return this.expandedPosts[postId];
   }
 }

@@ -20,12 +20,22 @@
                                 <i class="fa fa-calendar-alt"></i>
                                 <p>{{post.createdAt | date: 'dd-MMMM-yyyy'}}</p>
                             </div>
-                            <div class="blog-text">
-                                <p>
-                                    {{post.contenido}}
+                            <div *ngFor="let post of postsList" class="blog-text">
+                                <p
+                                  [ngStyle]="{
+                                    'overflow': isExpanded(post.id) ? 'visible' : 'hidden',
+                                    'display': isExpanded(post.id) ? 'block' : '-webkit-box',
+                                    '-webkit-line-clamp': isExpanded(post.id) ? 'unset' : '3',
+                                    '-webkit-box-orient': 'vertical'
+                                  }"
+                                >
+                                  {{ post.contenido }}
                                 </p>
-                                <a class="btn" href="">Leer Más</a>
-                            </div>
+                                <a class="btn" href="javascript:void(0)" (click)="toggleExpand(post.id)">
+                                  {{ isExpanded(post.id) ? 'Leer Menos' : 'Leer Más' }}
+                                </a>
+                              </div>
+                              
                         </div>
                     </div>
                 </div>
