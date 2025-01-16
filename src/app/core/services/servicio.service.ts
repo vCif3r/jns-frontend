@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Servicio } from '../models/servicio';
-import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -19,11 +19,17 @@ export class ServicioService {
 
   // Método para cargar los servicios manualmente
   loadServicios(): void {
-    this.http.get<Servicio[]>(this.url).subscribe(
-      (servicios) => this.serviciosSubject.next(servicios),
-      (err) => console.error('Error al cargar servicios:', err)
+    this.http.get<Servicio[]>(this.url).pipe(
+      catchError((err) => {
+        console.error('Error al cargar servicios:', err);
+        // Aquí puedes retornar una lista vacía o un error controlado
+        return of([]);
+      })
+    ).subscribe(
+      (servicios) => this.serviciosSubject.next(servicios)
     );
   }
+  
 
   // Método para obtener los servicios de forma reactiva
   getServicios(): Observable<Servicio[]> {

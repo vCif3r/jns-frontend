@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { StatisticCardComponent } from '../components/statistic-card/statistic-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { ClienteService } from '../../core/services/cliente.service';
@@ -9,7 +9,9 @@ import { StatisticService } from '../../core/services/statistic.service';
 import { MatIconModule } from '@angular/material/icon';
 import { BarchartTotalCasosComponent } from './charts/barchart-total-casos/barchart-total-casos.component';
 import { RouterLink } from '@angular/router';
-import { HorizontalBarchartConsultasServicioComponent } from './charts/horizontal-barchart-consultas-servicio/horizontal-barchart-consultas-servicio.component';
+import { HorizontalBarchartComponent } from './charts/horizontal-barchart/horizontal-barchart.component';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
 interface Card {
   label: string;
@@ -27,8 +29,9 @@ interface Card {
     MatButtonModule,
     PieChartAbogadosComponent,
     MatIconModule,
+    HorizontalBarchartComponent,
     BarchartTotalCasosComponent,
-    HorizontalBarchartConsultasServicioComponent,
+    PieChartAbogadosComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
@@ -38,12 +41,13 @@ export class DashboardComponent implements OnInit {
   latestAbogados?: any;
   currentYear?: number;
 
-  constructor(private statisticService: StatisticService) {}
+  private statisticService = inject(StatisticService)
 
   ngOnInit(): void {
     this.getlatestAbogados();
     this.getStatisticCards();
     this.currentYear = new Date().getFullYear();
+
   }
 
   getStatisticCards() {
@@ -58,7 +62,18 @@ export class DashboardComponent implements OnInit {
     });
   }
 
- 
-  
+  guardarComoImagen() {
+    const contenido = document.getElementById('contenido'); // Asegúrate de darle un id a la sección que quieres capturar
+
+    if (contenido) {
+      html2canvas(contenido).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = imgData;
+        link.download = 'dashboard.png';
+        link.click();
+      });
+    }
+  }
   
 }

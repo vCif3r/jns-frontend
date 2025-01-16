@@ -2,19 +2,21 @@ import { Component } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { AbogadoService } from '../../../../core/services/abogado.service';
 import { StatisticService } from '../../../../core/services/statistic.service';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 Chart.register(...registerables)
 
 @Component({
   selector: 'app-pie-chart-abogados',
-  imports: [],
+  imports: [NgApexchartsModule],
   templateUrl: './pie-chart-abogados.component.html',
   styleUrl: './pie-chart-abogados.component.css'
 })
 export class PieChartAbogadosComponent {
   labeldata: string[] = [];  // Tipos de cliente
   realdata: number[] = [];   // Cantidades de cada tipo
-  colordata: string[] = ['#3357FF', '#F1C40F','#33FF57', '#FF5733'];  // Colores de ejemplo
+
+  public chartOptions: any;
 
   constructor(private _statsService: StatisticService) { }
 
@@ -27,39 +29,34 @@ export class PieChartAbogadosComponent {
         this.realdata = data.map(item => Number(item.total));
 
         // Llamamos a la función para renderizar el gráfico
-        this.RenderChart(this.labeldata, this.realdata, this.colordata);
+        this.RenderChart(this.labeldata, this.realdata);
       }
     });
   }
 
   // Función para renderizar el gráfico
-  RenderChart(labeldata: string[], valuedata: number[], colordata: string[]): void {
-    new Chart('piechartAbogado', {
-      type: 'pie',  // Tipo de gráfico: pie
-      data: {
-        labels: labeldata,
-        datasets: [{
-          label: 'Especialidad Abogados',
-          data: valuedata,
-          backgroundColor: colordata,  // Colores asignados a cada tipo
-          hoverOffset: 4
-        }]
+  RenderChart(labeldata: string[], valuedata: number[]): void {
+    this.chartOptions = {
+      series: valuedata,
+      chart: {
+        type: 'pie',
+        width: '100%'
+        
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          tooltip: {
-            callbacks: {
-              label: (tooltipItem) => {
-                return `${tooltipItem.label}: ${tooltipItem.raw} abogados`;
-              }
-            }
-          }
+      labels: labeldata,
+      title: {
+        text: 'Especialidad Abogados',
+        align: 'center'
+      },
+      tooltip: {
+        y: {
+          formatter: (value:any) => `${value} abogados`
         }
+      },
+      legend: {
+        position: 'bottom',
+        horizontalAlign: 'center',
       }
-    });
+    };
   }
 }

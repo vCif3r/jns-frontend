@@ -1,4 +1,9 @@
-<div style="display: block;">
-    <canvas id="piechartAbogado"></canvas>
-</div>
-  
+@if (chartOptions) {
+  <apx-chart [series]="chartOptions.series"
+             [chart]="chartOptions.chart"
+             [labels]="chartOptions.labels"
+             [title]="chartOptions.title"
+             [tooltip]="chartOptions.tooltip"
+             [legend]="chartOptions.legend">
+  </apx-chart>
+}

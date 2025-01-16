@@ -1,16 +1,16 @@
-<div #contenido>
+<div id="contenido">
     <div class="d-flex justify-content-between align-items-center pb-3">
         <span class="fs-4 fw-bold">Dashboard</span>
-        <button class="btn btn-dark" >
+        <button class="btn btn-dark" (click)="guardarComoImagen()">
             <div class="d-flex gap-2">
-                <mat-icon>download</mat-icon>Descargar
+                Descargar <mat-icon>download</mat-icon>
             </div>
         </button>
     </div>
     
     <div class="row" >
         <!-- left column -->
-        <div class="col-12 col-xl-9">
+        <div class="col-12 col-xl-8">
     
             <div class="statistic-section mb-4">
                 @for (card of statsCards; track $index) {
@@ -22,12 +22,13 @@
                 }
             </div>
 
-            <mat-card>
+            <mat-card appearance="outlined">
                 <mat-card-header>
                     <mat-card-title>Consultas vs Casos</mat-card-title>
                     <mat-card-subtitle>Consultas y casos registrados en {{currentYear}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
+                    
                     <app-barchart-total-casos></app-barchart-total-casos>
                 </mat-card-content>
             </mat-card>
@@ -36,7 +37,7 @@
     
             <div class="row mt-4">
                 <div class="col-12 col-xl-6">
-                    <mat-card>
+                    <mat-card appearance="outlined">
                         <mat-card-header>
                             <mat-card-title>Ultimos abogados</mat-card-title>
                             @if (latestAbogados?.listAbogados.length > 0) {
@@ -74,13 +75,12 @@
     
     
                 <div class="col-12 col-xl-6">
-                    <mat-card>
+                    <mat-card appearance="outlined">
                         <mat-card-header>
                             <mat-card-title>Servicios</mat-card-title>
-                            <mat-card-subtitle>consultas por servicio</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
-                            <app-horizontal-barchart-consultas-servicio></app-horizontal-barchart-consultas-servicio>
+                            <app-horizontal-barchart></app-horizontal-barchart>
                         </mat-card-content>
                     </mat-card>
                 </div>
@@ -89,13 +89,12 @@
     
         <!-- rigth column -->
     
-        <div class="col-12 col-xl-3 ">
+        <div class="col-12 col-xl-4 ">
             <div class="row">
                 <div class="col-12">
-                    <mat-card>
+                    <mat-card appearance="outlined">
                         <mat-card-header>
                             <mat-card-title>Abogados</mat-card-title>
-                            <mat-card-subtitle>Especialidad de abogados</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
                             <app-pie-chart-abogados></app-pie-chart-abogados>
