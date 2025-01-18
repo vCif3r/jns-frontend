@@ -1,0 +1,16 @@
+<div class="w-100">
+    <div class="image-container">
+        <img [src]="post?.imagen" alt="Imagen" class="image">
+        <div class="overlay">
+            <h2 class="text">{{post?.titulo}}</h2>
+        </div>
+    </div>
+
+    <div class="w-75 m-auto py-4">
+        
+        <p class="d-flex gap-1 align-items-center text-secondary">
+            <mat-icon class="text-primary">calendar_month</mat-icon>
+            {{ post?.createdAt | date: 'dd/MM/yyyy - hh:mm a' }}</p>
+        <p [innerHTML]="post?.contenido"></p>
+    </div>
+</div>

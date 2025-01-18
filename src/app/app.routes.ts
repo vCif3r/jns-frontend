@@ -20,6 +20,7 @@ import { FormConsultaComponent } from './public/form-consulta/form-consulta.comp
 import { ConsultasComponent } from './workspace/consultas/consultas.component';
 import { ProfileComponent } from './workspace/profile/profile.component';
 import { ContactosComponent } from './workspace/contactos/contactos.component';
+import { PostDetalleComponent } from './public/blog/post-detalle/post-detalle.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,7 @@ export const routes: Routes = [
       { path: 'services', component: ServicesComponent },
       { path: 'about', component: AboutComponent },
       { path: 'blog', component: BlogComponent },
+      { path: 'blog/:id', component: PostDetalleComponent},
       { path: 'contact', component: ContactComponent },
       { path: 'experience', component: ExperienceComponent },
       { path: 'login', component: LoginComponent, title: 'login', canActivate: [PublicGuard] },
@@ -113,8 +115,27 @@ export const routes: Routes = [
       },
       {
         path: 'blogs',
-        loadComponent: () => import('./workspace/blogs/blogs.component').then((c)=>c.BlogsComponent)
-      }
+        loadComponent: () => import('./workspace/blogs/blogs.component').then((c)=>c.BlogsComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin'] },
+        title: 'blog'
+      },
+      {
+        path: 'blogs/create',
+        loadComponent: () => import('./workspace/blogs/agregar-blog/agregar-blog.component').then((c) => c.AgregarBlogComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin'] },
+        title: 'Crear Blog'
+      },
+      
+      // Ruta para editar un blog específico, usando un parámetro 'id'
+      {
+        path: 'blogs/edit/:id',
+        loadComponent: () => import('./workspace/blogs/editar-blog/editar-blog.component').then((c) => c.EditarBlogComponent),
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin'] },
+        title: 'Editar Blog'
+      },
     ],
   },
   {

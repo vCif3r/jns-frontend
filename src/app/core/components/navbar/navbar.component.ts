@@ -15,14 +15,9 @@ import { BuscarCasoComponent } from '../buscar-caso/buscar-caso.component';
 })
 export class NavbarComponent {
   isSticky: boolean = false;
-  isAuthenticated: boolean = false;
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit(): void {
-    this.isAuthenticated = this.authService.isAuthenticated()
-  }
-
+  
+  authService = inject(AuthService) 
+  
   // Usamos HostListener para escuchar el evento de scroll
   @HostListener('window:scroll', [])
   onWindowScroll() {

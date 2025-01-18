@@ -18,13 +18,13 @@
                                 <i class="fa fa-list-alt"></i>
                                 <a href="">{{ post.categoria }}</a>
                                 <i class="fa fa-calendar-alt"></i>
-                                <p>{{post.createdAt | date: 'dd-MMMM-yyyy'}}</p>
+                                <p>{{post.createdAt | date: 'dd-MMMM-yyyy':'':'es'}}</p>
                             </div>
                             <div class="blog-text">
-                                <p>
-                                    {{post.contenido}}
+                                <p [innerHTML]="post.resumen">
+                                    
                                 </p>
-                                <a class="btn" href="">Leer Más</a>
+                                <a class="btn" [routerLink]="['/blog', post.id]">Leer Más</a>
                             </div>
                         </div>
                     </div>

@@ -31,6 +31,15 @@ export class PostService {
     return this.http.get<PostResponse>(`${environment.API_URL}/posts/publicados?page=${page}`)
   }
 
+  getOnePost(id: any){
+    return this.http.get<Post>(`${environment.API_URL}/posts/${id}`).pipe(
+      map(post => {
+        // Transformar el campo 'image' utilizando el método 'getImageUrl'
+        post.imagen = this.getImageUrl(post.imagen);  // Se reemplaza la ruta relativa con la URL completa
+        return post;
+      }))
+  }
+
   deletePost(id: any){
     return this.http.delete(`${environment.API_URL}/posts/${id}`)
   }

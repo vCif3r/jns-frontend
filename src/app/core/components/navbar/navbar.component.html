@@ -74,7 +74,7 @@
                 <a class="nav-item nav-link" (click)="openDialog()">Mis Casos</a>
             </div>
             
-            @if (!isAuthenticated) {
+            @if (!authService.isAuthenticated()) {
                 <a routerLink="/login" class="btn-login">Iniciar sesión</a>
             }@else {
                 <app-dropdown-user/>
