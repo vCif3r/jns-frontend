@@ -1,16 +1,14 @@
-
-import { Abogado } from "./abogado";
-import { TipoServicio } from "./tipoServicio";
+import { Servicio } from "./servicio";
+import { User } from "./user";
 
 export interface Consulta{
     id: any;
-    tipoServicio: TipoServicio;
+    servicio: Servicio;
     fechaHora: string;
     detalles: string;
     nombreCompleto: string;
     email: string;
-    //lugar: string;
-    abogado?: Abogado;
+    abogado?: User ;
     estado: string;
     hechos: string;
     createdAt: Date;

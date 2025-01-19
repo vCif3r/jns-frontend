@@ -63,21 +63,28 @@ export const routes: Routes = [
       {
         path: 'consultas',
         loadComponent: ()=>import('./workspace/consultas/consultas.component').then((c)=>c.ConsultasComponent),
-        title: 'consultas',
+        title: 'Consultas',
         canActivate: [RoleGuard],
         data: { roles: ['Admin', 'Abogado'] },
       },
       {
+        path: 'areas-legales',
+        loadComponent: () => import('./workspace/areas-legales/areas-legales.component').then((c)=>c.AreasLegalesComponent),
+        title: 'Areas legales',
+        canActivate: [RoleGuard],
+        data: { roles: ['Admin'] }
+      },
+      {
         path: 'servicios',
         loadComponent: () => import('./workspace/servicios/servicios.component').then((c)=>c.ServiciosComponent),
-        title: 'servicios',
+        title: 'Servicios',
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
       },
       
-      { path: 'abogados',
-        loadComponent: ()=> import('./workspace/abogados/abogados.component').then((c)=>c.AbogadosComponent),
-        title: 'abogados',
+      { path: 'usuarios',
+        loadComponent: ()=> import('./workspace/users/users.component').then((c)=>c.UsersComponent),
+        title: 'Usuarios',
         canActivate: [RoleGuard],
         data: { roles: ['Admin'] },
       },

@@ -1,0 +1,105 @@
+<div>
+    <h2 mat-dialog-title>{{ isEditMode ? 'Editar Usuario' : 'Agregar nuevo usuario' }}</h2>
+
+    <mat-dialog-content>Completa los campos del formulario.</mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+        <div class="pt-4 px-4 w-100">
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput required formControlName="nombre">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput required formControlName="apellido">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Cédula</mat-label>
+                        <input matInput required formControlName="cedula">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Especialidad</mat-label>
+                        <mat-select formControlName="especialidad">
+                            @for (e of especialidades; track e) {
+                            <mat-option [value]="e.value">{{e.viewValue}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            
+                
+                <!-- <div class="col-12 col-xl-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nacionalidad</mat-label>
+                        <mat-select formControlName="pais" value="pais">
+                            @for (country of countries; track country) {
+                            <mat-option [value]="country.name.common">
+                                <img [src]="country.flags.png" alt="Bandera" width="24" height="16"
+                                    style="margin-right: 10px;">
+                                {{country.name.common}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div> -->
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Dirección</mat-label>
+                    <input matInput required formControlName="direccion">
+                </mat-form-field>
+
+
+            @if (isEditMode == false) {
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Correo</mat-label>
+                    <input matInput required formControlName="email">
+
+                    <mat-error *ngIf="f['email'].hasError('required')">*El correo electrónico es
+                        requerido</mat-error>
+                    <mat-error *ngIf="f['email'].hasError('email')">*Correo electrónico no válido</mat-error>
+                    
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+                    <a mat-icon-button matSuffix (click)="clickEvent($event)" 
+                        [attr.aria-pressed]="hide()">
+                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </a>
+
+                    <mat-error *ngIf="f['password'].hasError('required')">*La contraseña es requerida</mat-error>
+                    <mat-error *ngIf="f['password'].hasError('minlength')">*La contraseña debe tener al menos 8 caracteres</mat-error>
+                </mat-form-field>
+            }
+            
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Rol</mat-label>
+                <mat-select formControlName="role" value="role">
+                    @for (role of roles; track role.id) {
+                    <mat-option [value]="role.id">{{role.nombre}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            
+        </div>
+
+        <mat-dialog-actions>
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ isEditMode ? 'Actualizar' : 'Agregar' }}</button>
+            <button mat-button mat-dialog-close>Cancelar</button>
+        </mat-dialog-actions>
+
+    </form>
+</div>

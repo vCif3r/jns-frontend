@@ -35,56 +35,7 @@
     
             
     
-            <div class="row mt-4">
-                <div class="col-12 col-xl-6">
-                    <mat-card appearance="outlined">
-                        <mat-card-header>
-                            <mat-card-title>Ultimos abogados</mat-card-title>
-                            @if (latestAbogados?.listAbogados.length > 0) {
-                                <mat-card-subtitle>Se registraron {{latestAbogados?.countLastMonth}} abogados este mes.</mat-card-subtitle>
-                            }
-                        </mat-card-header>
-                        <mat-card-content>                      
-                            @for (item of latestAbogados?.listAbogados; track $index) {
-                                <div class="d-flex justify-content-between align-items-center gap-2 my-3">
-                                    <div class="d-flex align-items-center">
-                                        <img src="{{ item.foto || 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'}}"
-                                            alt="Avatar" class="rounded-circle" width="32" height="32" />
-    
-                                        <div class="ms-2 d-flex flex-column">
-                                            <small class="mb-0">{{ item.nombre }}</small>
-                                            <small class="mb-0 fw-lighter text-secondary">{{ item.email }}</small>
-                                        </div>
-                                    </div>
-    
-                                    <div class="d-flex flex-column">
-                                        <small>cédula</small>
-                                        <span class="fw-medium">{{item.cedula}}</span>
-                                    </div>
-                                </div>
-                            }
-                            @if (latestAbogados?.listAbogados.length == 0) {
-                                <p class="text-center text-secondary pt-2">
-                                    No se registraron abogados este mes.
-                                    <a routerLink="/workspace/abogados" class="btn-link">agregar</a>
-                                </p>                        
-                            }
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-    
-    
-                <div class="col-12 col-xl-6">
-                    <mat-card appearance="outlined">
-                        <mat-card-header>
-                            <mat-card-title>Servicios</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <app-horizontal-barchart></app-horizontal-barchart>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-            </div>
+            
         </div>
     
         <!-- rigth column -->
@@ -103,6 +54,58 @@
                 </div>
     
                 
+            </div>
+        </div>
+
+
+        <div class="row mt-4">
+            <div class="col-12 col-xl-6">
+                <mat-card appearance="outlined">
+                    <mat-card-header>
+                        <mat-card-title>Ultimos abogados</mat-card-title>
+                        @if (latestAbogados?.listAbogados.length > 0) {
+                            <mat-card-subtitle>Se registraron {{latestAbogados?.countLastMonth}} abogados este mes.</mat-card-subtitle>
+                        }
+                    </mat-card-header>
+                    <mat-card-content>                      
+                        @for (item of latestAbogados?.listAbogados; track $index) {
+                            <div class="d-flex justify-content-between align-items-center gap-2 my-3">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ item.foto || 'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'}}"
+                                        alt="Avatar" class="rounded-circle" width="32" height="32" />
+
+                                    <div class="ms-2 d-flex flex-column">
+                                        <small class="mb-0">{{ item.nombre }}</small>
+                                        <small class="mb-0 fw-lighter text-secondary">{{ item.email }}</small>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-column">
+                                    <small>cédula</small>
+                                    <span class="fw-medium">{{item.cedula}}</span>
+                                </div>
+                            </div>
+                        }
+                        @if (latestAbogados?.listAbogados.length == 0) {
+                            <p class="text-center text-secondary pt-2">
+                                No se registraron abogados este mes.
+                                <a routerLink="/workspace/abogados" class="btn-link">agregar</a>
+                            </p>                        
+                        }
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+
+            <div class="col-12 col-xl-6">
+                <mat-card appearance="outlined">
+                    <mat-card-header>
+                        <mat-card-title>Servicios - Consultas</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <app-horizontal-barchart></app-horizontal-barchart>
+                    </mat-card-content>
+                </mat-card>
             </div>
         </div>
     </div>

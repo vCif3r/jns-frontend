@@ -31,7 +31,7 @@
                 </div>
             }@empty {
                 <div class="w-100 text-center text-secondary pb-5">
-                    No hay blog publicados, regresa pronto
+                    No hay publicaciones, regresa pronto
                 </div>
             }
             
@@ -102,20 +102,24 @@
                 </div>
             </div> -->
         </div>
-        <div class="row">
-            <div class="col-12">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
-                    </li>
-                    <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-                    <li class="page-item">
-                        <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
-                    </li>
-                </ul> 
+
+        @if (postsList.length > 0) {
+            <div class="row">
+                <div class="col-12">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+                        </li>
+                        <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                        <li class="page-item">
+                            <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+                        </li>
+                    </ul> 
+                </div>
             </div>
-        </div>
+        }
+        
     </div>
 </div>  

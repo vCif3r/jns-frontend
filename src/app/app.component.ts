@@ -6,14 +6,13 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
+  private authService = inject(AuthService);
 
-  private authService = inject(AuthService)
-
-  //  @HostListener('window:beforeunload', ['$event'])
-  //  unloadNotification($event: any): void {
-  //    this.authService.logout();
-  //  }
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any): void {
+    this.authService.logout();
+  }
 }

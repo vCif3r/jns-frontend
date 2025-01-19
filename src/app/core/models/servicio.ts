@@ -1,12 +1,11 @@
-import { TipoServicio } from "./tipoServicio";
+import { AreaLegal } from "./area-legal";
 
 export interface Servicio{
     id: any;
     nombre: string;
     descripcion: string;
-    categoria: string;
+    area: AreaLegal;
     disponible: boolean
     createdAt: Date
     updatedAt: Date;
-    tipos_servicios?: TipoServicio[];
 }

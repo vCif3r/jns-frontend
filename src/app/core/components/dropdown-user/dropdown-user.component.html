@@ -4,14 +4,11 @@
 <mat-menu #beforeMenu="matMenu" xPosition="before">
     <div class="px-2">{{ email }}</div>
     <hr>
-    @if (role == 'Cliente') {
-        <button mat-menu-item routerLink="/casos">Mis citas</button>
-        <button mat-menu-item (click)="logout()">Cerrar sesión</button>
-    }@else if (role == "Admin") {
+    @if (role == "Admin") {
         <button mat-menu-item routerLink="/workspace">Dashboard</button>
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
     }@else if (role == "Abogado") {
-        <button mat-menu-item routerLink="/workspace/consultas">Consultas</button>
+        <button mat-menu-item routerLink="/workspace/consultas">Intranet</button>
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
     }
 </mat-menu>

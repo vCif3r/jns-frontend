@@ -1,0 +1,25 @@
+<div>
+    <h2 mat-dialog-title>{{ isEditMode ? 'Editar Área Legal' : 'Agregar Nueva Área Legal' }}</h2>
+
+    <mat-dialog-content>Completa todos los campos del formulario.
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div class="pt-4 w-100">
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nombre</mat-label>
+                <input matInput required formControlName="nombre">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput required formControlName="descripcion"></textarea>
+            </mat-form-field>
+
+            
+        </div>
+        <mat-dialog-actions>
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ isEditMode ? 'Actualizar' : 'Agregar' }}</button>
+            <button mat-button mat-dialog-close>Cancelar</button>
+        </mat-dialog-actions>
+    </form>
+</mat-dialog-content>
+</div>

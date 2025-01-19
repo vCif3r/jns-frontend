@@ -58,6 +58,7 @@ export class HorizontalBarchartComponent  {
       series: this.series,
       chart: {
         type: 'bar',
+        height: 'auto', 
       },
       title: {
         text: this.title,
@@ -76,8 +77,8 @@ export class HorizontalBarchartComponent  {
       },
       plotOptions: {
         bar: {
-          horizontal: true,  // Esto hace que el gráfico sea horizontal
-          columnWidth: '55%',
+          horizontal: true,  // Esto hace que el gráfico sea horizontal      
+          // barHeight: '20%',
         }
       },
       dataLabels: {
