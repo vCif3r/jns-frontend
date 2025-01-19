@@ -1,6 +1,14 @@
 a{
     text-decoration: none;
 }
+
+
+mat-icon{
+    height: 60px;
+    width: 60px;
+    font-size: 60px;
+}
+}
 /* //mmm */
 .section-subtitle{
     font-weight: bold; font-size: 18px; color: #4e4e4e;

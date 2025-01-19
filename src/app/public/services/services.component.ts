@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-services',
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css']
 })

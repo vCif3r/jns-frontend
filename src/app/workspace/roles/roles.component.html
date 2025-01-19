@@ -1,0 +1,57 @@
+<div class="py-3 d-flex gap-2">
+    <a class="btn btn-success btn-sm" (click)="openDialog()">
+        <div class="d-flex align-items-center gap-2">
+            <mat-icon>add_circle</mat-icon>
+            Add New
+        </div>
+    </a>
+   
+</div>
+
+@if (!loading) {
+    <div class="w-50 p-2">
+        <input type="text" matInput (keyup)="applyFilter($event)" placeholder="Buscar...">
+    </div>
+
+    <div class="table-responsive">
+        <table mat-table [dataSource]="dataSourceRoles" matSort id="printableTable">
+
+            <!-- Definir las columnas de la tabla -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+                <td mat-cell *matCellDef="let element">
+                    @if (element.descripcion) {
+                        {{element.descripcion }} 
+                    }@else {
+                        <span class="text-muted">sin descripción</span>
+                    }
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let element">
+                    <a mat-icon-button (click)="openDialog(element)">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+    
+            <!-- Definir las filas de la tabla -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 100]"
+            showFirstLastButtons></mat-paginator>
+    </div>    
+}

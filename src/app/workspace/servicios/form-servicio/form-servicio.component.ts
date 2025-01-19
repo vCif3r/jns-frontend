@@ -1,5 +1,5 @@
 import { ServicioService } from '../../../core/services/servicio.service';
-import { Component, Inject, signal } from '@angular/core';
+import { Component, inject, Inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -24,6 +24,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Servicio } from '../../../core/models/servicio';
 import { CommonModule } from '@angular/common';
+import { AreaLegal } from '../../../core/models/area-legal';
+import { AreaLegalService } from '../../../core/services/area-legal.service';
 
 @Component({
   selector: 'app-new-servicio',
@@ -47,19 +49,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './form-servicio.component.css',
 })
 export class FormServicioComponent {
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
-
   isEditMode: boolean;
   servicioForm: FormGroup;
 
+  private servicioService = inject(ServicioService)
+  private snackBar = inject(MatSnackBar)
+
+  areasLegales: AreaLegal[] = []
+  private areaService = inject(AreaLegalService)
+
   constructor(
     private fb: FormBuilder,
-    private servicioService: ServicioService,
-    private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<FormServicioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { servicio: Servicio }
   ) {
@@ -69,7 +69,7 @@ export class FormServicioComponent {
       this.servicioForm = this.fb.group({
         nombre: [data.servicio.nombre || '', Validators.required],
         descripcion: [data.servicio.descripcion || '', [Validators.required]],
-        categoria: [data.servicio.categoria || '', [Validators.required]],
+        area: [data.servicio.area.id || '', [Validators.required]],
         disponible: [data.servicio.disponible],
       });
     } else {
@@ -77,9 +77,13 @@ export class FormServicioComponent {
       this.servicioForm = this.fb.group({
         nombre: ['', Validators.required],
         descripcion: ['', [Validators.required]],
-        categoria: ['', [Validators.required]],
+        area: ['', [Validators.required]],
       });
     }
+  }
+
+  ngOnInit():void{
+    this.areaService.findAll().subscribe((data)=>this.areasLegales = data)
   }
 
   onSubmit(): void {

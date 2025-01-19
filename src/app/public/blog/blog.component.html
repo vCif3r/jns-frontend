@@ -18,30 +18,21 @@
                                 <i class="fa fa-list-alt"></i>
                                 <a href="">{{ post.categoria }}</a>
                                 <i class="fa fa-calendar-alt"></i>
-                                <p>{{post.createdAt | date: 'dd-MMMM-yyyy'}}</p>
+                                <p>{{post.createdAt | date: 'dd-MMMM-yyyy':'':'es'}}</p>
                             </div>
-                            <div *ngFor="let post of postsList" class="blog-text">
-                                <p
-                                  [ngStyle]="{
-                                    'overflow': isExpanded(post.id) ? 'visible' : 'hidden',
-                                    'display': isExpanded(post.id) ? 'block' : '-webkit-box',
-                                    '-webkit-line-clamp': isExpanded(post.id) ? 'unset' : '3',
-                                    '-webkit-box-orient': 'vertical'
-                                  }"
-                                >
-                                  {{ post.contenido }}
+
+                            <div class="blog-text">
+                                <p [innerHTML]="post.resumen">
+                                    
                                 </p>
-                                <a class="btn" href="javascript:void(0)" (click)="toggleExpand(post.id)">
-                                  {{ isExpanded(post.id) ? 'Leer Menos' : 'Leer Más' }}
-                                </a>
-                              </div>
-                              
+                                <a class="btn" [routerLink]="['/blog', post.id]">Leer Más</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             }@empty {
                 <div class="w-100 text-center text-secondary pb-5">
-                    No hay blog publicados, regresa pronto
+                    No hay publicaciones, regresa pronto
                 </div>
             }
             
@@ -112,20 +103,24 @@
                 </div>
             </div> -->
         </div>
-        <div class="row">
-            <div class="col-12">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
-                    </li>
-                    <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-                    <li class="page-item">
-                        <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
-                    </li>
-                </ul> 
+
+        @if (postsList.length > 0) {
+            <div class="row">
+                <div class="col-12">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+                        </li>
+                        <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                        <li class="page-item">
+                            <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+                        </li>
+                    </ul> 
+                </div>
             </div>
-        </div>
+        }
+        
     </div>
 </div>  

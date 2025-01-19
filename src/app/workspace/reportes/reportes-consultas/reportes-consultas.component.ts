@@ -120,7 +120,7 @@ export class ReportesConsultasComponent {
     }
     if (this.servicio) {
       filteredData = filteredData.filter((element) => {
-        return element.tipoServicio.nombre.toLowerCase().includes(this.servicio!.toLowerCase());
+        return element.servicio.nombre.toLowerCase().includes(this.servicio!.toLowerCase());
       });
     }
 

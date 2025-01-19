@@ -1,0 +1,90 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <h4 mat-card-title>Gestión de Usuarios</h4>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+            <mat-tab label="Usuarios">
+
+                <div class="py-3 d-flex gap-2">
+                    <a class="btn btn-success btn-sm" (click)="openDialog()">
+                        <div class="d-flex align-items-center gap-2">
+                            <mat-icon>add_circle</mat-icon>
+                            Add New
+                        </div>
+                    </a>
+                   
+                </div>
+                
+                    @if (!loading) {
+                        <div class="w-50 p-2">
+                            <input type="text" matInput (keyup)="applyFilter($event)" placeholder="Buscar...">
+                        </div>
+    
+                        <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSourceUsers" matSort id="printableTable">
+    
+                            <!-- Definir las columnas de la tabla -->
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="cedula">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cédula</th>
+                                <td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="nombre">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.nombre}} {{element.apellido}}
+                                </td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.email}}
+                                </td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="role">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.role.nombre}} 
+                                </td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="acciones">
+                                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <a mat-icon-button (click)="openDialog(element)">
+                                        <mat-icon>edit</mat-icon>
+                                    </a>
+                                    <a mat-icon-button >
+                                        <mat-icon>delete</mat-icon>
+                                    </a>
+                                </td>
+                            </ng-container>
+    
+                            <!-- Definir las filas de la tabla -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+                            showFirstLastButtons></mat-paginator>
+                     }
+                
+                
+                 
+                
+            </mat-tab>
+            <mat-tab label="Roles">
+                <app-roles></app-roles>
+            </mat-tab>
+        </mat-tab-group>
+          
+    </mat-card-content>
+</mat-card>

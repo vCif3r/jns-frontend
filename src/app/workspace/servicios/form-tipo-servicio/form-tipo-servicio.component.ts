@@ -12,6 +12,7 @@ import { TipoServicio } from '../../../core/models/tipoServicio';
 import { TipoServicioService } from '../../../core/services/tipoServicio.service';
 import { ServicioService } from '../../../core/services/servicio.service';
 import { Servicio } from '../../../core/models/servicio';
+import { TimeAgoPipe } from '../../../core/pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-form-tipo-servicio',

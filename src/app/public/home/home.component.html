@@ -31,7 +31,7 @@
                     asesoramiento jurídico posible.
                 </p>
                 <div class="carousel-btn">
-                    <a class="btn btn-carousel" href="#contact-section">
+                    <a class="btn btn-carousel" routerLink="/contact">
                         <div class="d-flex align-items-center gap-2">
                             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="mail"></mat-icon>
                             Contáctanos
@@ -50,7 +50,7 @@
                     Confía en nosotros para acompañarte en cada paso del camino
                 </p>
                 <div class="carousel-btn">
-                    <a class="btn btn-carousel" href="#contact-section">
+                    <a class="btn btn-carousel" routerLink="/contact">
                         <div class="d-flex align-items-center gap-2">
                             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="mail"></mat-icon>
                             Contáctanos
@@ -145,8 +145,8 @@
 <div class="processes">
     <div class="container">
         <div class="section-header">
-            <p>Procesos Legales</p>
-            <h2>Nuestros principales procesos legales</h2>
+            <p>Areas Legales</p>
+            <h2>Nuestras principales áreas legales</h2>
         </div>
         <div class="row">
             <!-- <div class="col-lg-4 col-md-6">
@@ -223,19 +223,17 @@
                 </div>
             </div> -->
 
-            @if (servicios.length > 0) {
+            @if (areas.length > 0) {
             <div class="row">
-                @for (servicio of servicios; track servicio.id) {
+                @for (area of areas; track area.id) {
                 <div class="col-lg-4 col-md-6">
                     <div class="process-item">
-                        <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="process-icon" fill="currentColor" width="70" height="70">
-                                    <path d="{{ servicio.icono }}"></path>
-                                </svg> -->
-                        <h3 class="process-title">{{ servicio.nombre }}</h3>
+                       
+                        <h3 class="process-title">{{ area.nombre }}</h3>
                         <p class="process-description">
-                            {{ servicio.descripcion }}
+                            {{ area.descripcion }}
                         </p>
-                        <a [routerLink]="['/nueva-consulta', servicio.id]" class="process-btn">Empieza tu proceso con
+                        <a [routerLink]="['/nueva-consulta', area.id]" class="process-btn">Empieza tu proceso con
                             nosotros</a>
                     </div>
                 </div>

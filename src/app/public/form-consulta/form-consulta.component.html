@@ -2,56 +2,38 @@
     <div class="w-100 bg-dark text-white p-4 d-flex align-items-center">
         <a routerLink="/home" class="text-white"><mat-icon fontIcon="arrow_back"></mat-icon></a>
 
-        <p class="fs-4 text-center mb-0 w-100">Proceso de {{servicio?.nombre}}</p>
+        <p class="fs-4 text-center mb-0 w-100">Proceso de {{area?.nombre}}</p>
     </div>
 
     <section>
         <mat-card appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Formulario de {{servicio?.nombre}}</mat-card-title>
+                <mat-card-title>Formulario de {{area?.nombre}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <form (ngSubmit)="onSubmit()" [formGroup]="consultaForm" class="pt-2">
                     <!-- fechas -->
                     <div class="row mb-2">
                         <span class="fs-6 mb-2">Fecha y hora de la cita</span>
-                        <!-- <div class="col-12 col-xl-6">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Fecha</mat-label>
-                                <input matInput [matDatepicker]="picker" formControlName="fecha" />
-                                <mat-hint>MM/DD/YYYY</mat-hint>
-                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
-                        </div> -->
-
                         <div class="mb-2">
                             <input matInput type="datetime-local" class="form-control p-3 " formControlName="fechaHora" [min]="minDate">                      
                         </div>
 
-                        <!-- <div class="col-12 col-xl-6">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Hora</mat-label>
-                                <input type="time" matInput formControlName="hora"  />
-                                
-                            </mat-form-field>
-                        </div> -->
                     </div>
-
-                    <!-- tipo demanda -->
-
                     <div class="w-100">
-                        <!-- <span class="fs-6 mb-2">Tipo de demanda</span> -->
                         <mat-form-field appearance="outline">
-                            <mat-label>Tipo de {{servicio?.nombre}}:</mat-label>
-                            <mat-select formControlName="tipoServicio">
-                                @for (tipo of servicio?.tipos_servicios; track tipo) {
-                                <mat-option [value]="tipo.id">{{
-                                    tipo.nombre
+                            <mat-label>Servicio:</mat-label>
+                            <mat-select formControlName="servicio" [disabled]="serviciosDisponibles.length == 0">
+                                @for (servicio of serviciosDisponibles; track servicio.id) {
+                                <mat-option [value]="servicio.id">{{
+                                    servicio.nombre
                                     }}</mat-option>
                                 }
                             </mat-select>
                         </mat-form-field>
+                        @if (serviciosDisponibles.length == 0) {
+                            <small class="text-danger">No hay servicios disponibles para esta área</small>
+                        }
                     </div>
 
                     <!-- detalles -->
@@ -90,7 +72,7 @@
                         </mat-form-field>
                     </div>
 
-                    <button mat-button type="submit" [disabled]="consultaForm.invalid">Procesar {{servicio?.nombre}}</button>
+                    <button mat-button type="submit" [disabled]="consultaForm.invalid">Procesar</button>
                     <button mat-button routerLink="/">Cancelar</button> 
                 </form>
             </mat-card-content>

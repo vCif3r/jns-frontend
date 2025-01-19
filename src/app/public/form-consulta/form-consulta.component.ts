@@ -21,6 +21,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ConsultaService } from '../../core/services/consulta.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { AreaLegal } from '../../core/models/area-legal';
+import { AreaLegalService } from '../../core/services/area-legal.service';
 
 @Component({
   selector: 'app-form-consulta',
@@ -47,19 +49,20 @@ export class FormConsultaComponent {
   value?: Date;
   consultaForm: FormGroup;
   minDate: any
-  servicio?: Servicio;
-
+  area?: AreaLegal;
+  serviciosDisponibles : Servicio[] = []
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private areaService: AreaLegalService,
     private servicioService: ServicioService,
     private consultaService: ConsultaService,
     private snackbar: MatSnackBar
   ) {
     this.consultaForm = new FormGroup({
       fechaHora: new FormControl(null, Validators.required),
-      tipoServicio: new FormControl(null, Validators.required),
+      servicio: new FormControl(null, Validators.required),
       detalles: new FormControl('', Validators.required),
       nombreCompleto: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -68,20 +71,24 @@ export class FormConsultaComponent {
   }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id')!;
+    const idArea = this.route.snapshot.paramMap.get('id')!;
 
-    if (id) {
-      this.servicioService.getServicioPublicado(id).subscribe(
+    if (idArea) {
+      this.areaService.findById(idArea).subscribe(
         (data) => {
           if (!data) {  
             this.router.navigate(['/']);  // Redirigir si no se encuentra el servicio
           } else {
-            this.servicio = data;  // Asignar el servicio recibido
+            this.area = data;  // Asignar el servicio recibido
           }
         },
         (error) => {
           console.log('Error al cargar el servicio');
-        })
+      })
+
+      this.servicioService.findAllPublicadosByArea(idArea).subscribe((data)=>{
+        this.serviciosDisponibles = data
+      })
     }
 
     let today = new Date();

@@ -35,15 +35,15 @@ export class SidenavComponent implements OnInit{
       this.sidebarItems = [
         { title: 'Consultas', icon: 'assignment', url: '/workspace/consultas' },
         { title: 'Casos', icon: 'gavels', url: '/workspace/casos' },
-        { title: 'Reportes', icon: 'summarize ', url: '/workspace/reportes' },
       ];
     } else if (this.userRole === 'Admin') {
       this.sidebarItems = [
         { title: 'Dashboard', icon: 'dashboard', url: '/workspace/dashboard' },
-        { title: 'Servicios', icon: 'library_books', url: '/workspace/servicios' },
+        { title: 'Areas Legales', icon: 'library_books', url: '/workspace/areas-legales' },
+        { title: 'Servicios', icon: 'work', url: '/workspace/servicios' },
         { title: 'Consultas', icon: 'assignment', url: '/workspace/consultas' },
         { title: 'Casos', icon: 'gavels', url: '/workspace/casos' },
-        { title: 'Abogados', icon: 'groups', url: '/workspace/abogados' },
+        { title: 'Usuarios', icon: 'groups', url: '/workspace/usuarios' },
         { title: 'Reportes', icon: 'summarize ', 
           children: [
             { title: 'casos', url: '/workspace/reportes/casos' },

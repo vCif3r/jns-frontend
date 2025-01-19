@@ -90,4 +90,9 @@ export class ServicioService {
       })
     );
   }
+
+
+  findAllPublicadosByArea(id: any){
+    return this.http.get<Servicio[]>(`${this.url}/publicados/area/${id}`);
+  }
 }

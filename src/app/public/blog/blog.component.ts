@@ -3,10 +3,14 @@ import { PostService } from '../../core/services/post.service';
 import { Post, PostResponse } from '../../core/models/post';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment.development';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { RouterLink } from '@angular/router';
+registerLocaleData(localeEs);
 
 @Component({
   selector: 'app-blog',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css'],
 })

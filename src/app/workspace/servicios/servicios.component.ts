@@ -34,7 +34,6 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     RouterLink,
     MatSortModule,
     MatTabsModule,
-    TiposServiciosComponent,
     MatSlideToggleModule,
     FormsModule,
     MatSnackBarModule,
@@ -44,7 +43,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   styleUrl: './servicios.component.css',
 })
 export class ServiciosComponent implements AfterViewInit {
-  displayedColumnsServicios: string[] = ['id', 'nombre', 'categoria', 'estado','publicado', 'acciones'];
+  displayedColumnsServicios: string[] = ['id', 'nombre', 'area','publicado', 'acciones'];
   dataSourceServicios = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginatorServices!: MatPaginator;

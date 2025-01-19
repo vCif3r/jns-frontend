@@ -1,19 +1,17 @@
-import { Component, Inject, inject } from '@angular/core';
+import { environment } from './../../../../environments/environment';
+import { Component, inject, OnInit } from '@angular/core';
 import { PostService } from '../../../core/services/post.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Post } from '../../../core/models/post';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-editar-blog',
@@ -22,33 +20,59 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogClose,
     ReactiveFormsModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatDialogContent,
-    MatDialogActions,
+    MatCardModule,
+    EditorModule,
+    RouterLink,
+    MatIconModule
   ],
   templateUrl: './editar-blog.component.html',
   styleUrl: './editar-blog.component.css'
 })
-export class EditarBlogComponent {
+export class EditarBlogComponent implements OnInit {
+  private route = inject(ActivatedRoute)
   private postService = inject(PostService);
   form: FormGroup;
   snackbar = inject(MatSnackBar)
-
+  router = inject(Router)
   imageFile: File | null = null;
+  post?: Post
+
+  ngOnInit(): void {
+    const postId = this.route.snapshot.paramMap.get('id');
+    if (postId) {
+      this.postService.getOnePost(postId).subscribe((data) => {
+        this.post = data;
+
+        // Ahora que tenemos el post, inicializamos el formulario con sus datos
+        this.form.patchValue({
+          titulo: this.post.titulo,
+          contenido: this.post.contenido,
+          publicado: this.post.publicado,
+          categoria: this.post.categoria,
+          resumen: this.post.resumen
+        });
+      },(error)=> {
+        this.router.navigateByUrl('workspace/blogs')
+        this.snackbar.open('No se encontro el post', 'Cerrar', {
+          duration: 5000,
+        });
+      });
+    }
+  }
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<EditarBlogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any // Recibe los datos del post a editar
+
   ) {
     // Inicializamos el formulario con los valores del post
     this.form = this.fb.group({
-      titulo: [this.data.titulo, Validators.required],
-      contenido: [this.data.contenido, Validators.required],
-      publicado: [this.data.publicado],
-      categoria: [this.data.categoria, Validators.required],
+      titulo: ['', Validators.required],
+      contenido: ['', Validators.required],
+      publicado: [],
+      categoria: ['', Validators.required],
+      resumen: ['', Validators.required]
     });
   }
 
@@ -61,6 +85,7 @@ export class EditarBlogComponent {
       formData.append('contenido', this.form.get('contenido')?.value);
       formData.append('publicado', this.form.get('publicado')?.value);
       formData.append('categoria', this.form.get('categoria')?.value);
+      formData.append('resumen', this.form.get('resumen')?.value)
 
       // Si hay una nueva imagen, añadirla al FormData
       if (this.imageFile) {
@@ -68,12 +93,12 @@ export class EditarBlogComponent {
       }
 
       // Realizar la solicitud HTTP para editar el post
-      this.postService.update(`${this.data.id}`, formData).subscribe(
+      this.postService.update(`${this.post?.id}`, formData).subscribe(
         (data) => {
           this.snackbar.open('Post actualizado correctamente', 'Cerrar', {
             duration: 3000,
           });
-          this.dialogRef.close({ success: true });
+          this.router.navigateByUrl('workspace/blogs')
         },
         (error) => {
           this.snackbar.open('Error, revise los datos ingresados', 'Cerrar', {
@@ -89,7 +114,6 @@ export class EditarBlogComponent {
     this.imageFile = event.target.files[0]; // Seleccionar el primer archivo
   }
 
-  getImageUrl(imagePath: string): string {
-    return this.postService.getImageUrl(imagePath);
-  }
+  apikeytinymce = environment.APIKEY_TINYMCE
+  
 }

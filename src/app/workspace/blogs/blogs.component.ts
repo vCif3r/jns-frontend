@@ -17,10 +17,11 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
 import { EditarBlogComponent } from './editar-blog/editar-blog.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-blogs',
-  imports: [MatButtonModule, MatTableModule, MatCardModule, CommonModule, MatIconModule, MatSlideToggleModule, FormsModule],
+  imports: [MatButtonModule, MatTableModule, MatCardModule, CommonModule, MatIconModule, MatSlideToggleModule, FormsModule, RouterLink],
   templateUrl: './blogs.component.html',
   styleUrl: './blogs.component.css'
 })
@@ -48,21 +49,23 @@ export class BlogsComponent {
 
   dialog = inject(MatDialog)
 
-  agregar() {
-    const dialogRef = this.dialog.open(AgregarBlogComponent, {
-      enterAnimationDuration: 500,
-      exitAnimationDuration: 500
-    });
+  // agregar() {
+  //   const dialogRef = this.dialog.open(AgregarBlogComponent, {
+  //     enterAnimationDuration: 500,
+  //     exitAnimationDuration: 500,
+  //     minWidth: '70vw',
+  //     maxWidth: '100vw',
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result && result.success) {
-        // Cerrar el diálogo
-        this.dialog.closeAll();
-        // Actualizar la lista de posts
-        this.ngOnInit()
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result && result.success) {
+  //       // Cerrar el diálogo
+  //       this.dialog.closeAll();
+  //       // Actualizar la lista de posts
+  //       this.ngOnInit()
+  //     }
+  //   });
+  // }
 
   dialogDelete(id: any){
     const dialogRefDelete = this.dialog.open(DeleteBlogComponent, {
@@ -81,20 +84,20 @@ export class BlogsComponent {
     });
   }
 
-  openEditDialog(post: any): void {
-    const dialogRef = this.dialog.open(EditarBlogComponent, {
-      data: post, // Pasamos los datos del post a editar
-      minWidth: '70vw',
-      maxWidth: '100vw',
-    });
+  // openEditDialog(post: any): void {
+  //   const dialogRef = this.dialog.open(EditarBlogComponent, {
+  //     data: post, // Pasamos los datos del post a editar
+  //     minWidth: '70vw',
+  //     maxWidth: '100vw',
+  //   });
   
-    dialogRef.afterClosed().subscribe(result => {
-      if (result?.success) {
-        // Recargar los datos o realizar acciones después de la edición
-        this.ngOnInit()
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result?.success) {
+  //       // Recargar los datos o realizar acciones después de la edición
+  //       this.ngOnInit()
+  //     }
+  //   });
+  // }
 
   changePage(page: number): void {
     if (page > 0 && page <= this.totalPages) {

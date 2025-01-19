@@ -24,8 +24,7 @@ main{
 }
 
 .active-link{
-    color: #000;
-    background-color: #ddd;
+    background-color: #3A3C3B;
 }
 
 .navlink:hover, .navlink.active{
